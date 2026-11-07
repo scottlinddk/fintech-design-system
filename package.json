@@ -1,0 +1,50 @@
+{
+  "name": "@scottlinddk/fintech-design-system",
+  "version": "0.1.0",
+  "description": "Shared design foundations for Funder, Portare and Investor",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scottlinddk/fintech-design-system.git"
+  },
+  "files": [
+    "dist",
+    "styles",
+    "AGENTS.md",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./styles/index.css",
+    "./themes/funder.css": "./styles/themes/funder.css",
+    "./themes/portare.css": "./styles/themes/portare.css",
+    "./themes/investor.css": "./styles/themes/investor.css"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "check": "vp check",
+    "test": "vp test",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "vite-plus": "^1.5.0",
+    "typescript": "^5.7.3"
+  },
+  "peerDependencies": {
+    "react": "^18.3.0 || ^19.0.0"
+  },
+  "engines": {
+    "node": ">=22.14.0"
+  }
+}
