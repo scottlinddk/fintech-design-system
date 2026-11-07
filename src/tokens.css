@@ -21,9 +21,15 @@
   --border-default: var(--neutral-200);
   --accent: var(--blue-600);
   --focus-ring: #0284c7;
-  --positive: var(--green-700);
-  --negative: var(--red-700);
-  --warning: var(--amber-700);
+  /* Status text meets WCAG AA on light cards; hue families stay consistent. */
+  --status-success: #15803d;
+  --status-error: #be123c;
+  --status-warning: #92400e;
+  --status-info: #0369a1;
+  --positive: var(--status-success);
+  --negative: var(--status-error);
+  --warning: var(--status-warning);
+  --info: var(--status-info);
   --table-row-hover: #f4f4f5;
   --control-background: var(--surface-card);
   --control-border: var(--border-default);
@@ -38,9 +44,15 @@
   --border-default: #292a30;
   --accent: #7dd3fc;
   --focus-ring: #7dd3fc;
-  --positive: #86efac;
-  --negative: #fda4af;
-  --warning: #fbbf24;
+  /* Lighter tonal counterparts for accessible text on dark cards. */
+  --status-success: #86efac;
+  --status-error: #fda4af;
+  --status-warning: #fbbf24;
+  --status-info: #7dd3fc;
+  --positive: var(--status-success);
+  --negative: var(--status-error);
+  --warning: var(--status-warning);
+  --info: var(--status-info);
   --table-row-hover: #1b1d22;
   --control-background: #15161a;
   --control-border: #3f3f46;
