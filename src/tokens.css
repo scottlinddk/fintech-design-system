@@ -32,7 +32,8 @@
   --info: var(--status-info);
   --table-row-hover: #f4f4f5;
   --control-background: var(--surface-card);
-  --control-border: var(--border-default);
+  /* Interactive controls require >=3:1 against neighboring surfaces. */
+  --control-border: #85858d;
 }
 [data-theme="dark"] {
   color-scheme: dark;
@@ -55,5 +56,5 @@
   --info: var(--status-info);
   --table-row-hover: #1b1d22;
   --control-background: #15161a;
-  --control-border: #3f3f46;
+  --control-border: #7a7e88;
 }
