@@ -7,6 +7,7 @@ Status: initial proposal, 2026-11-07.
 Blend Funder's serious, dark financial interface with Vercel's disciplined typography, borders and spacing, plus Vite+'s selective atmospheric gradient and fine-grain treatments. This is inspiration, not a visual clone. Avoid the default AI-dashboard aesthetic: no ubiquitous glowing cards, purple gradients, excessive pill radii, or decorative metrics.
 
 Sources:
+
 - Funder: https://github.com/nicklaslind/Funder (reviewed src/app/globals.css)
 - Vite+: https://viteplus.dev/ (reviewed 2026-11-07)
 - Vercel: https://vercel.com/
