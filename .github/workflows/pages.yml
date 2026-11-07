@@ -1,0 +1,53 @@
+name: Deploy showcase to GitHub Pages
+on:
+  push:
+    branches: [main]
+    paths:
+      - showcase/**
+      - src/tokens.css
+      - .github/workflows/pages.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble site
+        run: |
+          # Mirror the repo layout so showcase/index.html keeps its ../src/tokens.css link.
+          mkdir -p _site/showcase _site/src
+          cp showcase/index.html _site/showcase/index.html
+          cp src/tokens.css _site/src/tokens.css
+          cat > _site/index.html <<'HTML'
+          <!doctype html>
+          <meta charset="utf-8" />
+          <title>Fintech Design System</title>
+          <meta http-equiv="refresh" content="0; url=showcase/" />
+          <link rel="canonical" href="showcase/" />
+          <p><a href="showcase/">Open the showcase</a></p>
+          HTML
+          touch _site/.nojekyll
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
