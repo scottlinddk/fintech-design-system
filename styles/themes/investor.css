@@ -1,1 +1,9 @@
-:root,[data-fds-theme="investor"]{color-scheme:dark;--fds-background:#08090b;--fds-foreground:#f4f4f5;--fds-accent:#7dd3fc;--fds-accent-strong:#38bdf8;--fds-on-accent:#08090b}
+:root,
+[data-fds-theme="investor"] {
+  color-scheme: dark;
+  --fds-background: #08090b;
+  --fds-foreground: #f4f4f5;
+  --fds-accent: #7dd3fc;
+  --fds-accent-strong: #38bdf8;
+  --fds-on-accent: #08090b;
+}

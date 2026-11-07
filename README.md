@@ -5,7 +5,7 @@ Shared Funder-derived design foundations for Portare, Investor and Funder. Each 
 ## Develop with Vite+
 
 ```sh
-npm install
+npm ci
 npm run check
 npm test
 npm run build
@@ -23,9 +23,9 @@ npm install @scottlinddk/fintech-design-system
 At the app root import base styles then exactly one theme:
 
 ```tsx
-import '@scottlinddk/fintech-design-system/styles.css';
-import '@scottlinddk/fintech-design-system/themes/investor.css'; // or portare.css / funder.css
-import { Button } from '@scottlinddk/fintech-design-system';
+import "@scottlinddk/fintech-design-system/styles.css";
+import "@scottlinddk/fintech-design-system/themes/investor.css"; // or portare.css / funder.css
+import { Button } from "@scottlinddk/fintech-design-system";
 ```
 
 Read [AGENTS.md](AGENTS.md) and [adoption guide](docs/ADOPTION.md) before integrating. Original Funder palette is sourced from `nicklaslind/Funder/src/app/globals.css`. Portare's light theme is a proposed product-specific adaptation.
