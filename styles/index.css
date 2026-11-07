@@ -1,0 +1,8 @@
+@import "./tokens.css";
+.fds-button{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:2.5rem;padding:.55rem 1rem;border-radius:var(--fds-radius-md);font:inherit;font-weight:600;cursor:pointer;transition:background-color .15s,border-color .15s}
+.fds-button:focus-visible{outline:2px solid var(--fds-accent);outline-offset:2px}
+.fds-button:disabled{opacity:.5;cursor:not-allowed}
+.fds-button--primary{background:var(--fds-accent);color:var(--fds-on-accent);border:1px solid transparent}
+.fds-button--secondary{background:var(--fds-panel-raised);color:var(--fds-foreground);border:1px solid var(--fds-line)}
+.fds-button--ghost{background:transparent;color:var(--fds-foreground);border:1px solid transparent}
+@media(prefers-reduced-motion:reduce){.fds-button{transition:none}}
