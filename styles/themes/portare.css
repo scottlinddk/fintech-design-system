@@ -11,3 +11,14 @@
   --fds-accent-strong: #064c66;
   --fds-on-accent: #fff;
 }
+
+/* Semantic and secondary surface tokens: the base (dark) values fail contrast on a light surface. */
+:root,
+[data-fds-theme="portare"] {
+  --fds-muted-strong: #374151;
+  --fds-line-soft: #e5e9f0;
+  --fds-panel-soft: #f8fafc;
+  --fds-success: #1f6f4a;
+  --fds-warn: #8a5a00;
+  --fds-danger: #b3261e;
+}
