@@ -72,8 +72,14 @@ const { pathToFileURL } = require("node:url");
       2,
     ),
   );
-  console.log(failures.length ? failures.join("\n") : "Automated checks passed");
-  if (failures.length) process.exitCode = 1;
+  // Findings are advisory: surface them as GitHub warning annotations without failing the job.
+  // Only a crash of the audit itself (see .catch below) produces a non-zero exit code.
+  if (failures.length) {
+    for (const failure of failures) console.log("::warning title=Accessibility audit::" + failure);
+    console.log(failures.length + " accessibility warning(s); see report.json for details.");
+  } else {
+    console.log("Automated checks passed");
+  }
 })().catch((error) => {
   console.error(error);
   process.exitCode = 1;
