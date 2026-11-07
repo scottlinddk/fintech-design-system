@@ -27,7 +27,7 @@
 </head>
 <body>
 <main class="wrap">
-<header><div class="brand">FINTECH <span class="muted">/ Design System</span></div><button id="theme" aria-label="Toggle color theme">Switch to light</button></header>
+<header><div class="brand">FINTECH <span class="muted">/ Design System</span></div><button id="theme" aria-label="Switch to light theme">Switch to light</button></header>
 <section class="hero"><div class="eyebrow">Foundation preview · 01</div><h1>Clarity compounds.</h1><p class="muted">Financial interfaces designed for focus, trust, and the details that matter.</p></section>
 <section class="grid" aria-label="Account metrics">
   <article class="card"><div class="muted">Total balance</div><div class="number">DKK 284,920</div><span class="positive">↗ +4.82% this month</span></article>
@@ -39,7 +39,7 @@
 <tr><td>Dividend payment</td><td>05 Nov 2026</td><td class="positive"><span aria-hidden="true">●</span> Completed</td><td class="num positive">+184.20</td></tr>
 <tr><td>Bank transfer</td><td>03 Nov 2026</td><td class="muted"><span aria-hidden="true">●</span> Processing</td><td class="num">+5,000.00</td></tr>
 </tbody></table></div></section>
-<section class="section"><h2>Semantic status</h2><div class="swatches"><span class="swatch positive"><i aria-hidden="true" class="dot" style="--c:var(--positive)"></i>Positive</span><span class="swatch negative"><i class="dot" style="--c:var(--negative)"></i>Negative</span><span class="swatch warning"><i class="dot" style="--c:var(--warning)"></i>Warning</span><span class="swatch info"><i class="dot" style="--c:var(--status-info)"></i>Info</span></div></section>
+<section class="section"><h2>Semantic status</h2><div class="swatches"><span class="swatch positive"><i aria-hidden="true" class="dot" style="--c:var(--positive)"></i>Positive</span><span class="swatch negative"><i aria-hidden="true" class="dot" style="--c:var(--negative)"></i>Negative</span><span class="swatch warning"><i aria-hidden="true" class="dot" style="--c:var(--warning)"></i>Warning</span><span class="swatch info"><i aria-hidden="true" class="dot" style="--c:var(--status-info)"></i>Info</span></div></section>
 </main>
-<script>const root=document.documentElement;const button=document.getElementById('theme');button.addEventListener('click',()=>{const dark=root.dataset.theme==='dark';root.dataset.theme=dark?'light':'dark';button.textContent=dark?'Switch to dark':'Switch to light';});</script>
+<script>const root=document.documentElement;const button=document.getElementById('theme');button.addEventListener('click',()=>{const dark=root.dataset.theme==='dark';root.dataset.theme=dark?'light':'dark';button.textContent=dark?'Switch to dark':'Switch to light';button.setAttribute('aria-label',dark?'Switch to dark theme':'Switch to light theme');});</script>
 </body></html>
