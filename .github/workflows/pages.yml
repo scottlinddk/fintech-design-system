@@ -4,7 +4,10 @@ on:
     branches: [main]
     paths:
       - showcase/**
-      - src/tokens.css
+      - src/**
+      - styles/**
+      - package*.json
+      - vite.config.ts
       - .github/workflows/pages.yml
   workflow_dispatch:
 
@@ -22,25 +25,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Assemble site
-        run: |
-          # Mirror the repo layout so showcase/index.html keeps its ../src/tokens.css link.
-          mkdir -p _site/showcase _site/src
-          cp showcase/index.html _site/showcase/index.html
-          cp src/tokens.css _site/src/tokens.css
-          cat > _site/index.html <<'HTML'
-          <!doctype html>
-          <meta charset="utf-8" />
-          <title>Fintech Design System</title>
-          <meta http-equiv="refresh" content="0; url=showcase/" />
-          <link rel="canonical" href="showcase/" />
-          <p><a href="showcase/">Open the showcase</a></p>
-          HTML
-          touch _site/.nojekyll
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: npm ci --no-audit --no-fund
+      - run: npm run showcase:build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: showcase-dist
 
   deploy:
     needs: build

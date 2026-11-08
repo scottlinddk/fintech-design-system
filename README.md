@@ -32,7 +32,7 @@ Read [AGENTS.md](AGENTS.md) and [adoption guide](docs/ADOPTION.md) before integr
 
 ## Showcase
 
-The static design review page in [`showcase/index.html`](showcase/index.html) is deployed to GitHub Pages by `.github/workflows/pages.yml` on every push to `main` that touches it: <https://scottlinddk.github.io/fintech-design-system/>. One-time setup: repository **Settings → Pages → Source: GitHub Actions**.
+The component showcase (`npm run showcase:dev` locally, `npm run showcase:build` for a static build) in [`showcase/index.html`](showcase/index.html) is deployed to GitHub Pages by `.github/workflows/pages.yml` when its components, styles, dependencies, or showcase change on `main`: <https://scottlinddk.github.io/fintech-design-system/>. One-time setup: repository **Settings → Pages → Source: GitHub Actions**.
 
 ## Components
 
