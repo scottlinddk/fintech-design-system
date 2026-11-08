@@ -13,9 +13,9 @@
 ## Release
 
 - Update package version, CHANGELOG and tests in one reviewed PR.
-- Publish only from a matching `vX.Y.Z` tag after merging.
-- Configure npm trusted publisher: owner `scottlinddk`, repo `fintech-design-system`, workflow `publish.yml` and allow direct publish.
-- First publish needs the scope/package to exist on npm and ownership to be verified; never put a long-lived npm token in git.
+- Releases run from `.github/workflows/release.yml` (Changesets) on push to `main`; merge the generated "version packages" PR to publish.
+- Configure npm trusted publisher (on the `@scttlnd/fintech-design-system` package): GitHub owner `scottlinddk`, repo `fintech-design-system`, workflow `release.yml`.
+- First publish needs the package to exist on npm under the `@scttlnd` scope (npm username `scttlnd`) and ownership to be verified; never put a long-lived npm token in git.
 - Renovate can only discover releases visible on npm. Consumer Renovate GitHub app must be installed and enabled separately.
 
 ## Funder reference
