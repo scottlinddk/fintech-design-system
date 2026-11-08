@@ -5,3 +5,5 @@ showcase-dist/
 artifacts/
 test-results/
 playwright-report/
+smoke/next-app/.next/
+smoke/next-app/next-env.d.ts

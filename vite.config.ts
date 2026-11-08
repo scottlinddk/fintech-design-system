@@ -8,7 +8,19 @@ export default defineConfig({
   },
   test: { exclude: ["**/node_modules/**", "**/dist/**", "e2e/**", "smoke/**"] },
   pack: {
-    entry: ["src/index.ts"],
+    entry: [
+      "src/index.ts",
+      "src/components/{Badge,Button,Field,Menu,Meter,Metric,Notice,Panel}.tsx",
+    ],
+    unbundle: true,
+    outExtensions: () => ({ js: ".mjs", dts: ".d.mts" }),
+    platform: "neutral",
+    outputOptions: {
+      banner: (chunk) =>
+        /(?:^|\/)components\/(Button|Field|Menu|Panel)\.mjs$/.test(chunk.fileName)
+          ? '"use client";'
+          : "",
+    },
     dts: true,
     format: ["esm"],
     sourcemap: true,
