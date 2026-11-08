@@ -87,6 +87,19 @@ function Grain() {
         >
           <Metric label="Change" value="+4.82 %" tone="success" />
         </Panel>
+        <Panel
+          data-fds-grain="off"
+          eyebrow="Opted out"
+          title="Flat panel"
+          help="data-fds-grain=off."
+        >
+          <Metric label="Balance" value="DKK 284,920" />
+        </Panel>
+        <div data-fds-grain="off">
+          <Panel eyebrow="Opted out" title="Inherited" help="Ancestor sets the attribute.">
+            <Metric label="Balance" value="DKK 284,920" />
+          </Panel>
+        </div>
       </div>
     </main>
   );

@@ -1,12 +1,16 @@
 import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
 
-const css = readFileSync("styles/grain.css", "utf8").trim();
+const css = readFileSync("styles/components/grain.css", "utf8").trim();
 const pkg = JSON.parse(readFileSync("package.json", "utf8"));
 
-it("ships grain.css as an opt-in export, separate from styles.css", () => {
-  expect(pkg.exports["./grain.css"]).toBe("./styles/grain.css");
-  expect(readFileSync("styles/index.css", "utf8")).not.toContain("grain");
+it("is part of styles.css (on by default) and no longer a separate export", () => {
+  expect(pkg.exports["./grain.css"]).toBeUndefined();
+  expect(readFileSync("styles/index.css", "utf8")).toContain("./components/grain.css");
+});
+
+it("applies to .fds-panel by default and honours data-fds-grain=off on self or ancestors", () => {
+  expect(css).toContain('.fds-panel:not(:where([data-fds-grain="off"], [data-fds-grain="off"] *))');
 });
 
 it("keeps every grain rule inside the fds layer", () => {
