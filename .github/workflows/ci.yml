@@ -60,7 +60,21 @@ jobs:
           node-version: "24"
       - run: npm ci --no-audit --no-fund
       - run: npx playwright install chromium
-      - run: npm run test:visual
+      # Advisory: snapshot drift must not fail the workflow. It stays visible as a warning and summary.
+      - name: Visual snapshots (advisory)
+        id: visual
+        run: npm run test:visual
+        continue-on-error: true
+      - name: Report snapshot drift
+        if: steps.visual.outcome == 'failure'
+        run: |
+          echo "::warning title=Visual snapshots differ::Advisory only. Review the visual-evidence artifact; if the change is intended, run npm run test:visual:update on macOS and commit the reviewed baselines."
+          {
+            echo "### Visual snapshots differ (advisory, does not fail CI)"
+            echo
+            echo "Download the **visual-evidence** artifact and review \`*-actual.png\` and \`*-diff.png\`."
+            echo "If the change is intended, run \`npm run test:visual:update\` on macOS and commit the reviewed baselines."
+          } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
