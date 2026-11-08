@@ -1,0 +1,43 @@
+.fds-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: var(--fds-control-h);
+  padding: 0.55rem 1rem;
+  border-radius: var(--fds-radius-md);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color var(--fds-duration-fast) var(--fds-ease-out),
+    border-color var(--fds-duration-fast) var(--fds-ease-out);
+}
+.fds-button:focus-visible {
+  outline: 2px solid var(--fds-focus-ring);
+  outline-offset: 2px;
+}
+.fds-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.fds-button--primary {
+  background: var(--fds-accent);
+  color: var(--fds-on-accent);
+  border: 1px solid transparent;
+}
+.fds-button--secondary {
+  background: var(--fds-panel-raised);
+  color: var(--fds-foreground);
+  border: 1px solid var(--fds-line);
+}
+.fds-button--ghost {
+  background: transparent;
+  color: var(--fds-foreground);
+  border: 1px solid transparent;
+}
+@media (prefers-reduced-motion: reduce) {
+  .fds-button {
+    transition: none;
+  }
+}

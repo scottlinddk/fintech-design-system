@@ -1,0 +1,13 @@
+/* Tones */
+.fds-tone--accent {
+  color: var(--fds-accent);
+}
+.fds-tone--success {
+  color: var(--fds-success);
+}
+.fds-tone--warn {
+  color: var(--fds-warn);
+}
+.fds-tone--danger {
+  color: var(--fds-danger);
+}
