@@ -1,12 +1,12 @@
-# Plan: shadcn/ui component coverage
+# Component plan
 
 Status: proposal, 2026-11-08. Nothing here is implemented yet.
-Source: <https://ui.shadcn.com/docs/components> (66 components, read 2026-11-08). shadcn now ships each component in a **Base UI** flavour (default, `/docs/components/base/*`) and a **React Aria** flavour (`/docs/components/aria/*`).
+Scope: a reference set of 66 common UI components (reviewed 2026-11-08), triaged against what this package ships today.
 
 ## 1. Summary
 
-- Port shadcn's **component set and API shape**, not its implementation. shadcn is copy-paste + Tailwind; this package is a published npm library with plain CSS and `--fds-*` tokens (AGENTS.md rules 1–3). We keep that.
-- Use **`@base-ui/react`** (1.9.0 on npm, 2026-11-08) for behaviour in anything with focus management, portals or positioning. It is unstyled, and it is what shadcn's default flavour uses, so shadcn's docs and examples stay a valid reference.
+- Follow the conventional **component set and API shape** of modern React UI libraries, but not their copy-paste, Tailwind-based implementations. This package is a published npm library with plain CSS and `--fds-*` tokens (AGENTS.md rules 1–3). We keep that.
+- Use **`@base-ui/react`** (1.9.0 on npm, 2026-11-08) for behaviour in anything with focus management, portals or positioning. It is unstyled and widely used, so its docs and examples stay a valid reference.
 - Of the 66 components: **12 already exist** in some form, **38 are planned** across 5 phases, **16 are out of scope or deferred** (chat/AI pieces, app-shell pieces, and things AGENTS.md rule 7 forbids).
 - Phase 0 (tokens, test setup, showcase) must land first. Without it every later component adds hardcoded values.
 
@@ -14,10 +14,10 @@ Source: <https://ui.shadcn.com/docs/components> (66 components, read 2026-11-08)
 
 | # | Decision | Recommendation | Why |
 | - | -------- | -------------- | --- |
-| D1 | Headless library | `@base-ui/react` as a regular `dependency` (`^1.9.0`) | Matches shadcn's default flavour. One package, tree-shakeable, maintained. React Aria is stronger on i18n/date handling but larger and its API is further from shadcn. Hand-rolling (like today's `Menu`) does not scale to Dialog/Combobox/Select. |
+| D1 | Headless library | `@base-ui/react` as a regular `dependency` (`^1.9.0`) | One package, tree-shakeable, maintained. React Aria is stronger on i18n/date handling but larger and its API is less conventional. Hand-rolling (like today's `Menu`) does not scale to Dialog/Combobox/Select. |
 | D2 | Tailwind | Do not adopt | Consumers would need a Tailwind build matching ours. Plain CSS + tokens works in Funder (Next.js), Portare and Investor without config. |
-| D3 | Export style | Flat named exports with shadcn names (`Dialog`, `DialogTrigger`, `DialogContent`, …) | Familiar to anyone who knows shadcn, and tree-shakes cleanly. |
-| D4 | Composition | Base UI `render` prop (not Radix `asChild`) | It is what Base UI and shadcn's base flavour use. |
+| D3 | Export style | Flat named exports with conventional names (`Dialog`, `DialogTrigger`, `DialogContent`, …) | Familiar to most React developers, and tree-shakes cleanly. |
+| D4 | Composition | Base UI `render` prop (not Radix `asChild`) | It is Base UI's native composition mechanism. |
 | D5 | `"use client"` | Add the directive to the built output of every interactive component | Today README asks Next.js consumers to wrap imports themselves. That stops scaling at ~40 components. Needs a per-file build (see §4.6). |
 | D6 | CSS cascade layer | Wrap package CSS in `@layer fds` | Lets consumer styles win without specificity fights. **Behaviour change** for existing consumers: unlayered consumer CSS will start overriding package CSS. Ship in its own minor with a changeset note. |
 | D7 | Charts | Tokens + styling recipe only, no `Chart` component | AGENTS.md rule 7 bans business-specific charts here. Shipping a recharts wrapper would also force a heavy dependency on all three apps. |
@@ -25,9 +25,9 @@ Source: <https://ui.shadcn.com/docs/components> (66 components, read 2026-11-08)
 
 ## 3. Component triage (all 66)
 
-Legend: **Exists** = shipped today, extend to shadcn parity. **P1–P5** = phase. **Out** = not planned, reason given.
+Legend: **Exists** = shipped today, extend to parity with the reference set. **P1–P5** = phase. **Out** = not planned, reason given.
 
-| shadcn component | Status | FDS name / note |
+| Reference component | Status | FDS name / note |
 | ---------------- | ------ | --------------- |
 | Accordion | P4 | `Accordion*` (Base UI). FAQ, fee breakdowns. |
 | Alert | Exists | `Notice`. Add `title` slot and optional icon. Keep `danger` = `role="alert"`. |
@@ -96,7 +96,7 @@ Legend: **Exists** = shipped today, extend to shadcn parity. **P1–P5** = phase
 | Trace | Out | Chat/AI. |
 | Typography | P1 (CSS) | Type scale tokens + `.fds-prose` utility. No components. |
 
-Also out: all 21 "AI Elements" (separate shadcn section, not core components).
+Also out: all 21 "AI Elements" (a separate group of chat/AI pieces, not core components).
 
 Count: 12 Exists + 38 planned (P1–P5) + 16 Out = 66.
 
@@ -154,7 +154,7 @@ Base UI portals into `document.body`. Themes are applied on `:root` or `[data-fd
 
 ## 5. Fintech-specific requirements
 
-These go beyond shadcn's defaults and are why we do not take its CSS as-is.
+These go beyond typical library defaults and are why we do not take third-party styles as-is.
 
 - **Table**: `font-variant-numeric: tabular-nums`; `align="numeric"` column prop that right-aligns; optional sticky header and first column; `density` (`comfortable`/`compact`); caption required (visually hidden allowed); horizontal scroll inside the table wrapper, never the page; positive/negative use text + sign, not colour alone.
 - **Alert Dialog**: destructive confirm button never gets initial focus; optional "type to confirm" slot; title states the consequence ("Transfer 10.000 kr. to …?") using app-supplied text.

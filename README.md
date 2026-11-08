@@ -28,7 +28,7 @@ import "@scttlnd/fintech-design-system/themes/investor.css"; // or portare.css /
 import { Button } from "@scttlnd/fintech-design-system";
 ```
 
-Read [AGENTS.md](AGENTS.md) and [adoption guide](docs/ADOPTION.md) before integrating. Planned component roadmap: [shadcn/ui coverage plan](docs/SHADCN-COMPONENT-PLAN.md). Original Funder palette is sourced from `nicklaslind/Funder/src/app/globals.css`. Portare's light theme is a proposed product-specific adaptation.
+Read [AGENTS.md](AGENTS.md) and [adoption guide](docs/ADOPTION.md) before integrating. Planned component roadmap: [component plan](docs/COMPONENT-PLAN.md). Original Funder palette is sourced from `nicklaslind/Funder/src/app/globals.css`. Portare's light theme is a proposed product-specific adaptation.
 
 ## Showcase
 
