@@ -151,3 +151,38 @@ test("grain is on by default for panels and data-fds-grain=off opts out (self an
     expect(off.grain, title).toBe("none");
   }
 });
+
+for (const theme of ["funder", "portare"]) {
+  test(`${theme}: components on a grain surface are opaque, so grain never shows through`, async ({
+    page,
+  }) => {
+    await page.goto(`/grain.html?theme=${theme}`);
+    await page.waitForFunction(
+      () => (document.querySelector("#fds-theme") as HTMLLinkElement).sheet !== null,
+    );
+    const offenders = await page.evaluate(() => {
+      // Computed colours serialise as rgb()/rgba() or color(srgb r g b / a); alpha defaults to 1.
+      const alpha = (color: string) => {
+        const slash = color.match(/\/\s*([\d.]+%?)\s*\)/);
+        if (slash) return slash[1].endsWith("%") ? parseFloat(slash[1]) / 100 : Number(slash[1]);
+        const rgba = color.match(/^rgba\(([^)]+)\)/);
+        return rgba ? Number(rgba[1].split(",")[3]) : 1;
+      };
+      const out: string[] = [];
+      const selectors =
+        ".fds-badge, .fds-notice, .fds-metric, .fds-keyvalue, .fds-control, .fds-menu__trigger, .fds-button--primary, .fds-button--secondary";
+      for (const el of document.querySelectorAll(
+        `.fds-panel:not([data-fds-grain=off]) :is(${selectors})`,
+      )) {
+        if (el.closest("[data-fds-grain=off]")) continue;
+        const style = getComputedStyle(el);
+        const name = `${el.className} ${(el as HTMLButtonElement).disabled ? "(disabled)" : ""}`;
+        if (alpha(style.backgroundColor) < 1) out.push(`${name}: translucent background`);
+        for (let n: Element | null = el; n && !n.matches(".fds-panel"); n = n.parentElement)
+          if (Number(getComputedStyle(n).opacity) < 1) out.push(`${name}: opacity below 1`);
+      }
+      return out;
+    });
+    expect(offenders).toEqual([]);
+  });
+}

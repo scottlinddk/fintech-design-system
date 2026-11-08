@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import { Badge, Button, Metric, Panel } from "../src/index.js";
+import { Badge, Button, Field, Input, Metric, Notice, Panel } from "../src/index.js";
 import funder from "../styles/themes/funder.css?url";
 import investor from "../styles/themes/investor.css?url";
 import portare from "../styles/themes/portare.css?url";
@@ -101,6 +101,33 @@ function Grain() {
           </Panel>
         </div>
       </div>
+      <Panel eyebrow="On grain" title="Components stay on top" help="Grain is background only.">
+        <div className="showcase__row">
+          <Button>Primary action</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button disabled>Disabled</Button>
+          <Button variant="secondary" disabled>
+            Disabled
+          </Button>
+        </div>
+        <div className="showcase__row">
+          <Badge>Neutral</Badge>
+          <Badge tone="accent">Information</Badge>
+          <Badge tone="success">Completed</Badge>
+          <Badge tone="warn">Review</Badge>
+          <Badge tone="danger">Failed</Badge>
+        </div>
+        <div className="showcase__stack">
+          <Notice title="Information">Check the details before continuing.</Notice>
+          <Notice tone="danger" title="Could not save">
+            Try again after reviewing the form.
+          </Notice>
+          <Field label="Disabled field">
+            {(control) => <Input {...control} disabled placeholder="Unavailable" />}
+          </Field>
+        </div>
+      </Panel>
     </main>
   );
 }

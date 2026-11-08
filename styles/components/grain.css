@@ -173,6 +173,48 @@
       font-size: 0.875em;
     }
 
+    /*
+     * Components sit on top of the grain: it is background only. Any component fill that is translucent
+     * would let the grain show through, so inside a grain surface those fills are mixed with the panel
+     * colour instead of transparent. The result matches the flat-panel look, but is opaque.
+     */
+    :is(.fds-grain, .fds-panel):not(:where([data-fds-grain="off"], [data-fds-grain="off"] *))
+      .fds-badge {
+      background: color-mix(in srgb, var(--fds-badge-color) 12%, var(--fds-panel));
+      border-color: color-mix(in srgb, var(--fds-badge-color) 30%, var(--fds-panel));
+    }
+    :is(.fds-grain, .fds-panel):not(:where([data-fds-grain="off"], [data-fds-grain="off"] *))
+      .fds-notice {
+      background: color-mix(in srgb, var(--fds-notice-color) 10%, var(--fds-panel));
+      border-color: color-mix(in srgb, var(--fds-notice-color) 35%, var(--fds-panel));
+    }
+    /* Disabled controls use opacity: 0.5, which is see-through. Reproduce it as opaque mixes instead. */
+    :is(.fds-grain, .fds-panel):not(:where([data-fds-grain="off"], [data-fds-grain="off"] *))
+      :is(.fds-button, .fds-control):disabled {
+      opacity: 1;
+    }
+    :is(.fds-grain, .fds-panel):not(:where([data-fds-grain="off"], [data-fds-grain="off"] *))
+      .fds-button--primary:disabled {
+      background: color-mix(in srgb, var(--fds-accent) 50%, var(--fds-panel));
+      color: color-mix(in srgb, var(--fds-on-accent) 50%, var(--fds-panel));
+    }
+    :is(.fds-grain, .fds-panel):not(:where([data-fds-grain="off"], [data-fds-grain="off"] *))
+      .fds-button--secondary:disabled {
+      background: color-mix(in srgb, var(--fds-panel-raised) 50%, var(--fds-panel));
+      border-color: color-mix(in srgb, var(--fds-line) 50%, var(--fds-panel));
+      color: color-mix(in srgb, var(--fds-foreground) 50%, var(--fds-panel));
+    }
+    :is(.fds-grain, .fds-panel):not(:where([data-fds-grain="off"], [data-fds-grain="off"] *))
+      .fds-button--ghost:disabled {
+      color: color-mix(in srgb, var(--fds-foreground) 50%, var(--fds-panel));
+    }
+    :is(.fds-grain, .fds-panel):not(:where([data-fds-grain="off"], [data-fds-grain="off"] *))
+      .fds-control:disabled {
+      background: color-mix(in srgb, var(--fds-panel-soft, var(--fds-panel)) 50%, var(--fds-panel));
+      border-color: color-mix(in srgb, var(--fds-line) 50%, var(--fds-panel));
+      color: color-mix(in srgb, var(--fds-foreground) 50%, var(--fds-panel));
+    }
+
     /* Quiet, technical labelling inside grain surfaces. */
     .fds-grain .fds-eyebrow,
     .fds-panel:not(:where([data-fds-grain="off"], [data-fds-grain="off"] *)) .fds-eyebrow {
