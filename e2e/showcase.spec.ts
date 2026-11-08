@@ -106,3 +106,24 @@ test("earlier, less-specific consumer CSS overrides the fds layer", async ({ pag
   await button.focus();
   await expect(button).toHaveCSS("outline-style", "solid");
 });
+
+for (const theme of ["funder", "investor", "portare"]) {
+  test(`${theme}: grain surfaces pass axe and stay inside the viewport`, async ({ page }) => {
+    await page.goto(`/grain.html?theme=${theme}`);
+    await page.waitForFunction(
+      () => (document.querySelector("#fds-theme") as HTMLLinkElement).sheet !== null,
+    );
+    await expect(page.locator(".fds-grain").first()).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+    await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
+    const violations = await page.evaluate(async () => {
+      const axe = (
+        window as unknown as { axe: { run: (n: Document) => Promise<{ violations: unknown[] }> } }
+      ).axe;
+      return (await axe.run(document)).violations;
+    });
+    expect(violations).toEqual([]);
+  });
+}

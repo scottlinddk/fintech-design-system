@@ -14,3 +14,23 @@ All three themes explicitly define the Phase 0 foundation tokens. Funder and Inv
 - `chart-1` through `chart-6`, `chart-grid`, `chart-positive/negative`: recipe colours only. Supply labels, signs, patterns or shapes as well as colour. No chart library or financial calculation is included.
 
 `src/tokens.test.ts` checks all pre-existing declarations are unchanged, every new token exists in each theme, text on solid success/danger meets 4.5:1, Portare text on all four surfaces meets 4.5:1, and Portare focus/chart marks meet 3:1. This does not certify complete consumer screens or the existing low-contrast decorative border tokens.
+
+## Grain surfaces (opt-in)
+
+`@scttlnd/fintech-design-system/grain.css` adds `fds-grain`: a hairline-bordered surface with a soft two-colour glow and fine film grain. Import it after `styles.css` and your theme. It is not part of `styles.css`, so existing apps are unaffected until they opt in.
+
+```tsx
+import "@scttlnd/fintech-design-system/styles.css";
+import "@scttlnd/fintech-design-system/themes/investor.css";
+import "@scttlnd/fintech-design-system/grain.css";
+
+<Panel className="fds-grain" title="Portfolio value">…</Panel>
+<section className="fds-grain fds-grain--hero">…</section>
+```
+
+- Vivid: `fds-grain fds-grain--vivid` (plus `--teal`, `--green`, `--ember`) is a saturated colour field with light streaks and strong grain for hero bands and feature panels. Put all text on an `fds-grain__stage` (a near-black inset, same in every theme) so contrast never depends on the gradient. Tokens: `--fds-vivid-{indigo,teal,green,ember}-{1,2}`, `--fds-stage-{bg,fg,muted,line}`.
+- Also: `fds-cells` (flat 1px-divided cells instead of shadowed cards) and `fds-code` (inline mono chip).
+- Modifiers: `fds-grain--warm` (warn to danger glow), `fds-grain--subtle` (quieter), `fds-grain--hero` (large padding and radius).
+- Tokens: `--fds-glow-a`, `--fds-glow-b`, `--fds-glow-warm-a`, `--fds-glow-warm-b`, `--fds-glow-l`/`--fds-glow-d`, `--fds-grain-l`/`--fds-grain-d` (light/dark share and alpha), `--fds-grain-size`, `--fds-grain-image`. Glow A follows the theme accent; values switch with `color-scheme` through `light-dark()` (used for colours only; numeric light/dark pairs are separate `-l`/`-d` tokens), so no per-theme overrides exist. Rules are wrapped in `@supports (color: light-dark(…))`; browsers without it show the plain panel.
+- Use for a few emphasised surfaces (a hero, a headline figure), not every panel. Content must keep working without the decoration: it is removed under `forced-colors` and in print, and the grain layer is `pointer-events: none` and sits below content.
+- A `/grain.html` page in the showcase demonstrates every variant in all three themes; `npm run test:browser` runs axe on it.
