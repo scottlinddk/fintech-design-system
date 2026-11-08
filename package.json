@@ -23,6 +23,7 @@
       "import": "./dist/index.mjs"
     },
     "./styles.css": "./styles/index.css",
+    "./grain.css": "./styles/grain.css",
     "./themes/funder.css": "./styles/themes/funder.css",
     "./themes/portare.css": "./styles/themes/portare.css",
     "./themes/investor.css": "./styles/themes/investor.css"

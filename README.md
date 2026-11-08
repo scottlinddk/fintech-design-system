@@ -28,6 +28,8 @@ import "@scttlnd/fintech-design-system/themes/investor.css"; // or portare.css /
 import { Button } from "@scttlnd/fintech-design-system";
 ```
 
+Optional grain surfaces (`fds-grain`, soft glow plus film grain) are opt-in via `@scttlnd/fintech-design-system/grain.css`; see [Foundation tokens](docs/TOKENS.md#grain-surfaces-opt-in).
+
 Read [AGENTS.md](AGENTS.md) and [adoption guide](docs/ADOPTION.md) before integrating. Planned component roadmap: [component plan](docs/COMPONENT-PLAN.md). Original Funder palette is sourced from `nicklaslind/Funder/src/app/globals.css`. Portare's light theme is a proposed product-specific adaptation.
 
 ## Showcase
