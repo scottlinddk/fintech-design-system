@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0
+
+### Minor Changes
+
+- Release the changes merged into main with the default minor version bump. Review [the source commit](https://github.com/scottlinddk/fintech-design-system/commit/f5f28444c73fceb422d16b4df730dc64aa0f4d4d) and verify affected consumers before upgrading.
+
 ## 0.3.0
 
 ### Minor Changes
