@@ -49,6 +49,10 @@ The component showcase (`npm run showcase:dev` locally, `npm run showcase:build`
 
 Components render only `--fds-*` styled markup. Formatting, locale, currency and calculations stay in the consuming app (pass pre-formatted strings, or `formatValue`). The published modules for `Button`, `Menu`, `Field` (including its native controls), and `Panel` carry `"use client"`. The root barrel and static primitives such as `Badge` remain server-compatible. Event handlers, `Menu.items` callbacks and `Field.children` render functions still belong in a consumer client component because functions cannot cross the server/client boundary. See [Next.js verification](docs/verification/next-app-router.md).
 
+## Cascade layer
+
+Package styles and themes live in `@layer fds`. Normal unlayered consumer CSS overrides them regardless of specificity or import order. This changes cascade behaviour in Phase 0; review consumer resets and focus rules before upgrading. Layered apps can declare `@layer reset, fds, app;`. See [cascade migration notes](docs/CASCADE.md).
+
 ## npm publishing
 
 Releases are automated by `.github/workflows/release.yml` (Changesets) on every push to `main`, using npm trusted publishing (OIDC). **Requires** the npm user/scope `@scttlnd` (npm username `scttlnd`; the GitHub owner `scottlinddk` is a different name), a one-time bootstrap publication because npm can only attach a Trusted Publisher to an existing package, and then a Trusted Publisher configured on npmjs.com for GitHub `scottlinddk/fintech-design-system`, workflow filename `release.yml`. No package has been published yet.
