@@ -40,3 +40,7 @@ body {
   display: grid;
   gap: 1rem;
 }
+
+.showcase .fds-panel__action {
+  align-self: flex-end;
+}
