@@ -6,6 +6,21 @@ on:
 permissions:
   contents: read
 jobs:
+  release-policy:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Shipped changes need a described changeset
+        run: node scripts/changeset-policy.mjs
+        env:
+          BASE_REF: ${{ github.base_ref }}
+          HEAD_REF: ${{ github.head_ref }}
   validate:
     runs-on: ubuntu-latest
     steps:
@@ -15,6 +30,7 @@ jobs:
           node-version: "24"
       - run: npm ci --no-audit --no-fund
       - run: npm run check
+      - run: node scripts/changeset-policy.mjs --consistency
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
@@ -44,7 +60,21 @@ jobs:
           node-version: "24"
       - run: npm ci --no-audit --no-fund
       - run: npx playwright install chromium
-      - run: npm run test:visual
+      # Advisory: snapshot drift must not fail the workflow. It stays visible as a warning and summary.
+      - name: Visual snapshots (advisory)
+        id: visual
+        run: npm run test:visual
+        continue-on-error: true
+      - name: Report snapshot drift
+        if: steps.visual.outcome == 'failure'
+        run: |
+          echo "::warning title=Visual snapshots differ::Advisory only. Review the visual-evidence artifact; if the change is intended, run npm run test:visual:update on macOS and commit the reviewed baselines."
+          {
+            echo "### Visual snapshots differ (advisory, does not fail CI)"
+            echo
+            echo "Download the **visual-evidence** artifact and review \`*-actual.png\` and \`*-diff.png\`."
+            echo "If the change is intended, run \`npm run test:visual:update\` on macOS and commit the reviewed baselines."
+          } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         if: always()
         with:

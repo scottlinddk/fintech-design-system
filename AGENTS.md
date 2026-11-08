@@ -7,7 +7,7 @@ This repository is the **source of truth** for shared visual tokens and primitiv
 3. Prefer CSS variables `--fds-*` and exported primitives. Avoid hardcoded colors and duplicate primitives.
 4. Funder is the reference for the dark palette. Portare light theme is a **proposed** accessibility-oriented adaptation, not a verified Funder style.
 5. Preserve keyboard focus, semantic HTML, reduced motion, 44px touch targets where appropriate, WCAG contrast, mobile viewport/safe areas, and 16px mobile form control font sizes.
-6. Changes to public exports/tokens require SemVer, a changeset (`npx changeset`; CHANGELOG.md is generated), and consumer verification. Never silently break an existing theme.
+6. Changes to public exports/tokens require SemVer, a changeset (`npx changeset`; CHANGELOG.md and the package version are generated, never edit them by hand), and consumer verification. Any PR that changes `src/` (non-test), `styles/` or package exports needs a described changeset; the `release-policy` CI job enforces it, and tokens, themes and exports need at least a minor. Never silently break an existing theme.
 7. Never place financial arithmetic, API clients, user state, authentication, or business-specific charts in this package.
 8. Run `npm install`, `npm run check`, `npm test`, `npm run build` before proposing a release; review npm tarball contents with `npm pack --dry-run`.
 9. The package must be published to npm before consumer dependencies can resolve. Renovate updates versions only after publication.
