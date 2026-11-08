@@ -37,7 +37,7 @@
     "test": "vp test --run",
     "typecheck": "tsc --noEmit",
     "changeset": "changeset",
-    "version": "changeset version && vp check --fix",
+    "version": "changeset version && npm install --package-lock-only --ignore-scripts --no-audit --no-fund && vp check --fix",
     "release": "changeset publish",
     "prepublishOnly": "npm run build",
     "showcase:dev": "vp dev --config showcase/vite.config.ts",

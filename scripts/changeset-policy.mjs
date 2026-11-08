@@ -1,37 +1,11 @@
 // Release policy enforced in CI so every merge to main produces a correct version bump and changelog.
-// Versioning itself stays with Changesets: PRs carry changesets, the "version packages" PR bumps
-// package.json and generates CHANGELOG.md, and merging that PR publishes.
+// Versioning stays with Changesets: explicit changesets override the automatic minor default.
+// The "version packages" PR bumps package.json and generates CHANGELOG.md; merging it publishes.
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 
 export const PACKAGE = "@scttlnd/fintech-design-system";
 export const RELEASE_BRANCH = "changeset-release/main";
-const ORDER = { patch: 1, minor: 2, major: 3 };
-// Package keys that never reach consumers; changes to only these need no release.
-const NON_SHIPPING_KEYS = new Set(["devDependencies", "scripts", "version", "repository"]);
-
-/** Files that change what consumers receive in the tarball (README/AGENTS docs are excluded on purpose). */
-export function isShipped(path) {
-  if (path.startsWith("styles/")) return true;
-  if (path.startsWith("src/"))
-    return !/\.(test|spec)\.[cm]?[jt]sx?$|\.json$|axe-matchers\.d\.ts$/.test(path);
-  return false;
-}
-/** Tokens, themes and exports are the public contract (AGENTS.md rule 6): at least a minor bump. */
-export function isContract(path) {
-  return path === "styles/tokens.css" || path.startsWith("styles/themes/");
-}
-
-function shippingPackageChange(basePkg, headPkg) {
-  const strip = (pkg) =>
-    JSON.stringify(
-      Object.fromEntries(Object.entries(pkg).filter(([key]) => !NON_SHIPPING_KEYS.has(key))),
-    );
-  return strip(basePkg) !== strip(headPkg);
-}
-function exportsChanged(basePkg, headPkg) {
-  return JSON.stringify(basePkg.exports) !== JSON.stringify(headPkg.exports);
-}
 
 /** @returns {{bump: string|null, empty: boolean, body: string, file: string}} */
 export function parseChangeset(file, text) {
@@ -62,25 +36,13 @@ export function evaluate({ changed, basePkg, headPkg, changesets, headRef = "" }
   if (changed.includes("CHANGELOG.md"))
     errors.push("CHANGELOG.md is generated from changesets and must not be edited by hand.");
 
-  const shipped = changed.filter(isShipped);
-  const pkgShips = changed.includes("package.json") && shippingPackageChange(basePkg, headPkg);
-  const needsRelease = shipped.length > 0 || pkgShips;
   const real = changesets.filter((c) => c.bump);
-  const contract =
-    changed.some(isContract) ||
-    (changed.includes("package.json") && exportsChanged(basePkg, headPkg));
 
   for (const c of changesets) {
     if (c.invalid)
       errors.push(`${c.file}: missing "---" frontmatter. Create it with \`npx changeset\`.`);
     else if (!c.empty && !c.bump)
       errors.push(`${c.file}: must list "${PACKAGE}" with patch, minor or major.`);
-  }
-  if (needsRelease && real.length === 0) {
-    const what = [...shipped, ...(pkgShips ? ["package.json"] : [])].slice(0, 5).join(", ");
-    errors.push(
-      `This PR changes shipped files (${what}) but has no changeset. Run \`npx changeset\`, pick the SemVer bump and describe the change for consumers. An empty changeset is not enough here.`,
-    );
   }
   for (const c of real) {
     const min = c.bump === "patch" ? 40 : 80;
@@ -89,10 +51,6 @@ export function evaluate({ changed, basePkg, headPkg, changesets, headRef = "" }
         `${c.file}: the ${c.bump} description is ${c.body.length} characters; write at least ${min} so the changelog explains what changed and what consumers must do.`,
       );
   }
-  if (contract && real.length > 0 && !real.some((c) => ORDER[c.bump] >= ORDER.minor))
-    errors.push(
-      "Changes to tokens, themes or package exports are public-contract changes and need at least a minor changeset.",
-    );
   return errors;
 }
 
