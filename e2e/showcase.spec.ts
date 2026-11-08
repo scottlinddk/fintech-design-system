@@ -127,3 +127,27 @@ for (const theme of ["funder", "investor", "portare"]) {
     expect(violations).toEqual([]);
   });
 }
+
+test("grain is on by default for panels and data-fds-grain=off opts out (self and ancestor)", async ({
+  page,
+}) => {
+  await page.goto("/grain.html?theme=funder");
+  await page.waitForFunction(
+    () => (document.querySelector("#fds-theme") as HTMLLinkElement).sheet !== null,
+  );
+  const state = (title: string) =>
+    page
+      .locator(".fds-panel", { has: page.getByRole("heading", { name: title }) })
+      .evaluate((el) => ({
+        bg: getComputedStyle(el).backgroundImage,
+        grain: getComputedStyle(el, "::before").content,
+      }));
+  const on = await state("Portfolio value");
+  expect(on.bg).toContain("radial-gradient");
+  expect(on.grain).not.toBe("none");
+  for (const title of ["Flat panel", "Inherited"]) {
+    const off = await state(title);
+    expect(off.bg, title).toBe("none");
+    expect(off.grain, title).toBe("none");
+  }
+});

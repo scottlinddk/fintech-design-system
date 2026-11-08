@@ -1,7 +1,8 @@
 @layer fds {
   /*
    * Grain surfaces: a quiet, hairline-bordered surface with a soft two-colour glow and fine film grain.
-   * Opt-in. Import after styles.css and your theme. Nothing here changes existing components.
+   * On by default for every .fds-panel; opt out with data-fds-grain="off" on the element or any ancestor
+   * (for example <html>). Vivid, hero and the other modifiers are explicit classes on .fds-grain.
    * Colours derive from the active theme (accent, panel, line), so every theme works. `light-dark()`
    * follows the theme's `color-scheme`, so no per-theme overrides are needed.
    */
@@ -36,8 +37,8 @@
       --fds-stage-line: #26272d;
     }
 
-    .fds-grain,
-    .fds-panel.fds-grain {
+    .fds-grain:not(:where([data-fds-grain="off"], [data-fds-grain="off"] *)),
+    .fds-panel:not(:where([data-fds-grain="off"], [data-fds-grain="off"] *)) {
       position: relative;
       isolation: isolate;
       border: 1px solid var(--fds-line);
@@ -57,7 +58,8 @@
     }
 
     /* Grain sits above the gradient and below the content, so text stays crisp. */
-    .fds-grain::before {
+    .fds-grain:not(:where([data-fds-grain="off"], [data-fds-grain="off"] *))::before,
+    .fds-panel:not(:where([data-fds-grain="off"], [data-fds-grain="off"] *))::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -172,7 +174,8 @@
     }
 
     /* Quiet, technical labelling inside grain surfaces. */
-    .fds-grain .fds-eyebrow {
+    .fds-grain .fds-eyebrow,
+    .fds-panel:not(:where([data-fds-grain="off"], [data-fds-grain="off"] *)) .fds-eyebrow {
       font-family: var(--fds-font-mono);
       letter-spacing: 0.08em;
     }

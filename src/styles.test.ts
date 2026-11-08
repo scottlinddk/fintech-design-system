@@ -8,7 +8,10 @@ const expand = (file: string): string =>
   readFileSync(file, "utf8")
     .replace(/^@layer fds;\s*/, "")
     .replace(/^@layer fds \{\n([\s\S]*)\}\s*$/, "$1")
-    .replace(/@import "(.+?)";/g, (_, child: string) => expand(resolve(dirname(file), child)));
+    // The grain layer is a deliberate, separately tested addition on top of the original stream.
+    .replace(/@import "(.+?)";/g, (_, child: string) =>
+      child.endsWith("grain.css") ? "" : expand(resolve(dirname(file), child)),
+    );
 it("keeps the pre-split CSS declaration order and values", () => {
   const css = expand("styles/index.css").replace(/\s+/g, "");
   expect(createHash("sha256").update(css).digest("hex")).toBe(baseline.sha256);
