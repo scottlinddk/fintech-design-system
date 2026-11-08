@@ -14,12 +14,22 @@ it("keeps every grain rule inside the fds layer", () => {
   expect(css.endsWith("}")).toBe(true);
 });
 
-it("derives colours from theme tokens and hardcodes none outside the glow violet and the support probe", () => {
-  const hardcoded = css.match(/#[0-9a-fA-F]{3,8}\b/g) ?? [];
-  expect(hardcoded.sort()).toEqual(["#000", "#6941a5", "#a78bfa", "#fff"]);
+it("keeps hardcoded colours to --fds-* token declarations and the support probe", () => {
+  const stray = css
+    .split("\n")
+    .filter((line) => /#[0-9a-fA-F]{3,8}\b/.test(line))
+    .filter((line) => !/^\s*--fds-[\w-]+:/.test(line) && !line.includes("@supports"));
+  expect(stray).toEqual([]);
 });
 
 it("drops decoration for forced colours and print", () => {
   expect(css).toContain("@media (forced-colors: active)");
   expect(css).toContain("@media print");
+});
+
+it("uses light-dark() for colours only (numbers and keywords are invalid in it)", () => {
+  const code = css.replace(/\/\*[\s\S]*?\*\//g, "");
+  const args = [...code.matchAll(/:\s*light-dark\(\s*([^;]*?)\)\s*;/gs)].map((m) => m[1].trim());
+  expect(args.length).toBeGreaterThan(0);
+  for (const arg of args) expect(arg, arg).toMatch(/^(#|color-mix|rgb)/);
 });

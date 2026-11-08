@@ -29,6 +29,37 @@ function Grain() {
         </div>
       </section>
       <div className="showcase__grid">
+        {(["indigo", "teal", "green", "ember"] as const).map((hue) => (
+          <section
+            key={hue}
+            className={`fds-grain fds-grain--vivid ${hue === "indigo" ? "" : `fds-grain--${hue}`}`}
+            aria-label={`${hue} vivid`}
+          >
+            <div className="fds-grain__stage">
+              <p className="fds-eyebrow">Vivid · {hue}</p>
+              <p>
+                <span aria-hidden="true">$ </span>fds build
+              </p>
+              <p>All 42 files pass in 184ms.</p>
+            </div>
+          </section>
+        ))}
+      </div>
+      <div className="fds-cells">
+        <div>
+          <p className="fds-eyebrow">Hairline cell</p>
+          <h2>Flat and quiet</h2>
+          <p>
+            Dividers instead of shadows, with <code className="fds-code">fds-code</code> chips.
+          </p>
+        </div>
+        <div>
+          <p className="fds-eyebrow">Hairline cell</p>
+          <h2>Same tokens</h2>
+          <p>Backgrounds and lines come from the active theme.</p>
+        </div>
+      </div>
+      <div className="showcase__grid">
         <Panel
           className="fds-grain"
           eyebrow="Default"

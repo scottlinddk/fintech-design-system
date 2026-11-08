@@ -13,12 +13,27 @@
       --fds-glow-b: light-dark(#6941a5, #a78bfa);
       --fds-glow-warm-a: var(--fds-warn);
       --fds-glow-warm-b: var(--fds-danger);
-      /* Share of the glow colour mixed into the surface. Kept low so text contrast is unaffected. */
-      --fds-glow-strength: light-dark(16%, 26%);
-      --fds-grain-opacity: light-dark(0.16, 0.7);
-      --fds-grain-blend: light-dark(multiply, overlay);
+      /* Glow share (light / dark scheme). Kept low so text contrast is unaffected. */
+      --fds-glow-l: 16%;
+      --fds-glow-d: 26%;
+      /* Grain alpha (light / dark scheme). Grain is a tinted alpha mask: dark specks on light, light on dark. */
+      --fds-grain-l: 0.16;
+      --fds-grain-d: 0.09;
       --fds-grain-size: 160px;
-      --fds-grain-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+      --fds-grain-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.9 -.55'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+      /* Vivid hues: saturated colour fields with light streaks. Decoration only; put content on a stage. */
+      --fds-vivid-indigo-1: #4f30e8;
+      --fds-vivid-indigo-2: #8b8ffb;
+      --fds-vivid-teal-1: #0d9488;
+      --fds-vivid-teal-2: #5eead4;
+      --fds-vivid-green-1: #15803d;
+      --fds-vivid-green-2: #86efac;
+      --fds-vivid-ember-1: #c2410c;
+      --fds-vivid-ember-2: #fdba74;
+      --fds-stage-bg: #0d0e12;
+      --fds-stage-fg: #f4f4f5;
+      --fds-stage-muted: #a1a1aa;
+      --fds-stage-line: #26272d;
     }
 
     .fds-grain,
@@ -28,26 +43,17 @@
       border: 1px solid var(--fds-line);
       border-radius: var(--fds-radius-lg);
       color: var(--fds-foreground);
+      --fds-tint-1: light-dark(
+        color-mix(in oklab, var(--fds-glow-1, var(--fds-glow-a)) var(--fds-glow-l), transparent),
+        color-mix(in oklab, var(--fds-glow-1, var(--fds-glow-a)) var(--fds-glow-d), transparent)
+      );
+      --fds-tint-2: light-dark(
+        color-mix(in oklab, var(--fds-glow-2, var(--fds-glow-b)) var(--fds-glow-l), transparent),
+        color-mix(in oklab, var(--fds-glow-2, var(--fds-glow-b)) var(--fds-glow-d), transparent)
+      );
       background:
-        radial-gradient(
-          120% 100% at 0% 0%,
-          color-mix(
-            in oklab,
-            var(--fds-glow-1, var(--fds-glow-a)) var(--fds-glow-strength),
-            transparent
-          ),
-          transparent 62%
-        ),
-        radial-gradient(
-          100% 90% at 100% 100%,
-          color-mix(
-            in oklab,
-            var(--fds-glow-2, var(--fds-glow-b)) var(--fds-glow-strength),
-            transparent
-          ),
-          transparent 58%
-        ),
-        var(--fds-panel);
+        radial-gradient(120% 100% at 0% 0%, var(--fds-tint-1), transparent 62%),
+        radial-gradient(100% 90% at 100% 100%, var(--fds-tint-2), transparent 58%), var(--fds-panel);
     }
 
     /* Grain sits above the gradient and below the content, so text stays crisp. */
@@ -58,10 +64,14 @@
       z-index: -1;
       border-radius: inherit;
       pointer-events: none;
-      background-image: var(--fds-grain-image);
-      background-size: var(--fds-grain-size) var(--fds-grain-size);
-      opacity: var(--fds-grain-opacity);
-      mix-blend-mode: var(--fds-grain-blend);
+      background: light-dark(
+        rgb(0 0 0 / var(--fds-grain-l)),
+        rgb(255 255 255 / var(--fds-grain-d))
+      );
+      -webkit-mask-image: var(--fds-grain-image);
+      mask-image: var(--fds-grain-image);
+      -webkit-mask-size: var(--fds-grain-size) var(--fds-grain-size);
+      mask-size: var(--fds-grain-size) var(--fds-grain-size);
     }
 
     .fds-grain--warm {
@@ -69,13 +79,96 @@
       --fds-glow-2: var(--fds-glow-warm-b);
     }
     .fds-grain--subtle {
-      --fds-glow-strength: light-dark(8%, 14%);
-      --fds-grain-opacity: light-dark(0.1, 0.45);
+      --fds-glow-l: 8%;
+      --fds-glow-d: 14%;
+      --fds-grain-l: 0.1;
+      --fds-grain-d: 0.05;
     }
     .fds-grain--hero {
-      --fds-glow-strength: light-dark(20%, 34%);
+      --fds-glow-l: 20%;
+      --fds-glow-d: 34%;
       padding: clamp(1.5rem, 5vw, 3.5rem);
       border-radius: calc(var(--fds-radius-lg) * 1.5);
+    }
+
+    /*
+     * Vivid: a saturated colour field with diagonal light streaks and strong grain, for hero bands and
+     * feature panels. Text must sit on a .fds-grain__stage (a near-black inset) so contrast never depends
+     * on the gradient. Hues: --indigo (default), --teal, --green, --ember.
+     */
+    .fds-grain--vivid {
+      --fds-v1: var(--fds-vivid-indigo-1);
+      --fds-v2: var(--fds-vivid-indigo-2);
+      --fds-grain-l: 0.3;
+      --fds-grain-d: 0.3;
+      padding: clamp(1rem, 4vw, 2.5rem);
+      border-color: transparent;
+      background:
+        linear-gradient(118deg, transparent 30%, rgb(255 255 255 / 0.28) 30.4%, transparent 31.6%),
+        linear-gradient(118deg, transparent 52%, rgb(255 255 255 / 0.18) 52.3%, transparent 53.2%),
+        linear-gradient(62deg, transparent 64%, rgb(255 255 255 / 0.22) 64.4%, transparent 65.6%),
+        radial-gradient(90% 80% at 15% 10%, var(--fds-v2), transparent 60%),
+        radial-gradient(
+          80% 90% at 90% 95%,
+          color-mix(in oklab, var(--fds-v2) 70%, black),
+          transparent 65%
+        ),
+        linear-gradient(160deg, var(--fds-v1), color-mix(in oklab, var(--fds-v1) 55%, black));
+    }
+    .fds-panel.fds-grain--vivid {
+      padding: clamp(1rem, 4vw, 2.5rem);
+    }
+    .fds-grain--teal {
+      --fds-v1: var(--fds-vivid-teal-1);
+      --fds-v2: var(--fds-vivid-teal-2);
+    }
+    .fds-grain--green {
+      --fds-v1: var(--fds-vivid-green-1);
+      --fds-v2: var(--fds-vivid-green-2);
+    }
+    .fds-grain--ember {
+      --fds-v1: var(--fds-vivid-ember-1);
+      --fds-v2: var(--fds-vivid-ember-2);
+    }
+
+    /* Near-black inset that carries the content on a vivid field. Same colours in every theme. */
+    .fds-grain__stage {
+      padding: var(--fds-space-6);
+      border: 1px solid var(--fds-stage-line);
+      border-radius: var(--fds-radius-md);
+      background: var(--fds-stage-bg);
+      color: var(--fds-stage-fg);
+      font-family: var(--fds-font-mono);
+      font-size: var(--fds-text-sm);
+      line-height: var(--fds-leading-relaxed);
+      box-shadow: 0 18px 48px rgb(0 0 0 / 0.35);
+    }
+    .fds-grain__stage .fds-eyebrow,
+    .fds-grain__stage p {
+      color: var(--fds-stage-muted);
+    }
+
+    /* Flat hairline cells: dividers instead of shadowed cards. */
+    .fds-cells {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+      gap: 1px;
+      border-block: 1px solid var(--fds-line);
+      background: var(--fds-line);
+    }
+    .fds-cells > * {
+      padding: var(--fds-space-6);
+      background: var(--fds-background);
+    }
+
+    /* Inline mono chip for commands and identifiers. */
+    .fds-code {
+      padding: 0.1em 0.45em;
+      border: 1px solid var(--fds-line);
+      border-radius: var(--fds-radius-sm);
+      background: var(--fds-panel-soft);
+      font-family: var(--fds-font-mono);
+      font-size: 0.875em;
     }
 
     /* Quiet, technical labelling inside grain surfaces. */
