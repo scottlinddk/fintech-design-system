@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "24"
       - run: npm ci --no-audit --no-fund
       - run: npx playwright install --with-deps chromium
       - name: Run accessibility, keyboard and responsive checks
