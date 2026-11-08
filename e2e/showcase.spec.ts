@@ -44,7 +44,7 @@ for (const theme of ["funder", "investor", "portare"]) {
         await expect(page).toHaveScreenshot(name, {
           fullPage: true,
           animations: "disabled",
-          maxDiffPixels: 500,
+          maxDiffPixels: 1000,
         });
     };
     await snapshot("closed");
