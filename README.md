@@ -17,15 +17,15 @@ The project-local `vite-plus` package provides `vp pack`, `vp check` and `vp tes
 ## Use in frontend (after npm release)
 
 ```sh
-npm install @scottlinddk/fintech-design-system
+npm install @scttlnd/fintech-design-system
 ```
 
 At the app root import base styles then exactly one theme:
 
 ```tsx
-import "@scottlinddk/fintech-design-system/styles.css";
-import "@scottlinddk/fintech-design-system/themes/investor.css"; // or portare.css / funder.css
-import { Button } from "@scottlinddk/fintech-design-system";
+import "@scttlnd/fintech-design-system/styles.css";
+import "@scttlnd/fintech-design-system/themes/investor.css"; // or portare.css / funder.css
+import { Button } from "@scttlnd/fintech-design-system";
 ```
 
 Read [AGENTS.md](AGENTS.md) and [adoption guide](docs/ADOPTION.md) before integrating. Original Funder palette is sourced from `nicklaslind/Funder/src/app/globals.css`. Portare's light theme is a proposed product-specific adaptation.
@@ -51,4 +51,4 @@ Components render only `--fds-*` styled markup. Formatting, locale, currency and
 
 ## npm publishing
 
-A matching `vX.Y.Z` tag triggers `.github/workflows/publish.yml`, using npm trusted publishing OIDC and provenance. **Requires** npm ownership of `@scottlinddk`, a first bootstrap publication if the package does not yet exist, and an npm Trusted Publisher configured for GitHub `scottlinddk/fintech-design-system`, workflow filename `publish.yml`. The workflow is configured but no package has been published.
+Releases are automated by `.github/workflows/release.yml` (Changesets) on every push to `main`, using npm trusted publishing (OIDC). **Requires** the npm user/scope `@scttlnd` (npm username `scttlnd`; the GitHub owner `scottlinddk` is a different name), a one-time bootstrap publication because npm can only attach a Trusted Publisher to an existing package, and then a Trusted Publisher configured on npmjs.com for GitHub `scottlinddk/fintech-design-system`, workflow filename `release.yml`. No package has been published yet.
