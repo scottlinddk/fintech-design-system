@@ -1,11 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  PACKAGE,
-  changelogConsistency,
-  evaluate,
-  isShipped,
-  parseChangeset,
-} from "./changeset-policy.mjs";
+import { PACKAGE, changelogConsistency, evaluate, parseChangeset } from "./changeset-policy.mjs";
 
 const pkg = {
   name: PACKAGE,
@@ -20,17 +14,6 @@ const cs = (bump, body = long) =>
 const run = (over) =>
   evaluate({ changed: [], basePkg: pkg, headPkg: pkg, changesets: [], ...over });
 
-describe("shipped files", () => {
-  it("counts source and styles, not tests, baselines or docs", () => {
-    expect(isShipped("styles/components/panel.css")).toBe(true);
-    expect(isShipped("src/components/Panel.tsx")).toBe(true);
-    expect(isShipped("src/components/Panel.test.tsx")).toBe(false);
-    expect(isShipped("src/css-split-baseline.json")).toBe(false);
-    expect(isShipped("docs/TOKENS.md")).toBe(false);
-    expect(isShipped("e2e/showcase.spec.ts")).toBe(false);
-  });
-});
-
 describe("evaluate", () => {
   it("needs nothing for docs, tests and CI changes", () => {
     expect(
@@ -41,14 +24,12 @@ describe("evaluate", () => {
     const head = { ...pkg, devDependencies: { x: "2" } };
     expect(run({ changed: ["package.json"], headPkg: head })).toEqual([]);
   });
-  it("requires a changeset when shipped files change", () => {
-    expect(run({ changed: ["styles/components/panel.css"] })[0]).toMatch(/no changeset/);
+  it("allows shipped changes to use the automatic minor default", () => {
+    expect(run({ changed: ["styles/components/panel.css"] })).toEqual([]);
   });
-  it("rejects an empty changeset for shipped changes", () => {
+  it("allows empty changesets without disabling the automatic default", () => {
     const empty = parseChangeset(".changeset/e.md", "---\n---\n");
-    expect(run({ changed: ["src/components/Panel.tsx"], changesets: [empty] })[0]).toMatch(
-      /no changeset/,
-    );
+    expect(run({ changed: ["src/components/Panel.tsx"], changesets: [empty] })).toEqual([]);
   });
   it("accepts a described changeset", () => {
     expect(run({ changed: ["src/components/Panel.tsx"], changesets: [cs("patch")] })).toEqual([]);
@@ -61,16 +42,13 @@ describe("evaluate", () => {
       /at least 80/,
     );
   });
-  it("requires at least minor for tokens, themes and exports", () => {
-    const msg = /at least a minor/;
-    expect(
-      run({ changed: ["styles/themes/portare.css"], changesets: [cs("patch")] }).join(),
-    ).toMatch(msg);
-    expect(run({ changed: ["styles/tokens.css"], changesets: [cs("minor")] })).toEqual([]);
+  it("accepts an explicit patch override for tokens, themes and exports", () => {
+    for (const path of ["styles/themes/portare.css", "styles/tokens.css"])
+      expect(run({ changed: [path], changesets: [cs("patch")] })).toEqual([]);
     const head = { ...pkg, exports: { ".": "./b" } };
-    expect(
-      run({ changed: ["package.json"], headPkg: head, changesets: [cs("patch")] }).join(),
-    ).toMatch(msg);
+    expect(run({ changed: ["package.json"], headPkg: head, changesets: [cs("patch")] })).toEqual(
+      [],
+    );
   });
   it("forbids hand-edited versions and changelogs", () => {
     const errors = run({

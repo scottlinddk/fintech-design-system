@@ -1,5 +1,6 @@
 name: Release
 on:
+  workflow_dispatch: # retry the committed release without generating a new bump
   push:
     branches: [main]
 concurrency: ${{ github.workflow }}-${{ github.ref }}
@@ -9,6 +10,7 @@ permissions:
   id-token: write
 jobs:
   release:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,6 +25,9 @@ jobs:
       - run: node scripts/changeset-policy.mjs --consistency
       - run: npm test
       - run: npm run build
+      - name: Default to a minor release unless a changeset specifies otherwise
+        if: github.event_name == 'push'
+        run: node scripts/prepare-release.mjs
       - uses: changesets/action@v1
         with:
           version: npm run version
