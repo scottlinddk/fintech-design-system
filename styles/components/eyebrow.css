@@ -1,0 +1,9 @@
+/* Shared primitives. Only --fds-* tokens; tones are derived with color-mix so every theme works. */
+
+.fds-eyebrow {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fds-muted);
+}

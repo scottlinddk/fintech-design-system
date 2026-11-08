@@ -1,0 +1,57 @@
+/* Form controls: 44px targets on touch / small screens, 16px font to stop iOS zoom. */
+.fds-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.fds-field__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.fds-field__hint,
+.fds-field__error {
+  margin: 0;
+  font-size: 0.8125rem;
+}
+.fds-field__hint {
+  color: var(--fds-muted);
+}
+.fds-field__error {
+  color: var(--fds-danger);
+}
+.fds-control {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--fds-line);
+  border-radius: var(--fds-radius-md);
+  background: var(--fds-panel-soft, var(--fds-panel));
+  color: var(--fds-foreground);
+  font: inherit;
+  font-size: 1rem;
+}
+.fds-control--multiline {
+  min-height: 6rem;
+  resize: vertical;
+}
+.fds-control:focus-visible {
+  outline: 2px solid var(--fds-focus-ring);
+  outline-offset: 2px;
+  border-color: var(--fds-accent);
+}
+.fds-control[aria-invalid="true"] {
+  border-color: var(--fds-danger);
+}
+.fds-control:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+@media (min-width: 640px) and (pointer: fine) {
+  .fds-control {
+    min-height: 2.25rem;
+    font-size: 0.875rem;
+  }
+  .fds-control--multiline {
+    min-height: 6rem;
+  }
+}
