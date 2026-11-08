@@ -23,3 +23,66 @@
   --fds-radius-lg: 0.75rem;
   --fds-radius-sm: 0.375rem;
 }
+
+/* Phase 0 foundations. Spacing retains the retired showcase's 4px scale. */
+:root {
+  --fds-space-1: 4px;
+  --fds-space-2: 8px;
+  --fds-space-3: 12px;
+  --fds-space-4: 16px;
+  --fds-space-5: 20px;
+  --fds-space-6: 24px;
+  --fds-space-7: 28px;
+  --fds-space-8: 32px;
+  --fds-text-xs: 0.75rem;
+  --fds-text-sm: 0.875rem;
+  --fds-text-base: 1rem;
+  --fds-text-lg: 1.125rem;
+  --fds-text-xl: 1.25rem;
+  --fds-text-2xl: 1.5rem;
+  --fds-leading-tight: 1.25;
+  --fds-leading-normal: 1.5;
+  --fds-leading-relaxed: 1.75;
+  --fds-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --fds-numeric: tabular-nums;
+  --fds-control-h: 2.75rem;
+  --fds-control-h-sm: 2.75rem;
+  --fds-focus-ring: var(--fds-accent);
+  --fds-shadow-popover: 0 10px 30px rgb(0 0 0 / 0.25);
+  --fds-shadow-dialog: 0 24px 64px rgb(0 0 0 / 0.4);
+  --fds-overlay: rgb(0 0 0 / 0.6);
+  --fds-z-dropdown: 30;
+  --fds-z-sticky: 20;
+  --fds-z-overlay: 40;
+  --fds-z-modal: 50;
+  --fds-z-toast: 60;
+  --fds-z-tooltip: 70;
+  --fds-duration-fast: 0.15s;
+  --fds-duration-base: 0.2s;
+  --fds-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --fds-on-danger: var(--fds-background);
+  --fds-on-success: var(--fds-background);
+  --fds-chart-1: #7dd3fc;
+  --fds-chart-2: #c4b5fd;
+  --fds-chart-3: #fbbf24;
+  --fds-chart-4: #fda4af;
+  --fds-chart-5: #86efac;
+  --fds-chart-6: #67e8f9;
+  --fds-chart-grid: #71717a;
+  --fds-chart-positive: var(--fds-success);
+  --fds-chart-negative: var(--fds-danger);
+}
+
+@media (min-width: 640px) and (pointer: fine) {
+  :root {
+    --fds-control-h: 2.25rem;
+    --fds-control-h-sm: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --fds-duration-fast: 0s;
+    --fds-duration-base: 0s;
+  }
+}
