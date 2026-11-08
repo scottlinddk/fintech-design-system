@@ -1,90 +1,92 @@
-:root,
-[data-fds-theme="portare"] {
-  color-scheme: light;
-  --fds-background: #fafbfc;
-  --fds-foreground: #111827;
-  --fds-muted: #525b6b;
-  --fds-panel: #fff;
-  --fds-panel-raised: #f3f5f8;
-  --fds-line: #d8dee7;
-  --fds-accent: #075e7c;
-  --fds-accent-strong: #064c66;
-  --fds-on-accent: #fff;
-}
-
-/* Semantic and secondary surface tokens: the base (dark) values fail contrast on a light surface. */
-:root,
-[data-fds-theme="portare"] {
-  --fds-muted-strong: #374151;
-  --fds-line-soft: #e5e9f0;
-  --fds-panel-soft: #f8fafc;
-  --fds-success: #1f6f4a;
-  --fds-warn: #8a5a00;
-  --fds-danger: #b3261e;
-}
-
-/* Phase 0 foundations. Spacing retains the retired showcase's 4px scale. */
-:root,
-[data-fds-theme="portare"] {
-  --fds-space-1: 4px;
-  --fds-space-2: 8px;
-  --fds-space-3: 12px;
-  --fds-space-4: 16px;
-  --fds-space-5: 20px;
-  --fds-space-6: 24px;
-  --fds-space-7: 28px;
-  --fds-space-8: 32px;
-  --fds-text-xs: 0.75rem;
-  --fds-text-sm: 0.875rem;
-  --fds-text-base: 1rem;
-  --fds-text-lg: 1.125rem;
-  --fds-text-xl: 1.25rem;
-  --fds-text-2xl: 1.5rem;
-  --fds-leading-tight: 1.25;
-  --fds-leading-normal: 1.5;
-  --fds-leading-relaxed: 1.75;
-  --fds-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --fds-numeric: tabular-nums;
-  --fds-control-h: 2.75rem;
-  --fds-control-h-sm: 2.75rem;
-  --fds-focus-ring: var(--fds-accent);
-  --fds-shadow-popover: 0 10px 30px rgb(0 0 0 / 0.15);
-  --fds-shadow-dialog: 0 24px 64px rgb(0 0 0 / 0.25);
-  --fds-overlay: rgb(0 0 0 / 0.5);
-  --fds-z-dropdown: 30;
-  --fds-z-sticky: 20;
-  --fds-z-overlay: 40;
-  --fds-z-modal: 50;
-  --fds-z-toast: 60;
-  --fds-z-tooltip: 70;
-  --fds-duration-fast: 0.15s;
-  --fds-duration-base: 0.2s;
-  --fds-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --fds-on-danger: #fff;
-  --fds-on-success: #fff;
-  --fds-chart-1: #075e7c;
-  --fds-chart-2: #6941a5;
-  --fds-chart-3: #8a5a00;
-  --fds-chart-4: #b3261e;
-  --fds-chart-5: #1f6f4a;
-  --fds-chart-6: #0e6574;
-  --fds-chart-grid: #667085;
-  --fds-chart-positive: var(--fds-success);
-  --fds-chart-negative: var(--fds-danger);
-}
-
-@media (min-width: 640px) and (pointer: fine) {
+@layer fds {
   :root,
   [data-fds-theme="portare"] {
-    --fds-control-h: 2.25rem;
-    --fds-control-h-sm: 2rem;
+    color-scheme: light;
+    --fds-background: #fafbfc;
+    --fds-foreground: #111827;
+    --fds-muted: #525b6b;
+    --fds-panel: #fff;
+    --fds-panel-raised: #f3f5f8;
+    --fds-line: #d8dee7;
+    --fds-accent: #075e7c;
+    --fds-accent-strong: #064c66;
+    --fds-on-accent: #fff;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
+  /* Semantic and secondary surface tokens: the base (dark) values fail contrast on a light surface. */
   :root,
   [data-fds-theme="portare"] {
-    --fds-duration-fast: 0s;
-    --fds-duration-base: 0s;
+    --fds-muted-strong: #374151;
+    --fds-line-soft: #e5e9f0;
+    --fds-panel-soft: #f8fafc;
+    --fds-success: #1f6f4a;
+    --fds-warn: #8a5a00;
+    --fds-danger: #b3261e;
+  }
+
+  /* Phase 0 foundations. Spacing retains the retired showcase's 4px scale. */
+  :root,
+  [data-fds-theme="portare"] {
+    --fds-space-1: 4px;
+    --fds-space-2: 8px;
+    --fds-space-3: 12px;
+    --fds-space-4: 16px;
+    --fds-space-5: 20px;
+    --fds-space-6: 24px;
+    --fds-space-7: 28px;
+    --fds-space-8: 32px;
+    --fds-text-xs: 0.75rem;
+    --fds-text-sm: 0.875rem;
+    --fds-text-base: 1rem;
+    --fds-text-lg: 1.125rem;
+    --fds-text-xl: 1.25rem;
+    --fds-text-2xl: 1.5rem;
+    --fds-leading-tight: 1.25;
+    --fds-leading-normal: 1.5;
+    --fds-leading-relaxed: 1.75;
+    --fds-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --fds-numeric: tabular-nums;
+    --fds-control-h: 2.75rem;
+    --fds-control-h-sm: 2.75rem;
+    --fds-focus-ring: var(--fds-accent);
+    --fds-shadow-popover: 0 10px 30px rgb(0 0 0 / 0.15);
+    --fds-shadow-dialog: 0 24px 64px rgb(0 0 0 / 0.25);
+    --fds-overlay: rgb(0 0 0 / 0.5);
+    --fds-z-dropdown: 30;
+    --fds-z-sticky: 20;
+    --fds-z-overlay: 40;
+    --fds-z-modal: 50;
+    --fds-z-toast: 60;
+    --fds-z-tooltip: 70;
+    --fds-duration-fast: 0.15s;
+    --fds-duration-base: 0.2s;
+    --fds-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --fds-on-danger: #fff;
+    --fds-on-success: #fff;
+    --fds-chart-1: #075e7c;
+    --fds-chart-2: #6941a5;
+    --fds-chart-3: #8a5a00;
+    --fds-chart-4: #b3261e;
+    --fds-chart-5: #1f6f4a;
+    --fds-chart-6: #0e6574;
+    --fds-chart-grid: #667085;
+    --fds-chart-positive: var(--fds-success);
+    --fds-chart-negative: var(--fds-danger);
+  }
+
+  @media (min-width: 640px) and (pointer: fine) {
+    :root,
+    [data-fds-theme="portare"] {
+      --fds-control-h: 2.25rem;
+      --fds-control-h-sm: 2rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root,
+    [data-fds-theme="portare"] {
+      --fds-duration-fast: 0s;
+      --fds-duration-base: 0s;
+    }
   }
 }

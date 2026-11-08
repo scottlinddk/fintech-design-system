@@ -1,60 +1,62 @@
-/* Meters */
-.fds-meter {
-  height: 0.5rem;
-  overflow: hidden;
-  border-radius: 999px;
-  background: var(--fds-line);
-}
-.fds-meter--thin {
-  height: 0.375rem;
-}
-.fds-meter__fill {
-  height: 100%;
-  border-radius: inherit;
-  background: var(--fds-accent);
-}
-.fds-segmeter {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-.fds-segmeter__segment {
-  width: 0.5rem;
-  height: 1rem;
-  border-radius: 2px;
-  background: var(--fds-line);
-}
-.fds-segmeter__segment--on {
-  background: var(--fds-accent);
-}
-.fds-distribution__list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.fds-distribution__meta {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin-bottom: 0.25rem;
-  font-size: 0.75rem;
-}
-.fds-distribution__label {
-  color: var(--fds-muted-strong, var(--fds-foreground));
-}
-.fds-distribution__value {
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-}
-.fds-distribution__empty,
-.fds-distribution__overflow {
-  margin: 0;
-  font-size: 0.8125rem;
-  color: var(--fds-muted);
-}
-.fds-distribution__overflow {
-  margin-top: 0.5rem;
+@layer fds {
+  /* Meters */
+  .fds-meter {
+    height: 0.5rem;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--fds-line);
+  }
+  .fds-meter--thin {
+    height: 0.375rem;
+  }
+  .fds-meter__fill {
+    height: 100%;
+    border-radius: inherit;
+    background: var(--fds-accent);
+  }
+  .fds-segmeter {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .fds-segmeter__segment {
+    width: 0.5rem;
+    height: 1rem;
+    border-radius: 2px;
+    background: var(--fds-line);
+  }
+  .fds-segmeter__segment--on {
+    background: var(--fds-accent);
+  }
+  .fds-distribution__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .fds-distribution__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.25rem;
+    font-size: 0.75rem;
+  }
+  .fds-distribution__label {
+    color: var(--fds-muted-strong, var(--fds-foreground));
+  }
+  .fds-distribution__value {
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+  .fds-distribution__empty,
+  .fds-distribution__overflow {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--fds-muted);
+  }
+  .fds-distribution__overflow {
+    margin-top: 0.5rem;
+  }
 }

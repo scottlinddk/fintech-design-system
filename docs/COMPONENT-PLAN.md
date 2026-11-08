@@ -1,6 +1,6 @@
 # Component plan
 
-Status: proposal, 2026-11-08. Nothing here is implemented yet.
+Status: Phase 0 implemented in PRs #12–#17 (2026-11-08), awaiting merge and consumer release verification. Phases 1–5 remain proposed. See [Phase 0 verification](verification/phase-0.md).
 Scope: a reference set of 66 common UI components (reviewed 2026-11-08), triaged against what this package ships today.
 
 ## 1. Summary

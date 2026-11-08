@@ -90,3 +90,19 @@ for (const theme of ["funder", "investor", "portare"]) {
     expect(errors).toEqual([]);
   });
 }
+
+test("earlier, less-specific consumer CSS overrides the fds layer", async ({ page }) => {
+  await page.goto("/?theme=portare");
+  const button = page.getByRole("button", { name: "Primary action" });
+  await expect(button).toHaveCSS("font-weight", "600");
+  await page.evaluate(() => {
+    const style = document.createElement("style");
+    style.textContent = "button { font-weight: 400; } :root { --fds-accent: var(--fds-success); }";
+    // Put the consumer rule before package styles: layer precedence must win regardless of source order.
+    document.head.prepend(style);
+  });
+  await expect(button).toHaveCSS("font-weight", "400");
+  await expect(button).toHaveCSS("background-color", "rgb(31, 111, 74)");
+  await button.focus();
+  await expect(button).toHaveCSS("outline-style", "solid");
+});
