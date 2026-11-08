@@ -41,7 +41,11 @@ for (const theme of ["funder", "investor", "portare"]) {
         animations: "disabled",
       });
       if (process.env.FDS_VISUAL)
-        await expect(page).toHaveScreenshot(name, { fullPage: true, animations: "disabled" });
+        await expect(page).toHaveScreenshot(name, {
+          fullPage: true,
+          animations: "disabled",
+          maxDiffPixels: 500,
+        });
     };
     await snapshot("closed");
     const trigger = page.getByRole("button", { name: "Example actions" });

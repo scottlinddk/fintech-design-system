@@ -8,3 +8,5 @@
 DOM axe checks do not establish visual colour contrast or screen-reader usability. Real-browser axe complements the explicit token contrast tests. VoiceOver, real iOS/Android, other browser engines, and visual verification in consuming product apps still require manual review.
 
 Local Phase 0 test-setup result (2026-11-08): 32 unit/static/interaction tests and all 6 Chromium theme/viewport scenarios pass, including axe and all 12 snapshot comparisons. The CSS split separately matched 12 before/after PNGs byte-for-byte; see `verification/css-split.md`.
+
+The macOS CI runner differs from the local baseline by 49–426 pixels in native controls/text antialiasing (reviewed CI diff images). Snapshot assertions allow at most 500 differing pixels per full-page image; token, size, focus and axe assertions remain exact. This tolerance is independent of image area. The CSS split comparison used exact PNG hashes with no tolerance.
