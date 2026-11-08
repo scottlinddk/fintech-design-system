@@ -30,7 +30,7 @@ import { Button } from "@scottlinddk/fintech-design-system";
 
 Read [AGENTS.md](AGENTS.md) and [adoption guide](docs/ADOPTION.md) before integrating. Original Funder palette is sourced from `nicklaslind/Funder/src/app/globals.css`. Portare's light theme is a proposed product-specific adaptation.
 
-## Showcase
+## Showcase 
 
 The static design review page in [`showcase/index.html`](showcase/index.html) is deployed to GitHub Pages by `.github/workflows/pages.yml` on every push to `main` that touches it: <https://scottlinddk.github.io/fintech-design-system/>. One-time setup: repository **Settings → Pages → Source: GitHub Actions**.
 
