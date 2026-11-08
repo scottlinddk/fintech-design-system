@@ -1,0 +1,14 @@
+{
+  "name": "fds-next-app-router-smoke",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "next build --webpack",
+    "start": "next start --hostname 127.0.0.1 --port 4174"
+  },
+  "dependencies": {
+    "next": "16.4.5",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  }
+}

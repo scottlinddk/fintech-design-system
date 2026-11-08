@@ -43,7 +43,10 @@
     "showcase:build": "vp build --config showcase/vite.config.ts",
     "test:browser": "playwright test",
     "test:visual": "FDS_VISUAL=1 playwright test",
-    "test:visual:update": "FDS_VISUAL=1 playwright test --update-snapshots"
+    "test:visual:update": "FDS_VISUAL=1 playwright test --update-snapshots",
+    "test:package": "node scripts/check-build.mjs && node scripts/check-size.mjs",
+    "smoke:next": "node scripts/smoke-next.mjs",
+    "smoke:next:browser": "node scripts/verify-next.mjs"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.1",

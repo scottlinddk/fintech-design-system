@@ -47,7 +47,7 @@ The component showcase (`npm run showcase:dev` locally, `npm run showcase:build`
 | `Meter`, `SegmentedMeter`, `DistributionList` | Bounded bars, discrete scale, ranked share bars (`role="meter"`)        | Funder `EvidenceBar`, `RiskBars`, `ExposureList`                 |
 | `Menu`                                        | Action menu with Escape/arrow-key support and focus return              | Funder `Menu`                                                    |
 
-Components render only `--fds-*` styled markup. Formatting, locale, currency and calculations stay in the consuming app (pass pre-formatted strings, or `formatValue`). `Menu`, `Field` and `Panel` use React hooks: in Next.js import them from a file marked `"use client"`.
+Components render only `--fds-*` styled markup. Formatting, locale, currency and calculations stay in the consuming app (pass pre-formatted strings, or `formatValue`). The published modules for `Button`, `Menu`, `Field` (including its native controls), and `Panel` carry `"use client"`. The root barrel and static primitives such as `Badge` remain server-compatible. Event handlers, `Menu.items` callbacks and `Field.children` render functions still belong in a consumer client component because functions cannot cross the server/client boundary. See [Next.js verification](docs/verification/next-app-router.md).
 
 ## npm publishing
 

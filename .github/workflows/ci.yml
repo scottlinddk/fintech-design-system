@@ -17,6 +17,7 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: npm run build
+      - run: npm run test:package
       - run: npm pack --dry-run
   browser:
     runs-on: ubuntu-latest
@@ -48,3 +49,19 @@ jobs:
         with:
           name: visual-evidence
           path: test-results/
+  next-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: npm ci --no-audit --no-fund
+      - run: npm run smoke:next
+      - run: npx playwright install --with-deps chromium
+      - run: npm run smoke:next:browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: next-smoke
+          path: artifacts/next/
