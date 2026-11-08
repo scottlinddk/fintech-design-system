@@ -18,16 +18,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Install browser test dependencies
-        run: |
-          npm install --no-save --no-package-lock playwright axe-core
-          npx playwright install --with-deps chromium
+      - run: npm ci --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
       - name: Run accessibility, keyboard and responsive checks
-        run: node scripts/audit-accessibility.cjs
+        run: npm run test:browser
       - name: Upload screenshots and audit results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: accessibility-audit
-          path: artifacts/accessibility/
+          path: test-results/
           if-no-files-found: warn

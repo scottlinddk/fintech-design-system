@@ -6,6 +6,7 @@ export default defineConfig({
     // Markdown whitespace fail `vp check` and block the release pipeline.
     ignorePatterns: ["**/*.md"],
   },
+  test: { exclude: ["**/node_modules/**", "**/dist/**", "e2e/**", "smoke/**"] },
   pack: {
     entry: ["src/index.ts"],
     dts: true,

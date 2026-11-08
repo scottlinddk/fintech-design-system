@@ -3,3 +3,5 @@ dist/
 *.tgz
 showcase-dist/
 artifacts/
+test-results/
+playwright-report/
