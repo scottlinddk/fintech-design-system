@@ -6,6 +6,21 @@ on:
 permissions:
   contents: read
 jobs:
+  release-policy:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Shipped changes need a described changeset
+        run: node scripts/changeset-policy.mjs
+        env:
+          BASE_REF: ${{ github.base_ref }}
+          HEAD_REF: ${{ github.head_ref }}
   validate:
     runs-on: ubuntu-latest
     steps:
@@ -15,6 +30,7 @@ jobs:
           node-version: "24"
       - run: npm ci --no-audit --no-fund
       - run: npm run check
+      - run: node scripts/changeset-policy.mjs --consistency
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
