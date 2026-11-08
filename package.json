@@ -35,6 +35,7 @@
     "build": "vp pack",
     "check": "vp check",
     "test": "vp test --run",
+    "typecheck": "tsc --noEmit",
     "changeset": "changeset",
     "version": "changeset version && vp check --fix",
     "release": "changeset publish",
