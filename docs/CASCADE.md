@@ -1,6 +1,6 @@
 # The fds cascade layer
 
-All package token, theme and component declarations are inside `@layer fds`. Import base styles followed by exactly one theme, as before. This is the explicitly approved Phase 0 D6 behaviour change, shipped in its own PR and minor changeset.
+All package token, theme and component declarations are inside `@layer fds`. Import base styles for Studio by default, optionally followed by exactly one product theme. This is the explicitly approved Phase 0 D6 behaviour change, shipped in its own PR and minor changeset.
 
 Normal unlayered consumer styles take precedence over package styles even when the consumer rule appears earlier or has lower specificity. A global `button` reset can therefore override `.fds-button`; review resets, focus rules and token overrides in every consumer before upgrading. Package focus rings, touch sizing and reduced-motion rules remain present, but consumers now control the cascade above them.
 

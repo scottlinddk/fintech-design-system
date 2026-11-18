@@ -1,7 +1,7 @@
 @layer fds {
   /*
    * Grain surfaces: a quiet, hairline-bordered surface with a soft two-colour glow and fine film grain.
-   * On by default for every .fds-panel; opt out with data-fds-grain="off" on the element or any ancestor
+   * On by default for product-theme panels; opt out with data-fds-grain="off" on the element or any ancestor
    * (for example <html>). Vivid, hero and the other modifiers are explicit classes on .fds-grain.
    * Colours derive from the active theme (accent, panel, line), so every theme works. `light-dark()`
    * follows the theme's `color-scheme`, so no per-theme overrides are needed.
@@ -52,9 +52,11 @@
         color-mix(in oklab, var(--fds-glow-2, var(--fds-glow-b)) var(--fds-glow-l), transparent),
         color-mix(in oklab, var(--fds-glow-2, var(--fds-glow-b)) var(--fds-glow-d), transparent)
       );
-      background:
+      --fds-surface-background-image:
         radial-gradient(120% 100% at 0% 0%, var(--fds-tint-1), transparent 62%),
-        radial-gradient(100% 90% at 100% 100%, var(--fds-tint-2), transparent 58%), var(--fds-panel);
+        radial-gradient(100% 90% at 100% 100%, var(--fds-tint-2), transparent 58%);
+      background: var(--fds-panel);
+      background-image: var(--fds-surface-background-image);
     }
 
     /* Grain sits above the gradient and below the content, so text stays crisp. */
@@ -74,6 +76,19 @@
       mask-image: var(--fds-grain-image);
       -webkit-mask-size: var(--fds-grain-size) var(--fds-grain-size);
       mask-size: var(--fds-grain-size) var(--fds-grain-size);
+    }
+
+    /* Studio panels are flat, including when styles.css is the only import. Explicit grain
+       classes remain available; product themes reset these two overrides to their initial values. */
+    .fds-panel:not(
+      :where([data-fds-grain="off"], [data-fds-grain="off"] *, .fds-grain, .fds-grain--vivid)
+    ) {
+      background-image: var(--fds-panel-background-image, var(--fds-surface-background-image));
+    }
+    .fds-panel:not(
+        :where([data-fds-grain="off"], [data-fds-grain="off"] *, .fds-grain, .fds-grain--vivid)
+      )::before {
+      content: var(--fds-panel-grain-content, "");
     }
 
     .fds-grain--warm {

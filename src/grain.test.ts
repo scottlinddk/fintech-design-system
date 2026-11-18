@@ -4,12 +4,12 @@ import { expect, it } from "vitest";
 const css = readFileSync("styles/components/grain.css", "utf8").trim();
 const pkg = JSON.parse(readFileSync("package.json", "utf8"));
 
-it("is part of styles.css (on by default) and no longer a separate export", () => {
+it("is part of styles.css and no longer a separate export", () => {
   expect(pkg.exports["./grain.css"]).toBeUndefined();
   expect(readFileSync("styles/index.css", "utf8")).toContain("./components/grain.css");
 });
 
-it("applies to .fds-panel by default and honours data-fds-grain=off on self or ancestors", () => {
+it("supports .fds-panel and honours data-fds-grain=off on self or ancestors", () => {
   expect(css).toContain('.fds-panel:not(:where([data-fds-grain="off"], [data-fds-grain="off"] *))');
 });
 

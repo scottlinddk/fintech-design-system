@@ -7,7 +7,7 @@ const declarations = (text: string) =>
   Object.fromEntries(
     [...text.matchAll(/(--fds-[\w-]+):\s*([^;]+);/g)].map((match) => [match[1], match[2].trim()]),
   );
-const blocks = css.split(':root[data-fds-mode="dark"]');
+const blocks = css.split(':root:where([data-fds-mode="dark"])');
 const contrast = (a: string, b: string) => {
   const luminance = (hex: string) => {
     const full =
@@ -75,3 +75,11 @@ for (const mode of ["light", "dark"]) {
       ).toBeGreaterThanOrEqual(4.5);
   });
 }
+
+it("ships Studio as the default after component rules and keeps the explicit theme export", () => {
+  const index = readFileSync("styles/index.css", "utf8").trim();
+  const pkg = JSON.parse(readFileSync("package.json", "utf8"));
+  expect(index.endsWith('@import "./themes/studio.css";')).toBe(true);
+  expect(pkg.exports["./styles.css"]).toBe("./styles/index.css");
+  expect(pkg.exports["./themes/studio.css"]).toBe("./styles/themes/studio.css");
+});
