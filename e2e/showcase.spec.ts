@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 
-for (const theme of ["funder", "investor", "portare"]) {
+for (const theme of ["studio", "funder", "investor", "portare"]) {
   test(`${theme}: theme, keyboard, axe, motion and screenshots`, async ({ page }, info) => {
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
@@ -15,7 +15,11 @@ for (const theme of ["funder", "investor", "portare"]) {
     );
     await expect(page.locator("body")).toHaveCSS(
       "background-color",
-      theme === "portare" ? "rgb(250, 251, 252)" : "rgb(8, 9, 11)",
+      theme === "studio"
+        ? "rgb(255, 255, 255)"
+        : theme === "portare"
+          ? "rgb(250, 251, 252)"
+          : "rgb(8, 9, 11)",
     );
     expect(await page.locator("link[rel=stylesheet][id=fds-theme]").count()).toBe(1);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
@@ -55,6 +59,12 @@ for (const theme of ["funder", "investor", "portare"]) {
     await expect(page.getByRole("menuitem", { name: "View details" })).toBeFocused();
     await page.keyboard.press("ArrowDown");
     await expect(page.getByRole("menuitem", { name: "Remove example" })).toBeFocused();
+    expect(
+      await page.getByRole("menu").evaluate((menu) => {
+        const bounds = menu.getBoundingClientRect();
+        return bounds.left >= 0 && bounds.right <= innerWidth;
+      }),
+    ).toBe(true);
     await snapshot("open");
     await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
     const violations = await page.evaluate(async () => {
@@ -186,3 +196,38 @@ for (const theme of ["funder", "portare"]) {
     expect(offenders).toEqual([]);
   });
 }
+
+test("Studio preview, theme mode and empty state work together", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByLabel("Theme", { exact: true })).toHaveValue("studio");
+  await expect(page.locator("body")).toHaveCSS("font-family", /DM Sans/);
+  await page.getByRole("tab", { name: "Overview", exact: true }).focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(page.getByRole("tab", { name: "Activity", exact: true })).toBeFocused();
+  await expect(page.getByRole("tabpanel")).toContainText("Monthly statement");
+  await page.keyboard.press("End");
+  await expect(page.getByRole("tab", { name: "Settings", exact: true })).toBeFocused();
+  await page.getByLabel("Workspace name").fill("My workspace");
+  await page.getByRole("button", { name: "Save preferences" }).click();
+  await expect(page.getByRole("tabpanel")).toContainText("Preferences saved.");
+  await page.getByLabel("Workspace name").fill("Another workspace");
+  await expect(page.getByRole("tabpanel")).not.toContainText("Preferences saved.");
+  await page.getByRole("button", { name: "Create view" }).click();
+  await expect(page.getByText("My first view", { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Remove view" }).click();
+  await expect(page.getByText("No saved views", { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Switch to dark mode" }).click();
+  await expect(page.locator("body")).toHaveCSS("background-color", "rgb(23, 23, 23)");
+  await expect(page).toHaveURL(/mode=dark/);
+  await page.reload();
+  await expect(page.getByRole("button", { name: "Switch to light mode" })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
+  const violations = await page.evaluate(async () => {
+    const axe = (
+      window as unknown as { axe: { run: (n: Document) => Promise<{ violations: unknown[] }> } }
+    ).axe;
+    return (await axe.run(document)).violations;
+  });
+  expect(violations).toEqual([]);
+});

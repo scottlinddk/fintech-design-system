@@ -25,7 +25,8 @@
     "./styles.css": "./styles/index.css",
     "./themes/funder.css": "./styles/themes/funder.css",
     "./themes/portare.css": "./styles/themes/portare.css",
-    "./themes/investor.css": "./styles/themes/investor.css"
+    "./themes/investor.css": "./styles/themes/investor.css",
+    "./themes/studio.css": "./styles/themes/studio.css"
   },
   "publishConfig": {
     "access": "public",
