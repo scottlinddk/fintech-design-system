@@ -58,3 +58,20 @@ Package styles and themes live in `@layer fds`. Normal unlayered consumer CSS ov
 ## npm publishing
 
 Releases are automated by `.github/workflows/release.yml` (Changesets) on every push to `main`, using npm trusted publishing (OIDC). **Requires** the npm user/scope `@scttlnd` (npm username `scttlnd`; the GitHub owner `scottlinddk` is a different name), a one-time bootstrap publication because npm can only attach a Trusted Publisher to an existing package, and then a Trusted Publisher configured on npmjs.com for GitHub `scottlinddk/fintech-design-system`, workflow filename `release.yml`. Releases default to a minor bump on ordinary pushes to `main`; an explicit patch/minor/major changeset overrides that default. Merging the generated version PR publishes without starting another bump. See the [release policy and staging recovery guide](.changeset/README.md).
+
+## Studio theme
+
+The showcase defaults to the opt-in Studio theme: a Shadcn Studio-inspired foundation with forest-green depth, sage surfaces, restrained lime accents, and a spacious Vite+-inspired composition. Funder, Investor, and Portare retain their existing token values.
+
+```tsx
+import "@scttlnd/fintech-design-system/styles.css";
+import "@scttlnd/fintech-design-system/themes/studio.css";
+```
+
+Set `data-fds-theme="studio"` on the app root (`<html>` for a full-page theme). Studio uses flat panels. Add `data-fds-mode="dark"` to the same element for its dark palette; omit it or use `"light"` for light. Remove the mode attribute when switching to another product theme. All existing components and `--fds-*` token names work unchanged.
+
+The Studio font stack prefers DM Sans. The showcase self-hosts its variable webfont under `showcase/assets/` with its SIL Open Font License. Consumers can load DM Sans themselves or override `--fds-font-sans` with their own brand font; the package does not load fonts or make network requests.
+
+Try `?theme=studio&mode=dark` in the showcase. Its preview tabs support arrow keys, Home, and End; settings, saved views, component actions, and command copying are interactive browser-local examples.
+
+Studio exposes `--fds-brand-*` tokens for the forest, sage, and lime decorative fields in the showcase. Use `--fds-brand-foreground` and `--fds-brand-muted` on the forest/deep surfaces, and `--fds-brand-ink` on lime/sage surfaces. These accents complement the semantic `--fds-success`, `--fds-warn`, and `--fds-danger` tokens; they do not replace status meaning.

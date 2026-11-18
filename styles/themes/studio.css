@@ -1,0 +1,88 @@
+@layer fds {
+  /* Neutral foundations with forest, sage, and restrained lime accents. */
+  :root,
+  [data-fds-theme="studio"] {
+    color-scheme: light;
+    --fds-background: #fff;
+    --fds-foreground: #182c23;
+    --fds-muted: #5f6e65;
+    --fds-muted-strong: #354d40;
+    --fds-line: #dce4de;
+    --fds-line-soft: #eaf0eb;
+    --fds-panel: #fff;
+    --fds-panel-raised: #f0f4f0;
+    --fds-panel-soft: #f7f9f6;
+    --fds-accent: #21483e;
+    --fds-accent-strong: #17382f;
+    --fds-on-accent: #fff;
+    --fds-success: #166534;
+    --fds-warn: #854d0e;
+    --fds-danger: #b91c1c;
+    --fds-on-danger: #fff;
+    --fds-on-success: #fff;
+    --fds-chart-1: #2563eb;
+    --fds-chart-2: #7c3aed;
+    --fds-chart-3: #a16207;
+    --fds-chart-4: #be123c;
+    --fds-chart-5: #15803d;
+    --fds-chart-6: #0e7490;
+    --fds-chart-grid: #737373;
+    --fds-font-sans: "DM Sans", "Helvetica Neue", sans-serif;
+    --fds-shadow-popover: 0 8px 24px rgb(0 0 0 / 0.08);
+    --fds-shadow-dialog: 0 24px 64px rgb(0 0 0 / 0.16);
+    --fds-overlay: rgb(0 0 0 / 0.4);
+    /* Brand fields are decorative; text and actions use their paired foregrounds. */
+    --fds-brand-forest: #102d24;
+    --fds-brand-deep: #091a15;
+    --fds-brand-lime: #d3f873;
+    --fds-brand-lime-hover: #e0ff9b;
+    --fds-brand-sage: #e2ebd8;
+    --fds-brand-ink: #18382b;
+    --fds-brand-foreground: #f6faf1;
+    --fds-brand-muted: #b8cdbf;
+    --fds-brand-line: #39574a;
+  }
+
+  /* Studio's neutral surfaces deliberately opt out of the default grain treatment. */
+  [data-fds-theme="studio"] .fds-panel,
+  .fds-panel[data-fds-theme="studio"] {
+    background: var(--fds-panel);
+  }
+
+  [data-fds-theme="studio"] .fds-panel::before,
+  .fds-panel[data-fds-theme="studio"]::before {
+    content: none;
+  }
+
+  :root[data-fds-mode="dark"],
+  [data-fds-theme="studio"][data-fds-mode="dark"] {
+    color-scheme: dark;
+    --fds-background: #171717;
+    --fds-foreground: #fafafa;
+    --fds-muted: #afbbb1;
+    --fds-muted-strong: #d4d4d4;
+    --fds-line: #3b4a40;
+    --fds-line-soft: #2b392f;
+    --fds-panel: #19261f;
+    --fds-panel-raised: #22352a;
+    --fds-panel-soft: #1c2c23;
+    --fds-accent: #d3f873;
+    --fds-accent-strong: #e0ff9b;
+    --fds-on-accent: #11291f;
+    --fds-success: #86efac;
+    --fds-warn: #fde047;
+    --fds-danger: #fda4af;
+    --fds-on-danger: #171717;
+    --fds-on-success: #171717;
+    --fds-chart-1: #60a5fa;
+    --fds-chart-2: #c4b5fd;
+    --fds-chart-3: #fcd34d;
+    --fds-chart-4: #fda4af;
+    --fds-chart-5: #86efac;
+    --fds-chart-6: #67e8f9;
+    --fds-chart-grid: #a3a3a3;
+    --fds-shadow-popover: 0 8px 24px rgb(0 0 0 / 0.3);
+    --fds-shadow-dialog: 0 24px 64px rgb(0 0 0 / 0.4);
+    --fds-overlay: rgb(0 0 0 / 0.6);
+  }
+}

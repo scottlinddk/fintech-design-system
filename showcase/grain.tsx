@@ -3,6 +3,7 @@ import { Badge, Button, Field, Input, Metric, Notice, Panel } from "../src/index
 import funder from "../styles/themes/funder.css?url";
 import investor from "../styles/themes/investor.css?url";
 import portare from "../styles/themes/portare.css?url";
+import "../styles/index.css";
 import "./showcase.css";
 
 const themes = { funder, investor, portare };
