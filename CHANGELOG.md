@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0
+
+### Minor Changes
+
+- [#27](https://github.com/scottlinddk/fintech-design-system/pull/27) [`a267e98`](https://github.com/scottlinddk/fintech-design-system/commit/a267e98b5c4f0082909232ba538a9a5b21089127) Thanks [@scottlinddk](https://github.com/scottlinddk)! - VISIBLE CHANGE: Add an opt-in Studio theme with forest, sage, and restrained lime accents, light and dark modes, flat panels, and semantic status colors. Redesign the showcase with a spacious, bordered layout, live component examples, theme switching, and token inspection. Existing Funder, Investor, and Portare theme values are unchanged. Import `themes/studio.css` and set `data-fds-theme="studio"` on the root to adopt it; add `data-fds-mode="dark"` for dark mode.
+
+- [#29](https://github.com/scottlinddk/fintech-design-system/pull/29) [`e4b6fd0`](https://github.com/scottlinddk/fintech-design-system/commit/e4b6fd0bd8ffb50987abfa875a01dba67a0a7d7d) Thanks [@scottlinddk](https://github.com/scottlinddk)! - VISIBLE CHANGE: Make Studio the default when consumers import styles.css, including flat panels and light/dark mode without an extra stylesheet or theme attribute. Preserve explicit Funder, Investor and Portare imports, including the dark values previously inherited from the base palette. Consumers previously relying on styles.css alone can add themes/funder.css after it to keep the former implicit dark appearance. Existing product-theme consumers need no changes.
+
 ## 0.4.0
 
 ### Minor Changes
