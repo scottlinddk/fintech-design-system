@@ -4,7 +4,7 @@
 
 1. Read this repo's AGENTS.md and package exports before changing consumer UI.
 2. Add the package as an ordinary npm dependency to the consuming **frontend workspace**, not the C# API.
-3. Import base styles then the product theme once at the root. Migrate one component at a time, preserving screenshots, accessibility and existing user flows.
+3. Import base styles once at the root for Studio by default; optionally follow with exactly one product theme to preserve its palette. Migrate one component at a time, preserving screenshots, accessibility and existing user flows.
 4. Avoid making the product theme a copy of Funder's brand. Shared tokens are a baseline; branding remains independent.
 5. Do not use GitHub URL dependencies or workspace links in consumer package.json. Renovate needs a published semver package.
 6. Ensure a lockfile is committed. Renovate's npm manager discovers package.json dependencies; packageRules group the shared package updates.
@@ -20,4 +20,4 @@
 
 ## Funder reference
 
-Source of extracted values: `nicklaslind/Funder/src/app/globals.css`. The base tokens match its dark palette. Shared CSS intentionally does not override consumer `body` or global resets, to prevent disruptive integration.
+Source of extracted values: `nicklaslind/Funder/src/app/globals.css`. The historical tokens in `styles/tokens.css` match its dark palette; `styles.css` now applies Studio as the default, with explicit Funder and Investor imports preserving that dark palette. Shared CSS intentionally does not override consumer `body` or global resets, to prevent disruptive integration.

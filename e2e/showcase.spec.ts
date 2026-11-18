@@ -1,5 +1,9 @@
 import { expect, test } from "@playwright/test";
 import { createRequire } from "node:module";
+import { readFileSync } from "node:fs";
+const legacy: Record<string, Record<string, string>> = JSON.parse(
+  readFileSync("src/legacy-token-values.json", "utf8"),
+);
 const require = createRequire(import.meta.url);
 
 for (const theme of ["studio", "funder", "investor", "portare"]) {
@@ -230,4 +234,108 @@ test("Studio preview, theme mode and empty state work together", async ({ page }
     return (await axe.run(document)).violations;
   });
   expect(violations).toEqual([]);
+});
+
+test("styles.css alone defaults to Studio, including flat panels and dark mode", async ({
+  page,
+}) => {
+  // Start on Funder so no showcase-only Studio selectors or grain opt-out can hide package failures.
+  await page.goto("/?theme=funder");
+  await page.evaluate(() => {
+    document.getElementById("fds-theme")?.remove();
+    document.documentElement.removeAttribute("data-fds-theme");
+    document.documentElement.removeAttribute("data-fds-mode");
+  });
+  await expect(page.locator("body")).toHaveCSS("background-color", "rgb(255, 255, 255)");
+  await expect(page.locator("body")).toHaveCSS("font-family", /DM Sans/);
+  const panel = page.getByRole("region", { name: "Actions & feedback", exact: true });
+  // Exercise the primitive outside showcase composition rules, as in a consumer app.
+  await panel.evaluate((el) => document.body.append(el));
+  await expect(panel).toHaveCSS("background-image", "none");
+  expect(await panel.evaluate((el) => getComputedStyle(el, "::before").content)).toBe("none");
+  await panel.evaluate((el) => el.style.setProperty("--fds-panel", "#eff6f0"));
+  await expect(panel).toHaveCSS("background-color", "rgb(239, 246, 240)");
+  await panel.evaluate((el) => el.style.removeProperty("--fds-panel"));
+  const button = page.getByRole("button", { name: "Primary action", exact: true });
+  await expect(button).toHaveCSS("background-color", "rgb(33, 72, 62)");
+  await expect(button).toHaveCSS("color", "rgb(255, 255, 255)");
+  await page.evaluate(() => {
+    document.documentElement.dataset.fdsMode = "dark";
+  });
+  await expect(page.locator("body")).toHaveCSS("background-color", "rgb(23, 23, 23)");
+  await expect(button).toHaveCSS("background-color", "rgb(211, 248, 115)");
+  await expect(button).toHaveCSS("color", "rgb(17, 41, 31)");
+  await expect(panel).toHaveCSS("background-image", "none");
+  await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
+  const violations = await page.evaluate(async () => {
+    const axe = (
+      window as unknown as { axe: { run: (n: Document) => Promise<{ violations: unknown[] }> } }
+    ).axe;
+    return (await axe.run(document)).violations;
+  });
+  expect(violations).toEqual([]);
+});
+
+for (const theme of ["funder", "investor", "portare"] as const) {
+  test(`${theme}: explicit import preserves the original palette without a theme attribute`, async ({
+    page,
+  }) => {
+    await page.goto(`/?theme=${theme}`);
+    await page.waitForFunction(
+      () => (document.querySelector("#fds-theme") as HTMLLinkElement).sheet !== null,
+    );
+    await page.evaluate(() => {
+      document.documentElement.removeAttribute("data-fds-theme");
+      // An inherited Studio mode must not defeat an explicitly imported product theme.
+      document.documentElement.dataset.fdsMode = "dark";
+    });
+    const local: Record<string, string> = {};
+    for (const [, name, value] of readFileSync(`styles/themes/${theme}.css`, "utf8").matchAll(
+      /(--fds-[\w-]+):\s*([^;]+);/g,
+    ))
+      local[name] ??= value.trim();
+    const expected = {
+      ...legacy["styles/tokens.css"],
+      ...legacy[`styles/themes/${theme}.css`],
+      ...Object.fromEntries(
+        Object.entries(local).filter(([name]) => /^--fds-chart-[1-6]$/.test(name)),
+      ),
+    };
+    const actual = await page.locator("html").evaluate((html, names) => {
+      const css = getComputedStyle(html);
+      return Object.fromEntries(
+        names.map((name) => [name, css.getPropertyValue(name).trim().replace(/\s+/g, " ")]),
+      );
+    }, Object.keys(expected));
+    // The production CSS minifier drops leading zeroes in custom-property lengths.
+    expect(actual).toEqual(
+      Object.fromEntries(
+        Object.entries(expected).map(([name, value]) => [name, value.replace(/^0\./, ".")]),
+      ),
+    );
+    await expect(page.locator("html")).toHaveCSS(
+      "color-scheme",
+      theme === "portare" ? "light" : "dark",
+    );
+    await expect(
+      page.getByRole("region", { name: "Actions & feedback", exact: true }),
+    ).not.toHaveCSS("background-image", "none");
+  });
+}
+
+test("explicit grain surfaces remain available with the Studio default", async ({ page }) => {
+  await page.goto("/grain.html?theme=funder");
+  await page.evaluate(() => {
+    document.getElementById("fds-theme")?.remove();
+    document.documentElement.removeAttribute("data-fds-theme");
+  });
+  await expect(page.locator(".fds-grain").first()).not.toHaveCSS("background-image", "none");
+  await expect(page.getByRole("region", { name: "Portfolio value", exact: true })).not.toHaveCSS(
+    "background-image",
+    "none",
+  );
+  await expect(page.getByRole("region", { name: "Components stay on top", exact: true })).toHaveCSS(
+    "background-image",
+    "none",
+  );
 });

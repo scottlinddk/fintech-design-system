@@ -3,6 +3,8 @@
   :root,
   [data-fds-theme="studio"] {
     color-scheme: light;
+    --fds-panel-background-image: none;
+    --fds-panel-grain-content: none;
     --fds-background: #fff;
     --fds-foreground: #182c23;
     --fds-muted: #5f6e65;
@@ -43,18 +45,7 @@
     --fds-brand-line: #39574a;
   }
 
-  /* Studio's neutral surfaces deliberately opt out of the default grain treatment. */
-  [data-fds-theme="studio"] .fds-panel,
-  .fds-panel[data-fds-theme="studio"] {
-    background: var(--fds-panel);
-  }
-
-  [data-fds-theme="studio"] .fds-panel::before,
-  .fds-panel[data-fds-theme="studio"]::before {
-    content: none;
-  }
-
-  :root[data-fds-mode="dark"],
+  :root:where([data-fds-mode="dark"]),
   [data-fds-theme="studio"][data-fds-mode="dark"] {
     color-scheme: dark;
     --fds-background: #171717;

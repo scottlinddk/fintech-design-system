@@ -20,15 +20,14 @@ The project-local `vite-plus` package provides `vp pack`, `vp check` and `vp tes
 npm install @scttlnd/fintech-design-system
 ```
 
-At the app root import base styles then exactly one theme:
+At the app root import the shared styles. Studio is included by default:
 
 ```tsx
 import "@scttlnd/fintech-design-system/styles.css";
-import "@scttlnd/fintech-design-system/themes/investor.css"; // or portare.css / funder.css
 import { Button } from "@scttlnd/fintech-design-system";
 ```
 
-Panels have a soft glow and film grain by default (`data-fds-grain="off"` opts out); see [Foundation tokens](docs/TOKENS.md#grain-surfaces-default-opt-out).
+Studio panels are flat by default. Explicit Funder, Investor and Portare themes retain their soft glow and film grain (`data-fds-grain="off"` opts out); see [Foundation tokens](docs/TOKENS.md#grain-surfaces-default-opt-out).
 
 Read [AGENTS.md](AGENTS.md) and [adoption guide](docs/ADOPTION.md) before integrating. Planned component roadmap: [component plan](docs/COMPONENT-PLAN.md). Original Funder palette is sourced from `nicklaslind/Funder/src/app/globals.css`. Portare's light theme is a proposed product-specific adaptation.
 
@@ -61,17 +60,29 @@ Releases are automated by `.github/workflows/release.yml` (Changesets) on every 
 
 ## Studio theme
 
-The showcase defaults to the opt-in Studio theme: a Shadcn Studio-inspired foundation with forest-green depth, sage surfaces, restrained lime accents, and a spacious Vite+-inspired composition. Funder, Investor, and Portare retain their existing token values.
+The package and showcase default to Studio: a Shadcn Studio-inspired foundation with forest-green depth, sage surfaces, restrained lime accents, and a spacious Vite+-inspired composition. Funder, Investor, and Portare retain their existing token values.
 
 ```tsx
 import "@scttlnd/fintech-design-system/styles.css";
-import "@scttlnd/fintech-design-system/themes/studio.css";
 ```
 
-Set `data-fds-theme="studio"` on the app root (`<html>` for a full-page theme). Studio uses flat panels. Add `data-fds-mode="dark"` to the same element for its dark palette; omit it or use `"light"` for light. Remove the mode attribute when switching to another product theme. All existing components and `--fds-*` token names work unchanged.
+No theme attribute or additional stylesheet is needed for Studio. The explicit `themes/studio.css` export and `data-fds-theme="studio"` remain supported for existing integrations and named subtrees. Studio uses flat panels. Add `data-fds-mode="dark"` to the app root (`<html>` for a full-page theme) for its dark palette; omit it or use `"light"` for light. Remove the mode attribute when switching to another product theme. All existing components and `--fds-*` token names work unchanged.
 
 The Studio font stack prefers DM Sans. The showcase self-hosts its variable webfont under `showcase/assets/` with its SIL Open Font License. Consumers can load DM Sans themselves or override `--fds-font-sans` with their own brand font; the package does not load fonts or make network requests.
 
 Try `?theme=studio&mode=dark` in the showcase. Its preview tabs support arrow keys, Home, and End; settings, saved views, component actions, and command copying are interactive browser-local examples.
 
 Studio exposes `--fds-brand-*` tokens for the forest, sage, and lime decorative fields in the showcase. Use `--fds-brand-foreground` and `--fds-brand-muted` on the forest/deep surfaces, and `--fds-brand-ink` on lime/sage surfaces. These accents complement the semantic `--fds-success`, `--fds-warn`, and `--fds-danger` tokens; they do not replace status meaning.
+
+## Choosing a product theme
+
+To keep the original Funder, Investor, or Portare appearance, import exactly one product theme after the base stylesheet:
+
+```tsx
+import "@scttlnd/fintech-design-system/styles.css";
+import "@scttlnd/fintech-design-system/themes/funder.css"; // or investor.css / portare.css
+```
+
+These imports work with or without a matching `data-fds-theme` attribute. Set that attribute when selecting named subtrees; remove Studio's `data-fds-mode` when switching products. Existing product theme colors, typography, and panel treatments are preserved.
+
+**Upgrading from the implicit dark default:** `styles.css` alone now selects Studio light. Add `themes/funder.css` to preserve the previous implicit appearance, or use `data-fds-mode="dark"` to adopt Studio dark. Consumers already importing a product theme require no changes. The default change takes effect in the next published npm release; the package does not change consumer dependency versions automatically.

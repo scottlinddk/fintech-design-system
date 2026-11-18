@@ -8,9 +8,11 @@ const expand = (file: string): string =>
   readFileSync(file, "utf8")
     .replace(/^@layer fds;\s*/, "")
     .replace(/^@layer fds \{\n([\s\S]*)\}\s*$/, "$1")
-    // The grain layer is a deliberate, separately tested addition on top of the original stream.
+    // Grain and the Studio default are deliberate additions, verified by browser and theme tests.
     .replace(/@import "(.+?)";/g, (_, child: string) =>
-      child.endsWith("grain.css") ? "" : expand(resolve(dirname(file), child)),
+      child.endsWith("grain.css") || child.endsWith("themes/studio.css")
+        ? ""
+        : expand(resolve(dirname(file), child)),
     );
 it("keeps the pre-split CSS declaration order and values", () => {
   const css = expand("styles/index.css").replace(/\s+/g, "");

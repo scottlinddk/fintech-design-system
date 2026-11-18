@@ -1,6 +1,6 @@
 # Foundation tokens
 
-Import `styles.css` and exactly one theme stylesheet at the app root. Put `data-fds-theme` on `<html>` when selecting a named theme. Subtree themes do not automatically follow content portalled to `document.body`; future portal primitives must expose a `container` prop.
+Import `styles.css` at the app root for Studio light by default. Use `data-fds-mode="dark"` on the root for Studio dark. For a product palette, import exactly one Funder, Investor or Portare stylesheet after `styles.css`. Put `data-fds-theme` on `<html>` when selecting a named theme. Subtree themes do not automatically follow content portalled to `document.body`; future portal primitives must expose a `container` prop.
 
 All three themes explicitly define the Phase 0 foundation tokens. Funder and Investor retain the existing dark palette. New elevation, typography, motion and chart choices are proposed foundations, not values verified against the upstream Funder app. Portare remains a proposed light adaptation.
 
@@ -17,12 +17,12 @@ All three themes explicitly define the Phase 0 foundation tokens. Funder and Inv
 
 ## Grain surfaces (default, opt-out)
 
-Every `Panel` (`.fds-panel`) has a hairline border, a soft two-colour glow and fine film grain by default. This ships in `styles.css`; there is no separate import.
+Studio uses flat `Panel` (`.fds-panel`) surfaces, including when `styles.css` is the only import. The explicit Funder, Investor and Portare themes keep their hairline borders, soft two-colour glow and fine film grain by default. This ships in `styles.css`; there is no separate import.
 
 Opt out with `data-fds-grain="off"` on the element or on any ancestor, including `<html>` for a whole app. The panel then renders exactly as before.
 
 ```tsx
-<Panel title="Portfolio value">…</Panel>                     {/* grain */}
+<Panel title="Portfolio value">…</Panel>                     {/* flat in Studio; grain in product themes */}
 <Panel data-fds-grain="off" title="Flat">…</Panel>           {/* flat */}
 <html data-fds-grain="off">…</html>                          {/* every panel flat */}
 ```
@@ -38,3 +38,9 @@ Explicit classes add stronger treatments on any element:
 - `/grain.html` in the showcase shows every variant and the opt-out in all three themes. `npm run test:browser` runs axe on it and asserts the opt-out.
 
 **Upgrading:** this changes the appearance of every `Panel`. Review each app visually (Portare is the accessibility-oriented light theme) or set `data-fds-grain="off"` on the root first and adopt per area.
+
+## Default theme and migration
+
+`styles/index.css` loads the shared foundations and component rules, then Studio. The historical dark fallback values in `styles/tokens.css` remain intact; Funder and Investor now explicitly declare the values they previously inherited. Product stylesheets override the Studio defaults even without a theme attribute, including typography, semantics, charts, and panel grain. Studio's flat-panel treatment uses `--fds-panel-background-image` and `--fds-panel-grain-content`; product themes reset these overrides. Explicit `fds-grain` / `fds-grain--vivid` classes still opt into textured surfaces.
+
+Applications previously relying on `styles.css` alone should add `themes/funder.css` after it to retain the implicit dark appearance, or adopt the new Studio default. Applications already importing one product stylesheet keep their current appearance. No body styles, font downloads, or resets are introduced.

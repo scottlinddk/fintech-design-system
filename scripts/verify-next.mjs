@@ -39,6 +39,22 @@ try {
   await expect(page.getByText("Server-rendered badge", { exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: "Server-imported button" })).toBeVisible();
   await expect(page.getByRole("region", { name: "Server-imported panel" })).toBeVisible();
+  assert.equal(await page.locator("html").getAttribute("data-fds-theme"), null);
+  assert.equal(
+    await page
+      .locator("html")
+      .evaluate((root) => getComputedStyle(root).getPropertyValue("--fds-accent").trim()),
+    "#21483e",
+    "styles.css alone selects Studio in a packed consumer",
+  );
+  await expect(page.getByRole("region", { name: "Server-imported panel" })).toHaveCSS(
+    "background-image",
+    "none",
+  );
+  await expect(page.getByRole("region", { name: "Server-imported panel" })).toHaveCSS(
+    "background-color",
+    "rgb(255, 255, 255)",
+  );
   await page.getByRole("button", { name: "Try button" }).click();
   await expect(page.getByRole("status")).toHaveText("Button hydrated");
   await page.getByRole("textbox", { name: "Smoke name" }).fill("Packed package");
