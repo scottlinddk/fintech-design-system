@@ -3,7 +3,7 @@
 This repository is the **source of truth** for shared visual tokens and primitive components used by Funder, Portare and Investor. Read this file and README.md before UI changes.
 
 1. Consume the published npm package. Do not copy components or token values into consumer repositories.
-2. Import `@scttlnd/fintech-design-system/styles.css` at the app root; Studio is the default. For Funder, Investor or Portare, import exactly one product theme CSS after it. Keep product-specific composition, navigation and domain components in the consuming app.
+2. Import `@scttlnd/ui/styles.css` at the app root; Studio is the default. For Funder, Investor or Portare, import exactly one product theme CSS after it. Keep product-specific composition, navigation and domain components in the consuming app.
 3. Prefer CSS variables `--fds-*` and exported primitives. Avoid hardcoded colors and duplicate primitives.
 4. Funder is the reference for the dark palette. Portare light theme is a **proposed** accessibility-oriented adaptation, not a verified Funder style.
 5. Preserve keyboard focus, semantic HTML, reduced motion, 44px touch targets where appropriate, WCAG contrast, mobile viewport/safe areas, and 16px mobile form control font sizes.
