@@ -110,8 +110,10 @@ export function Showcase({
 
   return (
     <div
-      className={`site-shell${theme === "studio" ? " site-shell--studio" : ""}${theme === "classic" ? " site-shell--classic" : ""}`}
-      data-fds-grain={theme === "studio" || theme === "classic" ? "off" : undefined}
+      className={`site-shell${theme === "studio" ? " site-shell--studio" : ""}${theme === "classic" ? " site-shell--classic" : ""}${theme === "nuance" ? " site-shell--nuance" : ""}`}
+      data-fds-grain={
+        theme === "studio" || theme === "classic" || theme === "nuance" ? "off" : undefined
+      }
     >
       <a className="skip-link" href="#main">
         Skip to content
@@ -146,11 +148,12 @@ export function Showcase({
           >
             <option value="studio">Studio</option>
             <option value="classic">Classic</option>
+            <option value="nuance">Nuance</option>
             <option value="funder">Funder</option>
             <option value="investor">Investor</option>
             <option value="portare">Portare (proposed light)</option>
           </Select>
-          {theme === "studio" || theme === "classic" ? (
+          {theme === "studio" || theme === "classic" || theme === "nuance" ? (
             <Button
               variant="ghost"
               className="icon-button"

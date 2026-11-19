@@ -5,6 +5,20 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: "Fraunces";
+  src: url("./assets/Fraunces-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Figtree";
+  src: url("./assets/Figtree-Variable.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
 * {
   box-sizing: border-box;
 }
@@ -1792,4 +1806,78 @@ button:focus-visible,
 }
 .site-shell--classic .getting-started .text-link {
   color: var(--fds-brand-amber);
+}
+
+/* Nuance (Solskin / Aften): warm glow wash, ink pill actions, frosted cards and a coral highlight band. */
+.site-shell--nuance .hero {
+  position: relative;
+  padding-block: 72px 88px;
+  color: var(--fds-foreground);
+  background: var(--fds-brand-wash);
+}
+.site-shell--nuance .hero h1,
+.site-shell--nuance .hero h1 > span {
+  font-family: var(--fds-font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.site-shell--nuance .hero h1 > span {
+  color: var(--fds-chart-1);
+}
+.site-shell--nuance .release-label,
+.site-shell--nuance .hero__description,
+.site-shell--nuance .hero__meta,
+.site-shell--nuance .hero__meta > [aria-hidden] {
+  color: var(--fds-muted);
+}
+.site-shell--nuance .hero .status-dot {
+  background: var(--fds-brand-coral);
+}
+.site-shell--nuance .hero .action-link {
+  color: var(--fds-foreground);
+  border-color: var(--fds-muted);
+  border-radius: 999px;
+  background: transparent;
+}
+.site-shell--nuance .hero .action-link--primary {
+  color: var(--fds-on-accent);
+  border-color: transparent;
+  background: var(--fds-accent);
+}
+.site-shell--nuance .hero .action-link--primary:hover {
+  background: var(--fds-accent-strong);
+}
+.site-shell--nuance .preview-stage {
+  background: transparent;
+  border-top: 0;
+}
+.site-shell--nuance .preview-window {
+  border-radius: 32px;
+  border-color: color-mix(in srgb, var(--fds-line) 60%, transparent);
+  background: var(--fds-panel-background-image, none), var(--fds-panel);
+  box-shadow: var(--fds-glass-shadow);
+}
+.site-shell--nuance .getting-started {
+  --fds-foreground: var(--fds-brand-ink);
+  --fds-muted: var(--fds-brand-ink);
+  --fds-line: color-mix(in srgb, var(--fds-brand-ink) 35%, transparent);
+  --fds-focus-ring: var(--fds-brand-ink);
+  color: var(--fds-brand-ink);
+  background: var(--fds-brand-coral-gradient);
+  border-radius: 32px;
+  margin: 40px 30px;
+  box-shadow: var(--fds-glass-shadow);
+}
+.site-shell--nuance .getting-started .text-link {
+  color: var(--fds-brand-ink);
+  text-decoration: underline;
+}
+.site-shell--nuance .getting-started .install-panel {
+  --fds-foreground: #f8eee4;
+  --fds-muted: #cdbbad;
+  --fds-line: #4a3a31;
+  --fds-focus-ring: #ffd966;
+  background: #2a1f1a;
+  color: #f8eee4;
 }
