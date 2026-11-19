@@ -1721,3 +1721,87 @@ button:focus-visible,
   font: 9px var(--fds-font-mono);
   margin-top: 12px;
 }
+
+/* Deco: a poster-style hero with a sunburst, a stepped arch and ruled gold frames. */
+.site-shell--deco .hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: 72px 88px;
+  color: var(--fds-brand-foreground);
+  background:
+    radial-gradient(
+      ellipse at 50% 108%,
+      var(--fds-brand-amber) 0 14%,
+      color-mix(in srgb, var(--fds-brand-amber) 55%, var(--fds-brand-oxblood)) 34%,
+      transparent 62%
+    ),
+    var(--fds-brand-oxblood);
+  border-bottom: 4px double var(--fds-brand-amber);
+}
+.site-shell--deco .hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: repeating-conic-gradient(
+    from -90deg at 50% 118%,
+    rgb(242 163 58 / 0.16) 0 4deg,
+    transparent 4deg 12deg
+  );
+  mask-image: linear-gradient(to top, #000, transparent 85%);
+}
+.site-shell--deco .hero h1,
+.site-shell--deco .hero h1 > span {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+}
+.site-shell--deco .hero h1 > span {
+  color: var(--fds-brand-amber);
+}
+.site-shell--deco .release-label,
+.site-shell--deco .hero__description,
+.site-shell--deco .hero__meta,
+.site-shell--deco .hero__meta > [aria-hidden] {
+  color: var(--fds-brand-muted);
+}
+.site-shell--deco .hero .status-dot {
+  background: var(--fds-brand-amber);
+}
+.site-shell--deco .hero .action-link {
+  --fds-focus-ring: var(--fds-brand-amber);
+  color: var(--fds-brand-foreground);
+  border-color: var(--fds-brand-amber);
+  border-radius: var(--fds-radius-sm);
+  background: transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.site-shell--deco .hero .action-link--primary {
+  color: var(--fds-brand-ink);
+  background: var(--fds-brand-amber);
+}
+.site-shell--deco .hero .action-link--primary:hover {
+  background: var(--fds-brand-amber-hover);
+}
+.site-shell--deco .preview-window,
+.site-shell--deco .foundation-cell {
+  border-radius: var(--fds-radius-md);
+  outline: 1px solid var(--fds-line);
+  outline-offset: 3px;
+}
+.site-shell--deco .getting-started {
+  --fds-foreground: var(--fds-brand-foreground);
+  --fds-muted: var(--fds-brand-muted);
+  --fds-line: var(--fds-brand-line);
+  --fds-panel-soft: var(--fds-brand-oxblood);
+  --fds-focus-ring: var(--fds-brand-amber);
+  color: var(--fds-brand-foreground);
+  background: var(--fds-brand-emerald);
+  border-top: 4px double var(--fds-brand-amber);
+}
+.site-shell--deco .getting-started .text-link {
+  color: var(--fds-brand-amber);
+}

@@ -1,0 +1,98 @@
+@layer fds {
+  /*
+   * Deco: a 1920s–30s travel-poster palette. Warm cream paper, ink-black type, oxblood and emerald
+   * fields, and amber gradients. Light is the default; add data-fds-mode="dark" for the oxblood night
+   * palette. Import after styles.css, like the other product themes.
+   */
+  :root,
+  [data-fds-theme="deco"] {
+    color-scheme: light;
+    --fds-panel-background-image: linear-gradient(
+      155deg,
+      rgb(255 255 255 / 0.55),
+      transparent 55%,
+      rgb(242 163 58 / 0.12)
+    );
+    --fds-panel-grain-content: none;
+    --fds-background: #fbf1d8;
+    --fds-foreground: #1f140c;
+    --fds-muted: #65513a;
+    --fds-muted-strong: #3f2d1c;
+    --fds-line: #dcc79a;
+    --fds-line-soft: #ebdcb8;
+    --fds-panel: #fff8e6;
+    --fds-panel-raised: #f4e4bb;
+    --fds-panel-soft: #f8ebcc;
+    --fds-accent: #7a1f2b;
+    --fds-accent-strong: #5c1420;
+    --fds-on-accent: #fff8e6;
+    --fds-success: #1d6a37;
+    --fds-warn: #8a4a00;
+    --fds-danger: #a8231f;
+    --fds-on-danger: #fff;
+    --fds-on-success: #fff;
+    --fds-chart-1: #b4530a;
+    --fds-chart-2: #2c7a3a;
+    --fds-chart-3: #a3263a;
+    --fds-chart-4: #8f6500;
+    --fds-chart-5: #0f6f73;
+    --fds-chart-6: #7a3d8c;
+    --fds-chart-grid: #8a7556;
+    /* Geometric and crisp: poster frames, not pills. */
+    --fds-radius-sm: 0.125rem;
+    --fds-radius-md: 0.25rem;
+    --fds-radius-lg: 0.375rem;
+    --fds-font-sans:
+      "Josefin Sans", "Avenir Next", "Gill Sans", "Century Gothic", "Trebuchet MS", sans-serif;
+    --fds-shadow-popover: 0 8px 24px rgb(74 15 28 / 0.14);
+    --fds-shadow-dialog: 0 24px 64px rgb(74 15 28 / 0.26);
+    --fds-overlay: rgb(31 20 12 / 0.5);
+    /* Brand fields are decorative; text and actions use their paired foregrounds. */
+    --fds-brand-amber: #f2a33a;
+    --fds-brand-amber-hover: #f7b95e;
+    --fds-brand-oxblood: #4a0f1c;
+    --fds-brand-emerald: #14452a;
+    --fds-brand-cream: #fdf3d6;
+    --fds-brand-ink: #1f140c;
+    --fds-brand-foreground: #fdf3d6;
+    --fds-brand-muted: #e6c9b0;
+    --fds-brand-line: #8a5a3a;
+  }
+
+  :root:where([data-fds-mode="dark"]),
+  [data-fds-theme="deco"][data-fds-mode="dark"] {
+    color-scheme: dark;
+    --fds-panel-background-image: radial-gradient(
+      120% 90% at 100% 0%,
+      rgb(246 169 59 / 0.1),
+      transparent 60%
+    );
+    --fds-background: #1a0a0f;
+    --fds-foreground: #fbefd5;
+    --fds-muted: #d4bba8;
+    --fds-muted-strong: #ecdcc2;
+    --fds-line: #5a2a33;
+    --fds-line-soft: #3d1b23;
+    --fds-panel: #2a1118;
+    --fds-panel-raised: #391a22;
+    --fds-panel-soft: #220e14;
+    --fds-accent: #f6a93b;
+    --fds-accent-strong: #ffc062;
+    --fds-on-accent: #1a0a0f;
+    --fds-success: #9be08a;
+    --fds-warn: #ffd166;
+    --fds-danger: #ffa3ac;
+    --fds-on-danger: #1a0a0f;
+    --fds-on-success: #1a0a0f;
+    --fds-chart-1: #f6a93b;
+    --fds-chart-2: #8fd694;
+    --fds-chart-3: #ff8f9c;
+    --fds-chart-4: #ffd166;
+    --fds-chart-5: #6ad6d2;
+    --fds-chart-6: #d3a8ec;
+    --fds-chart-grid: #a98b78;
+    --fds-shadow-popover: 0 8px 24px rgb(0 0 0 / 0.4);
+    --fds-shadow-dialog: 0 24px 64px rgb(0 0 0 / 0.55);
+    --fds-overlay: rgb(10 3 6 / 0.65);
+  }
+}
