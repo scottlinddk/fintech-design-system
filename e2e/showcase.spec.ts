@@ -6,7 +6,7 @@ const legacy: Record<string, Record<string, string>> = JSON.parse(
 );
 const require = createRequire(import.meta.url);
 
-for (const theme of ["studio", "deco", "funder", "investor", "portare"]) {
+for (const theme of ["studio", "classic", "funder", "investor", "portare"]) {
   test(`${theme}: theme, keyboard, axe, motion and screenshots`, async ({ page }, info) => {
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
@@ -21,7 +21,7 @@ for (const theme of ["studio", "deco", "funder", "investor", "portare"]) {
       "background-color",
       theme === "studio"
         ? "rgb(255, 255, 255)"
-        : theme === "deco"
+        : theme === "classic"
           ? "rgb(251, 241, 216)"
           : theme === "portare"
             ? "rgb(250, 251, 252)"

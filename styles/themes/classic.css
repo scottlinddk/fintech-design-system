@@ -1,11 +1,11 @@
 @layer fds {
   /*
-   * Deco: a 1920s–30s travel-poster palette. Warm cream paper, ink-black type, oxblood and emerald
+   * Classic: a 1920s–30s travel-poster palette. Warm cream paper, ink-black type, oxblood and emerald
    * fields, and amber gradients. Light is the default; add data-fds-mode="dark" for the oxblood night
    * palette. Import after styles.css, like the other product themes.
    */
   :root,
-  [data-fds-theme="deco"] {
+  [data-fds-theme="classic"] {
     color-scheme: light;
     --fds-panel-background-image: linear-gradient(
       155deg,
@@ -47,7 +47,7 @@
     --fds-shadow-popover: 0 8px 24px rgb(74 15 28 / 0.14);
     --fds-shadow-dialog: 0 24px 64px rgb(74 15 28 / 0.26);
     --fds-overlay: rgb(31 20 12 / 0.5);
-    /* Brand fields are decorative; text and actions use their paired foregrounds. */
+    /* Brand fields are classicrative; text and actions use their paired foregrounds. */
     --fds-brand-amber: #f2a33a;
     --fds-brand-amber-hover: #f7b95e;
     --fds-brand-oxblood: #4a0f1c;
@@ -60,7 +60,7 @@
   }
 
   :root:where([data-fds-mode="dark"]),
-  [data-fds-theme="deco"][data-fds-mode="dark"] {
+  [data-fds-theme="classic"][data-fds-mode="dark"] {
     color-scheme: dark;
     --fds-panel-background-image: radial-gradient(
       120% 90% at 100% 0%,

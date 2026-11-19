@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
 
-const css = readFileSync("styles/themes/deco.css", "utf8");
+const css = readFileSync("styles/themes/classic.css", "utf8");
 const base = readFileSync("styles/tokens.css", "utf8");
 const declarations = (text: string) =>
   Object.fromEntries(
@@ -29,7 +29,7 @@ const contrast = (a: string, b: string) => {
 };
 
 for (const mode of ["light", "dark"]) {
-  it(`Deco ${mode} maintains readable text, semantic colors and data marks`, () => {
+  it(`Classic ${mode} maintains readable text, semantic colors and data marks`, () => {
     const light = declarations(blocks[0]);
     const tokens = {
       ...declarations(base),
@@ -76,9 +76,9 @@ for (const mode of ["light", "dark"]) {
   });
 }
 
-it("is an explicit opt-in export that overrides Studio's decorative panel fields", () => {
+it("is an explicit opt-in export that overrides Studio's classicrative panel fields", () => {
   const pkg = JSON.parse(readFileSync("package.json", "utf8"));
-  expect(pkg.exports["./themes/deco.css"]).toBe("./styles/themes/deco.css");
-  expect(readFileSync("styles/index.css", "utf8")).not.toContain("deco.css");
+  expect(pkg.exports["./themes/classic.css"]).toBe("./styles/themes/classic.css");
+  expect(readFileSync("styles/index.css", "utf8")).not.toContain("classic.css");
   expect(declarations(blocks[0])["--fds-panel-grain-content"]).toBe("none");
 });

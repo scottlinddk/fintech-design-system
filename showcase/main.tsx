@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { Showcase } from "./Showcase.js";
-import deco from "../styles/themes/deco.css?url";
+import classic from "../styles/themes/classic.css?url";
 import funder from "../styles/themes/funder.css?url";
 import investor from "../styles/themes/investor.css?url";
 import portare from "../styles/themes/portare.css?url";
@@ -8,7 +8,7 @@ import studio from "../styles/themes/studio.css?url";
 import "../styles/index.css";
 import "./showcase.css";
 
-const themes = { studio, deco, funder, investor, portare };
+const themes = { studio, classic, funder, investor, portare };
 const requested = new URLSearchParams(location.search).get("theme");
 const theme =
   requested && Object.hasOwn(themes, requested) ? (requested as keyof typeof themes) : "studio";

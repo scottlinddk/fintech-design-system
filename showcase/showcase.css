@@ -21,7 +21,7 @@ body {
 }
 a {
   color: inherit;
-  text-decoration: none;
+  text-classicration: none;
 }
 button,
 a,
@@ -1722,8 +1722,8 @@ button:focus-visible,
   margin-top: 12px;
 }
 
-/* Deco: a poster-style hero with a sunburst, a stepped arch and ruled gold frames. */
-.site-shell--deco .hero {
+/* Classic: a poster-style hero with a sunburst, a stepped arch and ruled gold frames. */
+.site-shell--classic .hero {
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -1739,7 +1739,7 @@ button:focus-visible,
     var(--fds-brand-oxblood);
   border-bottom: 4px double var(--fds-brand-amber);
 }
-.site-shell--deco .hero::before {
+.site-shell--classic .hero::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -1752,25 +1752,25 @@ button:focus-visible,
   );
   mask-image: linear-gradient(to top, #000, transparent 85%);
 }
-.site-shell--deco .hero h1,
-.site-shell--deco .hero h1 > span {
+.site-shell--classic .hero h1,
+.site-shell--classic .hero h1 > span {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-weight: 600;
 }
-.site-shell--deco .hero h1 > span {
+.site-shell--classic .hero h1 > span {
   color: var(--fds-brand-amber);
 }
-.site-shell--deco .release-label,
-.site-shell--deco .hero__description,
-.site-shell--deco .hero__meta,
-.site-shell--deco .hero__meta > [aria-hidden] {
+.site-shell--classic .release-label,
+.site-shell--classic .hero__description,
+.site-shell--classic .hero__meta,
+.site-shell--classic .hero__meta > [aria-hidden] {
   color: var(--fds-brand-muted);
 }
-.site-shell--deco .hero .status-dot {
+.site-shell--classic .hero .status-dot {
   background: var(--fds-brand-amber);
 }
-.site-shell--deco .hero .action-link {
+.site-shell--classic .hero .action-link {
   --fds-focus-ring: var(--fds-brand-amber);
   color: var(--fds-brand-foreground);
   border-color: var(--fds-brand-amber);
@@ -1779,20 +1779,20 @@ button:focus-visible,
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
-.site-shell--deco .hero .action-link--primary {
+.site-shell--classic .hero .action-link--primary {
   color: var(--fds-brand-ink);
   background: var(--fds-brand-amber);
 }
-.site-shell--deco .hero .action-link--primary:hover {
+.site-shell--classic .hero .action-link--primary:hover {
   background: var(--fds-brand-amber-hover);
 }
-.site-shell--deco .preview-window,
-.site-shell--deco .foundation-cell {
+.site-shell--classic .preview-window,
+.site-shell--classic .foundation-cell {
   border-radius: var(--fds-radius-md);
   outline: 1px solid var(--fds-line);
   outline-offset: 3px;
 }
-.site-shell--deco .getting-started {
+.site-shell--classic .getting-started {
   --fds-foreground: var(--fds-brand-foreground);
   --fds-muted: var(--fds-brand-muted);
   --fds-line: var(--fds-brand-line);
@@ -1802,6 +1802,6 @@ button:focus-visible,
   background: var(--fds-brand-emerald);
   border-top: 4px double var(--fds-brand-amber);
 }
-.site-shell--deco .getting-started .text-link {
+.site-shell--classic .getting-started .text-link {
   color: var(--fds-brand-amber);
 }

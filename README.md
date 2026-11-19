@@ -72,18 +72,18 @@ The Studio font stack prefers DM Sans. The showcase self-hosts its variable webf
 
 Try `?theme=studio&mode=dark` in the showcase. Its preview tabs support arrow keys, Home, and End; settings, saved views, component actions, and command copying are interactive browser-local examples.
 
-Studio exposes `--fds-brand-*` tokens for the forest, sage, and lime decorative fields in the showcase. Use `--fds-brand-foreground` and `--fds-brand-muted` on the forest/deep surfaces, and `--fds-brand-ink` on lime/sage surfaces. These accents complement the semantic `--fds-success`, `--fds-warn`, and `--fds-danger` tokens; they do not replace status meaning.
+Studio exposes `--fds-brand-*` tokens for the forest, sage, and lime classicrative fields in the showcase. Use `--fds-brand-foreground` and `--fds-brand-muted` on the forest/deep surfaces, and `--fds-brand-ink` on lime/sage surfaces. These accents complement the semantic `--fds-success`, `--fds-warn`, and `--fds-danger` tokens; they do not replace status meaning.
 
-## Deco theme
+## Classic theme
 
-Deco is an opt-in theme inspired by 1920s–30s Art Deco travel and beer posters: warm cream paper, ink-black type, oxblood and emerald fields, amber gradients and crisp geometric corners. Import it after the base stylesheet:
+Classic is an opt-in theme inspired by 1920s–30s Art Deco travel and beer posters: warm cream paper, ink-black type, oxblood and emerald fields, amber gradients and crisp geometric corners. Import it after the base stylesheet:
 
 ```tsx
 import "@scttlnd/fintech-design-system/styles.css";
-import "@scttlnd/fintech-design-system/themes/deco.css";
+import "@scttlnd/fintech-design-system/themes/classic.css";
 ```
 
-Light (cream) is the default. Add `data-fds-mode="dark"` to the root for the oxblood night palette. Panels are flat with a soft amber wash. The stack prefers Josefin Sans, a geometric deco face; the package does not load fonts, so load it yourself or override `--fds-font-sans`. `--fds-brand-amber`, `--fds-brand-oxblood`, `--fds-brand-emerald` and `--fds-brand-cream` are decorative fields; use `--fds-brand-foreground` / `--fds-brand-muted` on oxblood and emerald, and `--fds-brand-ink` on amber and cream. Text, semantic, focus and chart colours are contrast-tested in `src/deco-theme.test.ts`. Try `?theme=deco&mode=dark` in the showcase.
+Light (cream) is the default. Add `data-fds-mode="dark"` to the root for the oxblood night palette. Panels are flat with a soft amber wash. The stack prefers Josefin Sans, a geometric classic face; the package does not load fonts, so load it yourself or override `--fds-font-sans`. `--fds-brand-amber`, `--fds-brand-oxblood`, `--fds-brand-emerald` and `--fds-brand-cream` are classicrative fields; use `--fds-brand-foreground` / `--fds-brand-muted` on oxblood and emerald, and `--fds-brand-ink` on amber and cream. Text, semantic, focus and chart colours are contrast-tested in `src/classic-theme.test.ts`. Try `?theme=classic&mode=dark` in the showcase.
 
 ## Choosing a product theme
 
