@@ -19,9 +19,11 @@
     --fds-panel: #fffdf9;
     --fds-panel-raised: #f1e6d6;
     --fds-panel-soft: #f7efe3;
-    --fds-accent: #14505c;
-    --fds-accent-strong: #0f4350;
-    --fds-on-accent: #fff;
+    /* nuance's single dark "action" pill is the primary button; teal is the brand and focus colour. */
+    --fds-accent: #2a1f1a;
+    --fds-accent-strong: #43342c;
+    --fds-on-accent: #fff8ee;
+    --fds-focus-ring: #14505c;
     --fds-success: #0f6b5c;
     --fds-warn: #8a5300;
     --fds-danger: #a62b2b;
@@ -57,6 +59,17 @@
     --fds-brand-foreground: #fff;
     --fds-brand-muted: #cfe6e3;
     --fds-brand-line: #4f8791;
+    /* Soft rose and peach glow over the canvas (nuance's "wash"); apply to a page or hero background. */
+    --fds-brand-wash:
+      radial-gradient(60% 28% at 18% 6%, var(--fds-brand-glow-rose), transparent 72%),
+      radial-gradient(50% 26% at 92% 20%, var(--fds-brand-glow-peach), transparent 72%),
+      var(--fds-background);
+    --fds-brand-coral-gradient: linear-gradient(
+      135deg,
+      var(--fds-brand-coral),
+      var(--fds-brand-coral-light)
+    );
+    --fds-glass-shadow: inset 0 1px 0 rgb(255 255 255 / 0.9), 0 12px 32px rgb(170 90 60 / 0.14);
   }
 
   :root:where([data-fds-mode="dark"]),
@@ -72,9 +85,9 @@
     --fds-panel: #281e1a;
     --fds-panel-raised: #33261f;
     --fds-panel-soft: #211815;
-    --fds-accent: #7fc8c0;
-    --fds-accent-strong: #a9ddd6;
-    --fds-on-accent: #0c2b30;
+    --fds-accent: #f8eee4;
+    --fds-accent-strong: #fff8ee;
+    --fds-on-accent: #1a1311;
     --fds-success: #7fd6bf;
     --fds-warn: #f2b652;
     --fds-danger: #ff9c8f;
@@ -91,5 +104,29 @@
     --fds-shadow-popover: 0 12px 32px rgb(0 0 0 / 0.5);
     --fds-shadow-dialog: 0 24px 64px rgb(0 0 0 / 0.6);
     --fds-overlay: rgb(0 0 0 / 0.6);
+    --fds-brand-glow-rose: #5a2f2a;
+    --fds-brand-glow-peach: #4d3520;
+    --fds-brand-coral: #e58a5a;
+    --fds-brand-coral-light: #f2a878;
+    --fds-brand-ink: #1a1311;
+    --fds-glass-shadow: inset 0 1px 0 rgb(255 255 255 / 0.15), 0 12px 32px rgb(0 0 0 / 0.5);
+  }
+
+  /*
+   * Component shapes. nuance uses pill buttons and chips and frosted, very round cards with a soft warm
+   * glow. These rules apply wherever this theme is imported, or inside [data-fds-theme="nuance"].
+   */
+  :is(:root, [data-fds-theme="nuance"]) .fds-button,
+  :is(:root, [data-fds-theme="nuance"]) .fds-badge {
+    border-radius: 999px;
+  }
+  :is(:root, [data-fds-theme="nuance"]) .fds-panel {
+    border-radius: 2rem;
+    border-color: color-mix(in srgb, var(--fds-line) 60%, transparent);
+    box-shadow: var(--fds-glass-shadow);
+  }
+  :is(:root, [data-fds-theme="nuance"]) .fds-metric,
+  :is(:root, [data-fds-theme="nuance"]) .fds-notice {
+    border-radius: 1.5rem;
   }
 }

@@ -1808,29 +1808,12 @@ button:focus-visible,
   color: var(--fds-brand-amber);
 }
 
-/* Nuance (Solskin / Aften): a teal hero with flat sun and coral shapes, Fraunces headings, soft cards. */
+/* Nuance (Solskin / Aften): warm glow wash, ink pill actions, frosted cards and a coral highlight band. */
 .site-shell--nuance .hero {
   position: relative;
-  isolation: isolate;
-  overflow: hidden;
   padding-block: 72px 88px;
-  color: var(--fds-brand-foreground);
-  background: linear-gradient(135deg, var(--fds-brand-teal), var(--fds-brand-teal-light));
-}
-.site-shell--nuance .hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 88% 22%, var(--fds-brand-sun) 0 64px, transparent 65px),
-    radial-gradient(ellipse 360px 220px at 10% 112%, var(--fds-brand-coral) 0 60%, transparent 61%),
-    radial-gradient(
-      ellipse 300px 190px at 96% 108%,
-      var(--fds-brand-coral-light) 0 60%,
-      transparent 61%
-    );
+  color: var(--fds-foreground);
+  background: var(--fds-brand-wash);
 }
 .site-shell--nuance .hero h1,
 .site-shell--nuance .hero h1 > span {
@@ -1840,52 +1823,61 @@ button:focus-visible,
   line-height: 1;
 }
 .site-shell--nuance .hero h1 > span {
-  color: var(--fds-brand-sun);
+  color: var(--fds-chart-1);
 }
 .site-shell--nuance .release-label,
 .site-shell--nuance .hero__description,
 .site-shell--nuance .hero__meta,
 .site-shell--nuance .hero__meta > [aria-hidden] {
-  color: var(--fds-brand-muted);
+  color: var(--fds-muted);
 }
 .site-shell--nuance .hero .status-dot {
-  background: var(--fds-brand-sun);
+  background: var(--fds-brand-coral);
 }
 .site-shell--nuance .hero .action-link {
-  --fds-focus-ring: var(--fds-brand-sun);
-  color: var(--fds-brand-foreground);
-  border-color: var(--fds-brand-muted);
+  color: var(--fds-foreground);
+  border-color: var(--fds-muted);
   border-radius: 999px;
   background: transparent;
 }
 .site-shell--nuance .hero .action-link--primary {
-  color: var(--fds-brand-ink);
+  color: var(--fds-on-accent);
   border-color: transparent;
-  background: var(--fds-brand-sun);
+  background: var(--fds-accent);
+}
+.site-shell--nuance .hero .action-link--primary:hover {
+  background: var(--fds-accent-strong);
 }
 .site-shell--nuance .preview-stage {
-  background:
-    radial-gradient(60% 40% at 15% 0%, var(--fds-brand-glow-rose), transparent 72%),
-    radial-gradient(50% 36% at 92% 10%, var(--fds-brand-glow-peach), transparent 72%),
-    var(--fds-background);
-}
-[data-fds-mode="dark"] .site-shell--nuance .preview-stage {
-  background: var(--fds-background);
+  background: transparent;
+  border-top: 0;
 }
 .site-shell--nuance .preview-window {
-  border-radius: 24px;
+  border-radius: 32px;
+  border-color: color-mix(in srgb, var(--fds-line) 60%, transparent);
+  background: var(--fds-panel-background-image, none), var(--fds-panel);
+  box-shadow: var(--fds-glass-shadow);
 }
 .site-shell--nuance .getting-started {
-  --fds-foreground: var(--fds-brand-foreground);
-  --fds-muted: var(--fds-brand-muted);
-  --fds-line: var(--fds-brand-line);
-  --fds-panel-soft: var(--fds-brand-teal);
-  --fds-focus-ring: var(--fds-brand-sun);
-  color: var(--fds-brand-foreground);
-  background: linear-gradient(135deg, var(--fds-brand-teal), var(--fds-brand-teal-light));
+  --fds-foreground: var(--fds-brand-ink);
+  --fds-muted: var(--fds-brand-ink);
+  --fds-line: color-mix(in srgb, var(--fds-brand-ink) 35%, transparent);
+  --fds-focus-ring: var(--fds-brand-ink);
+  color: var(--fds-brand-ink);
+  background: var(--fds-brand-coral-gradient);
   border-radius: 32px;
   margin: 40px 30px;
+  box-shadow: var(--fds-glass-shadow);
 }
 .site-shell--nuance .getting-started .text-link {
-  color: var(--fds-brand-sun);
+  color: var(--fds-brand-ink);
+  text-decoration: underline;
+}
+.site-shell--nuance .getting-started .install-panel {
+  --fds-foreground: #f8eee4;
+  --fds-muted: #cdbbad;
+  --fds-line: #4a3a31;
+  --fds-focus-ring: #ffd966;
+  background: #2a1f1a;
+  color: #f8eee4;
 }
