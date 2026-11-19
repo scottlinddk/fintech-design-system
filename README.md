@@ -85,6 +85,17 @@ import "@scttlnd/fintech-design-system/themes/classic.css";
 
 Light is the default. Add `data-fds-mode="dark"` to the root for Night. Panels are flat hairline cards. Running's ember (`#DC4A1E`) is only 3.9:1 with cream, so actions and links use the deeper `#A23010` (dark mode uses its lifted `#F77A50`); the original value remains as the decorative `--fds-brand-ember`. Running's muted grey and semantic colours were likewise darkened or lifted to meet AA, and its charts add a teal and a plum because it defines no blue. The theme also exposes `--fds-font-display` (Instrument Serif), `--fds-font-sans` (Geist) and `--fds-font-mono` (Geist Mono). The package does not load fonts: load them yourself or the stacks fall back to system serif and sans. Buttons and chips are pills in Running but remain the package's rounded rectangles here, because themes change tokens, not component shapes. Use `--fds-brand-foreground` / `--fds-brand-muted` on brick and night, and `--fds-brand-ink` on amber, ember-hover and cream. Contrast is tested in `src/classic-theme.test.ts`. Try `?theme=classic&mode=dark` in the showcase.
 
+## Nuance theme
+
+Nuance carries the "Solskin" (light) and "Aften" (dark) look of the [nuance](https://github.com/scottlinddk/nuance) family guide: a warm cream canvas, frosted cards, deep teal as the brand colour, coral and sun accents, Fraunces headings and generous radii (16px fields, 24px cards). Import it after the base stylesheet:
+
+```tsx
+import "@scttlnd/fintech-design-system/styles.css";
+import "@scttlnd/fintech-design-system/themes/nuance.css";
+```
+
+Light is the default; add `data-fds-mode="dark"` to the root for Aften. Values come from nuance's `src/styles/index.css`, and its dark focus ring is the sun yellow. Teal is the accent for links, focus and the primary button here; nuance's own dark ink pill button is not reproduced because themes change tokens, not component shapes. The theme exposes `--fds-font-sans` (Figtree) and `--fds-font-display` (Fraunces); the package loads no fonts, so load them or the stacks fall back to system fonts (the showcase bundles both variable fonts under SIL OFL, as nuance does). `--fds-brand-*` teal, coral, sun and glow fields are decorative: use `--fds-brand-foreground` / `--fds-brand-muted` on teal, and `--fds-brand-ink` on coral, sun and cream. Contrast is tested in `src/nuance-theme.test.ts`. Try `?theme=nuance&mode=dark` in the showcase.
+
 ## Choosing a product theme
 
 To keep the original Funder, Investor, or Portare appearance, import exactly one product theme after the base stylesheet:

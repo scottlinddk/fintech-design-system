@@ -3,12 +3,13 @@ import { Showcase } from "./Showcase.js";
 import classic from "../styles/themes/classic.css?url";
 import funder from "../styles/themes/funder.css?url";
 import investor from "../styles/themes/investor.css?url";
+import nuance from "../styles/themes/nuance.css?url";
 import portare from "../styles/themes/portare.css?url";
 import studio from "../styles/themes/studio.css?url";
 import "../styles/index.css";
 import "./showcase.css";
 
-const themes = { studio, classic, funder, investor, portare };
+const themes = { studio, classic, nuance, funder, investor, portare };
 const requested = new URLSearchParams(location.search).get("theme");
 const theme =
   requested && Object.hasOwn(themes, requested) ? (requested as keyof typeof themes) : "studio";
