@@ -21,7 +21,7 @@ body {
 }
 a {
   color: inherit;
-  text-decoration: none;
+  text-classicration: none;
 }
 button,
 a,
@@ -1720,4 +1720,76 @@ button:focus-visible,
   display: block;
   font: 9px var(--fds-font-mono);
   margin-top: 12px;
+}
+
+/* Classic (Running): a dusk-to-night hero, a dashed route trail, serif display and mono labels. */
+.site-shell--classic .hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: 72px 88px;
+  color: var(--fds-brand-foreground);
+  background:
+    radial-gradient(
+      ellipse at 50% 120%,
+      color-mix(in srgb, var(--fds-brand-ember) 70%, transparent),
+      transparent 60%
+    ),
+    linear-gradient(180deg, var(--fds-brand-brick), var(--fds-brand-night));
+}
+.site-shell--classic .hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400' preserveAspectRatio='none'%3E%3Cpath d='M-20 360 C 220 300 330 120 560 190 S 900 330 1220 60' fill='none' stroke='%23e8d5be' stroke-opacity='.55' stroke-width='2' stroke-linecap='round' stroke-dasharray='2 10'/%3E%3Ccircle cx='8' cy='358' r='6' fill='%23f26a3d'/%3E%3Ccircle cx='1190' cy='70' r='6' fill='%23f26a3d'/%3E%3C/svg%3E")
+    center / cover no-repeat;
+}
+.site-shell--classic .hero h1,
+.site-shell--classic .hero h1 > span {
+  font-family: var(--fds-font-display);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 0.94;
+}
+.site-shell--classic .hero h1 > span {
+  font-style: italic;
+  color: var(--fds-brand-amber);
+}
+.site-shell--classic .release-label,
+.site-shell--classic .hero__description,
+.site-shell--classic .hero__meta,
+.site-shell--classic .hero__meta > [aria-hidden] {
+  color: var(--fds-brand-muted);
+}
+.site-shell--classic .hero .status-dot {
+  background: var(--fds-brand-ember-hover);
+}
+.site-shell--classic .hero .action-link {
+  --fds-focus-ring: var(--fds-brand-amber);
+  color: var(--fds-brand-foreground);
+  border-color: var(--fds-brand-muted);
+  border-radius: 999px;
+  background: transparent;
+}
+.site-shell--classic .hero .action-link--primary {
+  color: var(--fds-brand-ink);
+  border-color: transparent;
+  background: var(--fds-brand-ember-hover);
+}
+.site-shell--classic .hero .action-link--primary:hover {
+  background: var(--fds-brand-amber);
+}
+.site-shell--classic .getting-started {
+  --fds-foreground: var(--fds-brand-foreground);
+  --fds-muted: var(--fds-brand-muted);
+  --fds-line: var(--fds-brand-line);
+  --fds-panel-soft: var(--fds-brand-night);
+  --fds-focus-ring: var(--fds-brand-amber);
+  color: var(--fds-brand-foreground);
+  background: linear-gradient(180deg, var(--fds-brand-brick), var(--fds-brand-night));
+}
+.site-shell--classic .getting-started .text-link {
+  color: var(--fds-brand-amber);
 }
