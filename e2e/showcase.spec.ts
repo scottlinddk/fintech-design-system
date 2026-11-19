@@ -11,9 +11,7 @@ for (const theme of ["studio", "classic", "nuance", "funder", "investor", "porta
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
     await page.goto(`/?theme=${theme}`);
-    await expect(
-      page.getByRole("heading", { name: "Fintech Design System", exact: true }),
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Scttlnd UI", exact: true })).toBeVisible();
     await page.waitForFunction(
       () => (document.querySelector("#fds-theme") as HTMLLinkElement).sheet !== null,
     );

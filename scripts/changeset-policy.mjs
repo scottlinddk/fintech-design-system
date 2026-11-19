@@ -4,7 +4,7 @@
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 
-export const PACKAGE = "@scttlnd/fintech-design-system";
+export const PACKAGE = "@scttlnd/ui";
 export const RELEASE_BRANCH = "changeset-release/main";
 
 /** @returns {{bump: string|null, empty: boolean, body: string, file: string}} */

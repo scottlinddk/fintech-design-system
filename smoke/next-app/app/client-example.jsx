@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Button, Field, Input, Menu } from "@scttlnd/fintech-design-system";
+import { Button, Field, Input, Menu } from "@scttlnd/ui";
 
 export function ClientExample() {
   const [message, setMessage] = useState("Ready");

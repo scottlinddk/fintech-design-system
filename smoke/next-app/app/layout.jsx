@@ -1,4 +1,4 @@
-import "@scttlnd/fintech-design-system/styles.css";
+import "@scttlnd/ui/styles.css";
 
 export const metadata = { title: "FDS App Router smoke" };
 export default function Layout({ children }) {

@@ -1,4 +1,4 @@
-import { Badge, Button, Panel } from "@scttlnd/fintech-design-system";
+import { Badge, Button, Panel } from "@scttlnd/ui";
 import { ClientExample } from "./client-example.jsx";
 
 // Deliberate server-side function invocation: this fails if Badge becomes a client reference.

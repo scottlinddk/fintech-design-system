@@ -18,7 +18,7 @@ import {
 } from "../src/index.js";
 
 const repository = "https://github.com/scottlinddk/fintech-design-system";
-const installCommand = "npm install @scttlnd/fintech-design-system";
+const installCommand = "npm install @scttlnd/ui";
 const previewTabs = ["Overview", "Activity", "Settings"] as const;
 type PreviewTab = (typeof previewTabs)[number];
 
@@ -121,10 +121,10 @@ export function Showcase({
       <header className="site-header">
         <a className="wordmark" href="#">
           <span className="brand-symbol" aria-hidden="true">
-            f<span>+</span>
+            s<span>+</span>
           </span>
           <span>
-            fintech<span className="wordmark__suffix">/design</span>
+            scttlnd<span className="wordmark__suffix">/ui</span>
           </span>
         </a>
         <nav aria-label="Main navigation">
@@ -179,9 +179,9 @@ export function Showcase({
               <Icon name="arrow" size={13} />
             </a>
             <h1 id="hero-title">
-              Fintech
+              Scttlnd
               <br />
-              <span>Design System</span>
+              <span>UI</span>
             </h1>
             <p className="hero__description">
               A little less noise. A lot more clarity.
@@ -218,7 +218,7 @@ export function Showcase({
               </div>
               <div className="material-card material-card--front">
                 <div className="material-card__top">
-                  <span>fintech/design</span>
+                  <span>scttlnd/ui</span>
                   <Icon name="arrow" size={17} />
                 </div>
                 <p>
@@ -675,7 +675,7 @@ export function Showcase({
       <footer className="site-footer">
         <a className="wordmark" href="#">
           <span className="brand-symbol" aria-hidden="true">
-            f<span>+</span>
+            s<span>+</span>
           </span>
           <span>Built to feel connected.</span>
         </a>
