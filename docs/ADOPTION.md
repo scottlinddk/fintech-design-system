@@ -14,7 +14,7 @@
 
 - Update package version, CHANGELOG and tests in one reviewed PR.
 - Releases run from `.github/workflows/release.yml` (Changesets) on push to `main`; merge the generated "version packages" PR to publish.
-- Configure npm trusted publisher (on the `@scttlnd/ui` package): GitHub owner `scottlinddk`, repo `fintech-design-system`, workflow `release.yml`.
+- Configure npm trusted publisher (on the `@scttlnd/ui` package): GitHub owner `scottlinddk`, repo `ui`, workflow `release.yml`.
 - First publish needs the package to exist on npm under the `@scttlnd` scope (npm username `scttlnd`) and ownership to be verified; never put a long-lived npm token in git.
 - Renovate can only discover releases visible on npm. Consumer Renovate GitHub app must be installed and enabled separately.
 

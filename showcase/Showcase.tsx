@@ -17,7 +17,7 @@ import {
   Textarea,
 } from "../src/index.js";
 
-const repository = "https://github.com/scottlinddk/fintech-design-system";
+const repository = "https://github.com/scottlinddk/ui";
 const installCommand = "npm install @scttlnd/ui";
 const previewTabs = ["Overview", "Activity", "Settings"] as const;
 type PreviewTab = (typeof previewTabs)[number];

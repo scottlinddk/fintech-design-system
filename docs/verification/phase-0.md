@@ -4,12 +4,12 @@ Implemented in six ordered, stacked PRs based on main `e316658`:
 
 | Order | PR | Concern | Changeset |
 | --- | --- | --- | --- |
-| 1 | [#12](https://github.com/scottlinddk/fintech-design-system/pull/12) | Real-component showcase and Pages build; retire obsolete tokens | None (unshipped showcase) |
-| 2 | [#13](https://github.com/scottlinddk/fintech-design-system/pull/13) | 45 foundation tokens in all themes; contrast and legacy-value checks | Minor |
-| 3 | [#14](https://github.com/scottlinddk/fintech-design-system/pull/14) | Component CSS split, same declaration order and visuals | Patch |
-| 4 | [#15](https://github.com/scottlinddk/fintech-design-system/pull/15) | DOM interaction/axe tests, browser checks and visual snapshots | Patch |
-| 5 | [#16](https://github.com/scottlinddk/fintech-design-system/pull/16) | Per-entry build/client boundaries, size budget, packed Next smoke | Minor |
-| 6 | [#17](https://github.com/scottlinddk/fintech-design-system/pull/17) | `@layer fds` and explicit consumer cascade migration note | Minor, behaviour change |
+| 1 | [#12](https://github.com/scottlinddk/ui/pull/12) | Real-component showcase and Pages build; retire obsolete tokens | None (unshipped showcase) |
+| 2 | [#13](https://github.com/scottlinddk/ui/pull/13) | 45 foundation tokens in all themes; contrast and legacy-value checks | Minor |
+| 3 | [#14](https://github.com/scottlinddk/ui/pull/14) | Component CSS split, same declaration order and visuals | Patch |
+| 4 | [#15](https://github.com/scottlinddk/ui/pull/15) | DOM interaction/axe tests, browser checks and visual snapshots | Patch |
+| 5 | [#16](https://github.com/scottlinddk/ui/pull/16) | Per-entry build/client boundaries, size budget, packed Next smoke | Minor |
+| 6 | [#17](https://github.com/scottlinddk/ui/pull/17) | `@layer fds` and explicit consumer cascade migration note | Minor, behaviour change |
 
 Merge in order. Each PR targets its predecessor so review shows one concern; retarget remaining PRs as their bases merge and preserve the dependency commits if squash-merging. No PR is merged or npm release published as part of this implementation. Changesets aggregates these into the planned 0.3.0 minor; package.json stays 0.2.0 until the version PR.
 

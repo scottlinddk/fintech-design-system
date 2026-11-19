@@ -26,7 +26,7 @@ export function prepareRelease(cwd = process.cwd()) {
   // intentionally untracked and consumed only in the action's version branch.
   // git reset --hard in changesets/action preserves this untracked file.
   const sha = git("rev-parse", "HEAD");
-  const summary = `Release the changes merged into main with the default minor version bump. Review [the source commit](https://github.com/scottlinddk/fintech-design-system/commit/${sha}) and verify affected consumers before upgrading.`;
+  const summary = `Release the changes merged into main with the default minor version bump. Review [the source commit](https://github.com/scottlinddk/ui/commit/${sha}) and verify affected consumers before upgrading.`;
   writeFileSync(
     join(cwd, ".changeset", "automatic-minor.md"),
     `---\n"${pkg.name}": minor\n---\n\n${summary}\n`,
