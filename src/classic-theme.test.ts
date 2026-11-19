@@ -62,13 +62,13 @@ for (const mode of ["light", "dark"]) {
         contrast(value(`on-${tone}`), value(tone)),
         `${mode}: solid ${tone}`,
       ).toBeGreaterThanOrEqual(4.5);
-    for (const surface of ["brand-oxblood", "brand-emerald"])
+    for (const surface of ["brand-brick", "brand-night"])
       for (const text of ["brand-foreground", "brand-muted"])
         expect(
           contrast(value(text), value(surface)),
           `${text} on ${surface}`,
         ).toBeGreaterThanOrEqual(4.5);
-    for (const surface of ["brand-amber", "brand-amber-hover", "brand-cream"])
+    for (const surface of ["brand-amber", "brand-ember-hover", "brand-cream"])
       expect(
         contrast(value("brand-ink"), value(surface)),
         `brand-ink on ${surface}`,

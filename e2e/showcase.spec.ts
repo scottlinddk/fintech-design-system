@@ -22,7 +22,7 @@ for (const theme of ["studio", "classic", "funder", "investor", "portare"]) {
       theme === "studio"
         ? "rgb(255, 255, 255)"
         : theme === "classic"
-          ? "rgb(251, 241, 216)"
+          ? "rgb(242, 235, 219)"
           : theme === "portare"
             ? "rgb(250, 251, 252)"
             : "rgb(8, 9, 11)",

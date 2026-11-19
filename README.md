@@ -76,14 +76,14 @@ Studio exposes `--fds-brand-*` tokens for the forest, sage, and lime classicrati
 
 ## Classic theme
 
-Classic is an opt-in theme inspired by 1920s–30s Art Deco travel and beer posters: warm cream paper, ink-black type, oxblood and emerald fields, amber gradients and crisp geometric corners. Import it after the base stylesheet:
+Classic brings the "Running" editorial design system into the package: warm Dawn paper and ink (light) or Night near-black (dark), a single ember action colour, and brick, olive and amber accents. Import it after the base stylesheet:
 
 ```tsx
 import "@scttlnd/fintech-design-system/styles.css";
 import "@scttlnd/fintech-design-system/themes/classic.css";
 ```
 
-Light (cream) is the default. Add `data-fds-mode="dark"` to the root for the oxblood night palette. Panels are flat with a soft amber wash. The stack prefers Josefin Sans, a geometric classic face; the package does not load fonts, so load it yourself or override `--fds-font-sans`. `--fds-brand-amber`, `--fds-brand-oxblood`, `--fds-brand-emerald` and `--fds-brand-cream` are classicrative fields; use `--fds-brand-foreground` / `--fds-brand-muted` on oxblood and emerald, and `--fds-brand-ink` on amber and cream. Text, semantic, focus and chart colours are contrast-tested in `src/classic-theme.test.ts`. Try `?theme=classic&mode=dark` in the showcase.
+Light is the default. Add `data-fds-mode="dark"` to the root for Night. Panels are flat hairline cards. Running's ember (`#DC4A1E`) is only 3.9:1 with cream, so actions and links use the deeper `#A23010` (dark mode uses its lifted `#F26A3D`); the original value remains as the decorative `--fds-brand-ember`. Running's muted grey and semantic colours were likewise darkened or lifted to meet AA, and its charts add a teal and a plum because it defines no blue. The theme also exposes `--fds-font-display` (Instrument Serif), `--fds-font-sans` (Geist) and `--fds-font-mono` (Geist Mono). The package does not load fonts: load them yourself or the stacks fall back to system serif and sans. Buttons and chips are pills in Running but remain the package's rounded rectangles here, because themes change tokens, not component shapes. Use `--fds-brand-foreground` / `--fds-brand-muted` on brick and night, and `--fds-brand-ink` on amber, ember-hover and cream. Contrast is tested in `src/classic-theme.test.ts`. Try `?theme=classic&mode=dark` in the showcase.
 
 ## Choosing a product theme
 
