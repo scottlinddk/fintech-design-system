@@ -1,0 +1,27 @@
+@layer fds {
+  /*
+   * Motion and layout-offset tokens. Enter 250-400ms decelerate, exit 150-200ms accelerate, large
+   * transitions 400-500ms; exits stay shorter than entries. Durations collapse to 0s under reduced motion.
+   * --fds-sticky-offset: set it to the height of sticky app chrome so focused elements are not hidden
+   * behind it (WCAG 2.4.11). It feeds scroll-padding-top on the root.
+   */
+  :root {
+    --fds-duration-enter: 0.3s;
+    --fds-duration-exit: 0.15s;
+    --fds-duration-slow: 0.45s;
+    --fds-duration-pulse: 1.6s;
+    --fds-ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+    --fds-ease-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+    --fds-ease-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+    --fds-sticky-offset: 0px;
+    scroll-padding-top: var(--fds-sticky-offset);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      --fds-duration-enter: 0s;
+      --fds-duration-exit: 0s;
+      --fds-duration-slow: 0s;
+    }
+  }
+}

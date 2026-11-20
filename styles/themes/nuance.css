@@ -129,4 +129,21 @@
   :is(:root, [data-fds-theme="nuance"]) .fds-notice {
     border-radius: 1.5rem;
   }
+  /*
+   * Frosted cards fall back to opaque, flat surfaces when the user asks for reduced transparency or
+   * more contrast, so text never sits on a translucent gradient or soft glow.
+   */
+  @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+    :root,
+    :root:where([data-fds-mode="dark"]),
+    [data-fds-theme="nuance"],
+    [data-fds-theme="nuance"][data-fds-mode="dark"] {
+      --fds-panel-background-image: none;
+      --fds-glass-shadow: none;
+    }
+    :is(:root, [data-fds-theme="nuance"]) .fds-panel {
+      background: var(--fds-panel);
+      border-color: var(--fds-line);
+    }
+  }
 }

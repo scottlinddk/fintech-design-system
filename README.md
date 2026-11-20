@@ -47,6 +47,9 @@ The component showcase (`npm run showcase:dev` locally, `npm run showcase:build`
 | `Field`, `Input`, `Select`, `Textarea`        | Label/hint/error wiring with 44px touch targets and 16px mobile font    | Investor `.form-grid`/`.field-hint`, Funder form sizing standard |
 | `Meter`, `SegmentedMeter`, `DistributionList` | Bounded bars, discrete scale, ranked share bars (`role="meter"`)        | Funder `EvidenceBar`, `RiskBars`, `ExposureList`                 |
 | `Menu`                                        | Action menu with Escape/arrow-key support and focus return              | Funder `Menu`                                                    |
+| `Skeleton`, `SkeletonText`, `SkeletonGroup`   | Decorative loading placeholders; the group announces "Loading" (`role="status"`, `aria-busy`) | Shared |
+| `Toast`, `ToastRegion`                        | Controlled transient message with optional Undo; pauses on hover/focus; danger stays until dismissed | Shared |
+| `Table`, `TableHead`, `TableBody`, `TableRow`, `TableCell`, `TableHeaderCell` | Semantic table: keyboard-scrollable region, sticky header, 48px/32px rows, numeric columns, `aria-sort` | Shared |
 
 Components render only `--fds-*` styled markup. Formatting, locale, currency and calculations stay in the consuming app (pass pre-formatted strings, or `formatValue`). The published modules for `Button`, `Menu`, `Field` (including its native controls), and `Panel` carry `"use client"`. The root barrel and static primitives such as `Badge` remain server-compatible. Event handlers, `Menu.items` callbacks and `Field.children` render functions still belong in a consumer client component because functions cannot cross the server/client boundary. See [Next.js verification](docs/verification/next-app-router.md).
 

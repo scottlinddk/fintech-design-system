@@ -10,14 +10,14 @@ export default defineConfig({
   pack: {
     entry: [
       "src/index.ts",
-      "src/components/{Badge,Button,Field,Menu,Meter,Metric,Notice,Panel}.tsx",
+      "src/components/{Badge,Button,Field,Menu,Meter,Metric,Notice,Panel,Skeleton,Table,Toast}.tsx",
     ],
     unbundle: true,
     outExtensions: () => ({ js: ".mjs", dts: ".d.mts" }),
     platform: "neutral",
     outputOptions: {
       banner: (chunk) =>
-        /(?:^|\/)components\/(Button|Field|Menu|Panel)\.mjs$/.test(chunk.fileName)
+        /(?:^|\/)components\/(Button|Field|Menu|Panel|Toast)\.mjs$/.test(chunk.fileName)
           ? '"use client";'
           : "",
     },
