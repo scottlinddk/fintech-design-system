@@ -14,7 +14,18 @@ import {
   Panel,
   SegmentedMeter,
   Select,
+  Skeleton,
+  SkeletonGroup,
+  SkeletonText,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeaderCell,
+  TableRow,
   Textarea,
+  Toast,
+  ToastRegion,
 } from "../src/index.js";
 
 const repository = "https://github.com/scottlinddk/ui";
@@ -88,6 +99,8 @@ export function Showcase({
   const [mode, setMode] = useState(initialMode);
   const [preview, setPreview] = useState<PreviewTab>("Overview");
   const [savedView, setSavedView] = useState(false);
+  const [undoToast, setUndoToast] = useState(false);
+  const [sortDescending, setSortDescending] = useState(true);
   const [preferencesSaved, setPreferencesSaved] = useState(false);
 
   async function copyCommand() {
@@ -542,6 +555,45 @@ export function Showcase({
               </div>
             </Panel>
             <Panel
+              title="Every state, covered"
+              eyebrow="06 / LOADING, UNDO, DATA"
+              help="Skeletons for waits, undo instead of confirm, tables for numbers."
+            >
+              <div className="showcase__stack">
+                <SkeletonGroup label="Loading holdings">
+                  <Skeleton shape="rect" height={48} />
+                  <SkeletonText lines={2} />
+                </SkeletonGroup>
+                <Button variant="secondary" onClick={() => setUndoToast(true)}>
+                  Archive view
+                </Button>
+                <Table caption="Holdings" density="compact">
+                  <TableHead>
+                    <TableRow>
+                      <TableHeaderCell>Fund</TableHeaderCell>
+                      <TableHeaderCell
+                        numeric
+                        sort={sortDescending ? "descending" : "ascending"}
+                        onSort={() => setSortDescending((value) => !value)}
+                      >
+                        Value
+                      </TableHeaderCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {(sortDescending ? ["1.240,50", "860,00"] : ["860,00", "1.240,50"]).map(
+                      (value) => (
+                        <TableRow key={value}>
+                          <TableCell>{value === "860,00" ? "Fund B" : "Fund A"}</TableCell>
+                          <TableCell numeric>{value}</TableCell>
+                        </TableRow>
+                      ),
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
+            </Panel>
+            <Panel
               className="empty-example"
               title="Room for what's next"
               eyebrow="05 / EMPTY STATES"
@@ -672,6 +724,16 @@ export function Showcase({
           </div>
         </section>
       </main>
+      <ToastRegion>
+        {undoToast ? (
+          <Toast
+            tone="success"
+            title="View archived"
+            action={{ label: "Undo", onSelect: () => setMessage("Archive undone.") }}
+            onDismiss={() => setUndoToast(false)}
+          />
+        ) : null}
+      </ToastRegion>
       <footer className="site-footer">
         <a className="wordmark" href="#">
           <span className="brand-symbol" aria-hidden="true">

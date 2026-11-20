@@ -1,0 +1,58 @@
+@layer fds {
+  /*
+   * Windows High Contrast / forced colors: colour-mixed fills and tones collapse, so meaning moves to
+   * system-colour borders and fills. Status always has text and, for badges, an optional icon too.
+   */
+  @media (forced-colors: active) {
+    .fds-badge,
+    .fds-notice,
+    .fds-metric,
+    .fds-panel {
+      border-color: CanvasText;
+    }
+    .fds-notice {
+      border-inline-start-width: 4px;
+    }
+    .fds-badge--danger,
+    .fds-notice--danger,
+    .fds-badge--warn,
+    .fds-notice--warn {
+      border-style: double;
+      border-width: 3px;
+    }
+    .fds-meter {
+      background: Canvas;
+      border: 1px solid CanvasText;
+    }
+    .fds-meter__fill {
+      background: Highlight;
+      forced-color-adjust: none;
+    }
+    .fds-segmeter__segment {
+      border: 1px solid CanvasText;
+      background: Canvas;
+    }
+    .fds-segmeter__segment--on {
+      background: Highlight;
+      forced-color-adjust: none;
+    }
+    .fds-button {
+      border: 1px solid ButtonText;
+    }
+    .fds-button--primary {
+      background: ButtonFace;
+      color: ButtonText;
+    }
+    .fds-button:disabled {
+      border-color: GrayText;
+      color: GrayText;
+      opacity: 1;
+    }
+    .fds-button:focus-visible,
+    .fds-control:focus-visible,
+    .fds-menu__trigger:focus-visible,
+    .fds-menu__item:focus-visible {
+      outline: 2px solid Highlight;
+    }
+  }
+}

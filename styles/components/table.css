@@ -1,0 +1,93 @@
+@layer fds {
+  /* Table: 48px rows (32px compact), sticky header, right-aligned tabular numerals. */
+  .fds-table-wrap {
+    max-width: 100%;
+    overflow: auto;
+    border: 1px solid var(--fds-line);
+    border-radius: var(--fds-radius-md);
+  }
+  .fds-table-wrap:focus-visible {
+    outline: 2px solid var(--fds-focus-ring);
+    outline-offset: 2px;
+  }
+  .fds-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: var(--fds-text-sm);
+    color: var(--fds-foreground);
+  }
+  .fds-table__caption {
+    padding: 0.75rem 1rem;
+    text-align: start;
+    font-size: var(--fds-text-sm);
+    color: var(--fds-muted);
+  }
+  .fds-table th,
+  .fds-table td {
+    height: 3rem;
+    padding: 0 1rem;
+    border-bottom: 1px solid var(--fds-line-soft);
+    text-align: start;
+    vertical-align: middle;
+  }
+  .fds-table--compact th,
+  .fds-table--compact td {
+    height: 2rem;
+  }
+  .fds-table tbody tr:last-child > * {
+    border-bottom: 0;
+  }
+  .fds-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: var(--fds-panel-raised);
+    border-bottom: 1px solid var(--fds-line);
+    color: var(--fds-muted-strong, var(--fds-foreground));
+    font-size: var(--fds-text-xs);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .fds-table tbody tr:hover > * {
+    background: var(--fds-panel-soft);
+  }
+  .fds-table [data-align="end"] {
+    text-align: end;
+  }
+  .fds-table [data-numeric] {
+    font-variant-numeric: var(--fds-numeric, tabular-nums);
+  }
+  .fds-table__sort {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+  }
+  .fds-table__sort:focus-visible {
+    outline: 2px solid var(--fds-focus-ring);
+    outline-offset: 2px;
+  }
+  .fds-table__sort-icon {
+    font-size: 0.75rem;
+    line-height: 1;
+  }
+  @media (pointer: coarse) {
+    .fds-table__sort {
+      min-width: 2.75rem;
+      min-height: 2.75rem;
+    }
+  }
+  @media (forced-colors: active) {
+    .fds-table thead th {
+      border-bottom-color: CanvasText;
+    }
+  }
+}

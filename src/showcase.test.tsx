@@ -18,6 +18,8 @@ it("showcases the real primitives rather than duplicate component markup", () =>
     "segmeter",
     "distribution",
     "menu",
+    "skeleton",
+    "table",
   ]) {
     expect(html).toContain(`fds-${name}`);
   }

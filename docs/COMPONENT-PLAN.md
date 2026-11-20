@@ -115,7 +115,7 @@ Count: 12 Exists + 38 planned (P1–P5) + 16 Out = 66.
 | Elevation | `--fds-shadow-popover`, `--fds-shadow-dialog` | Popover, Menu, Dialog |
 | Overlay | `--fds-overlay` (scrim colour) | Dialog, Sheet, Drawer |
 | Layer | `--fds-z-dropdown`, `-sticky`, `-overlay`, `-modal`, `-toast`, `-tooltip` | All floating UI |
-| Motion | `--fds-duration-fast/base`, `--fds-ease-out` | All transitions (0 under reduced motion) |
+| Motion | `--fds-duration-fast/base/enter/exit/slow`, `--fds-ease-out/emphasized/decelerate/accelerate`, `--fds-sticky-offset` | All transitions (0 under reduced motion) |
 | On-colour | `--fds-on-danger`, `--fds-on-success` | Danger button, solid badges |
 | Chart | `--fds-chart-1…6`, `--fds-chart-grid`, `--fds-chart-positive/negative` | Chart recipe |
 
@@ -158,7 +158,7 @@ These go beyond typical library defaults and are why we do not take third-party 
 
 - **Table**: `font-variant-numeric: tabular-nums`; `align="numeric"` column prop that right-aligns; optional sticky header and first column; `density` (`comfortable`/`compact`); caption required (visually hidden allowed); horizontal scroll inside the table wrapper, never the page; positive/negative use text + sign, not colour alone.
 - **Alert Dialog**: destructive confirm button never gets initial focus; optional "type to confirm" slot; title states the consequence ("Transfer 10.000 kr. to …?") using app-supplied text.
-- **Toast**: `role="status"` for success; errors that block a task go in a `Notice`, not only a toast. Pause on hover/focus. No auto-dismiss for anything with an action.
+- **Toast** (shipped as a controlled, hand-built component, not Base UI): `role="status"` for success; errors that block a task go in a `Notice`, not only a toast. Pause on hover/focus. No auto-dismiss for anything with an action. Deliberate exception: an undo toast auto-dismisses after 8s (pauses on hover/focus; `duration={0}` disables it).
 - **Tooltip / Hover Card**: never hold required information (fees, risk). Open on focus as well as hover.
 - **Input Group / Input OTP / Slider**: 16px font on mobile (already a rule), `inputmode` hints, `autocomplete` passthrough.
 - **Calendar / Date Picker**: week starts Monday by default; `locale` comes from the app; selected value is a `Date`/ISO string, never a formatted string; disabled dates (bank holidays, settlement days) are passed in. Always allow typed entry.

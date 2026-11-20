@@ -15,6 +15,25 @@ All three themes explicitly define the Phase 0 foundation tokens. Funder and Inv
 
 `src/tokens.test.ts` checks all pre-existing declarations are unchanged, every new token exists in each theme, text on solid success/danger meets 4.5:1, Portare text on all four surfaces meets 4.5:1, and Portare focus/chart marks meet 3:1. This does not certify complete consumer screens or the existing low-contrast decorative border tokens.
 
+## Motion and sticky offset
+
+Defined in `styles/motion.css` (loaded by `styles.css`, inherited by every theme).
+
+| Token | Value | Use |
+| ----- | ----- | --- |
+| `--fds-duration-enter` | `0.3s` | Elements entering (use with `--fds-ease-decelerate`) |
+| `--fds-duration-exit` | `0.15s` | Elements leaving; keep shorter than enter (`--fds-ease-accelerate`) |
+| `--fds-duration-slow` | `0.45s` | Large transitions (`--fds-ease-emphasized`) |
+| `--fds-duration-pulse` | `1.6s` | Skeleton pulse; the animation itself is removed under reduced motion |
+| `--fds-ease-emphasized` / `-decelerate` / `-accelerate` | Material 3 curves | Spatial movement; never linear |
+| `--fds-sticky-offset` | `0px` | Set to the height of sticky app chrome; feeds root `scroll-padding-top` so focused elements are not obscured (WCAG 2.4.11) |
+
+`enter`, `exit` and `slow` become `0s` under `prefers-reduced-motion: reduce`. Prefer opacity or colour changes over movement.
+
+## Forced colors and reduced transparency
+
+`styles/components/a11y.css` maps badges, notices, meters, buttons and focus rings to system colours under `forced-colors: active`; status text is never removed. Nuance panels switch to opaque, flat surfaces under `prefers-reduced-transparency: reduce` or `prefers-contrast: more`.
+
 ## Grain surfaces (default, opt-out)
 
 Studio uses flat `Panel` (`.fds-panel`) surfaces, including when `styles.css` is the only import. The explicit Funder, Investor and Portare themes keep their hairline borders, soft two-colour glow and fine film grain by default. This ships in `styles.css`; there is no separate import.
