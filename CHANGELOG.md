@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.6.0
+
+### Minor Changes
+
+- [#30](https://github.com/scottlinddk/ui/pull/30) [`bfe7665`](https://github.com/scottlinddk/ui/commit/bfe7665b3ce9ae30b627cf7a1639523da252e925) Thanks [@scottlinddk](https://github.com/scottlinddk)! - VISIBLE CHANGE: add an opt-in Classic theme, `@scttlnd/ui/themes/classic.css`, derived from the Running editorial design system. It has warm Dawn (light) and Night (`data-fds-mode="dark"`) palettes, an ember accent, brick/olive/amber `--fds-brand-*` fields and Geist / Instrument Serif font stacks. Existing themes and the Studio default are unchanged; import classic.css after styles.css to adopt it.
+
+- [#32](https://github.com/scottlinddk/ui/pull/32) [`95b3892`](https://github.com/scottlinddk/ui/commit/95b3892960084b613559acef5aee100d48e99d87) Thanks [@scottlinddk](https://github.com/scottlinddk)! - VISIBLE CHANGE: add an opt-in Nuance theme, `@scttlnd/ui/themes/nuance.css`, based on the nuance app's Solskin (light) and Aften (`data-fds-mode="dark"`) palettes: cream canvas, teal accent, coral and sun `--fds-brand-*` fields, rounded radii and Figtree / Fraunces font stacks. Existing themes and the Studio default are unchanged; import nuance.css after styles.css to adopt it.
+
+- [#33](https://github.com/scottlinddk/ui/pull/33) [`bc1233c`](https://github.com/scottlinddk/ui/commit/bc1233c87c46ea41d8f990c634d85acbc943f44e) Thanks [@scottlinddk](https://github.com/scottlinddk)! - BREAKING: the package is renamed from `@scttlnd/fintech-design-system` to `@scttlnd/ui` because it now serves multiple products and themes in any domain. Exports, `--fds-*` tokens, `data-fds-*` attributes and theme files are unchanged. Migrate by replacing the dependency name in package.json and every `@scttlnd/fintech-design-system` import path (including `/styles.css` and `/themes/*.css`) with `@scttlnd/ui`; the old package is deprecated and receives no further releases.
+
 ## 0.5.0
 
 ### Minor Changes
