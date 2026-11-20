@@ -1,6 +1,6 @@
 {
   "name": "@scttlnd/ui",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Shared design tokens and primitive components for multiple products and themes",
   "license": "MIT",
   "repository": {
