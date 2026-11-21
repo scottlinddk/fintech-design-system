@@ -28,7 +28,8 @@
     "./themes/investor.css": "./styles/themes/investor.css",
     "./themes/studio.css": "./styles/themes/studio.css",
     "./themes/classic.css": "./styles/themes/classic.css",
-    "./themes/nuance.css": "./styles/themes/nuance.css"
+    "./themes/nuance.css": "./styles/themes/nuance.css",
+    "./themes/caffeine.css": "./styles/themes/caffeine.css"
   },
   "publishConfig": {
     "access": "public",
