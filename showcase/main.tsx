@@ -1,16 +1,30 @@
 import { createRoot } from "react-dom/client";
 import { Showcase } from "./Showcase.js";
+import boligdata from "../styles/themes/boligdata.css?url";
 import caffeine from "../styles/themes/caffeine.css?url";
 import classic from "../styles/themes/classic.css?url";
 import funder from "../styles/themes/funder.css?url";
 import investor from "../styles/themes/investor.css?url";
 import nuance from "../styles/themes/nuance.css?url";
+import orbit from "../styles/themes/orbit.css?url";
 import portare from "../styles/themes/portare.css?url";
 import studio from "../styles/themes/studio.css?url";
+import tredjekort from "../styles/themes/tredjekort.css?url";
 import "../styles/index.css";
 import "./showcase.css";
 
-const themes = { studio, classic, nuance, caffeine, funder, investor, portare };
+const themes = {
+  studio,
+  classic,
+  nuance,
+  caffeine,
+  boligdata,
+  tredjekort,
+  orbit,
+  funder,
+  investor,
+  portare,
+};
 const requested = new URLSearchParams(location.search).get("theme");
 const theme =
   requested && Object.hasOwn(themes, requested) ? (requested as keyof typeof themes) : "studio";

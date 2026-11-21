@@ -6,7 +6,18 @@ const legacy: Record<string, Record<string, string>> = JSON.parse(
 );
 const require = createRequire(import.meta.url);
 
-for (const theme of ["studio", "classic", "nuance", "caffeine", "funder", "investor", "portare"]) {
+for (const theme of [
+  "studio",
+  "classic",
+  "nuance",
+  "caffeine",
+  "boligdata",
+  "tredjekort",
+  "orbit",
+  "funder",
+  "investor",
+  "portare",
+]) {
   test(`${theme}: theme, keyboard, axe, motion and screenshots`, async ({ page }, info) => {
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
@@ -25,9 +36,15 @@ for (const theme of ["studio", "classic", "nuance", "caffeine", "funder", "inves
             ? "rgb(251, 245, 236)"
             : theme === "caffeine"
               ? "rgb(249, 249, 249)"
-              : theme === "portare"
-                ? "rgb(250, 251, 252)"
-                : "rgb(8, 9, 11)",
+              : theme === "boligdata"
+                ? "rgb(255, 255, 255)"
+                : theme === "tredjekort"
+                  ? "rgb(250, 250, 248)"
+                  : theme === "orbit"
+                    ? "rgb(244, 240, 238)"
+                    : theme === "portare"
+                      ? "rgb(250, 251, 252)"
+                      : "rgb(8, 9, 11)",
     );
     expect(await page.locator("link[rel=stylesheet][id=fds-theme]").count()).toBe(1);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(

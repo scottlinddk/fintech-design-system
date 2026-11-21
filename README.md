@@ -1,6 +1,6 @@
 # Scttlnd UI
 
-Shared design tokens and primitive components for multiple products and themes (Funder, Portare, Investor, Studio, Classic, Nuance, Caffeine). Each brand and product remains independent.
+Shared design tokens and primitive components for multiple products and themes (Funder, Portare, Investor, Studio, Classic, Nuance, Caffeine, BoligData, Tredjekort, Orbit). Each brand and product remains independent.
 
 ## Develop with Vite+
 
@@ -109,6 +109,31 @@ import "@scttlnd/ui/themes/caffeine.css";
 ```
 
 Light is the default; add `data-fds-mode="dark"` to the root for the dark palette (cream actions on near-black). cv follows the OS and `data-theme`; here the package convention `data-fds-mode` applies. Values come from cv's `design-system/tokens/colors.css`. cv defines no success, warning, danger or chart colours, so those are additions chosen for AA contrast and are not verified against cv itself. Print/A4 rules, the `--ds-*` token names and cv's components stay in cv; only the palette, radii, shadows and font stacks are themed. The theme exposes `--fds-font-sans` (Geist), `--fds-font-mono` (Geist Mono) and `--fds-font-display` (Instrument Serif); the package loads no fonts, so load them or the stacks fall back to system fonts (cv ships static weights because variable fonts break PDF text extraction). `--fds-brand-*` espresso, roast, mocha, cream and peach fields are decorative: use `--fds-brand-foreground` / `--fds-brand-muted` on espresso, roast and mocha, and `--fds-brand-ink` on cream and peach. Contrast is tested in `src/caffeine-theme.test.ts`. Try `?theme=caffeine&mode=dark` in the showcase.
+
+## BoligData, Tredjekort and Orbit themes
+
+Three opt-in themes bring the palettes of the author's own apps into the package. Import one after the base stylesheet; each has light as the default and a dark palette under `data-fds-mode="dark"`:
+
+```tsx
+import "@scttlnd/ui/styles.css";
+import "@scttlnd/ui/themes/boligdata.css"; // or tredjekort.css, orbit.css
+```
+
+| Theme        | Source                                                  | Character                                                                                                                                                      |
+| ------------ | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `boligdata`  | `scottlinddk/boligdata` `apps/web/src/index.css`        | Near-white and sage-grey surfaces, ink action (dark button in light, cream in dark), copper focus and brand, peach accent. Inter, DM Serif Display for headings. |
+| `tredjekort` | `scottlinddk/tredjekort` `src/shared/styles/tokens.css` | Vejdirektoratet drafting look: survey-blue actions on warm paper, fjord and amber markers, 4px corners. IBM Plex Sans/Mono, Space Grotesk for headings.        |
+| `orbit`      | `scottlinddk/orbit` `apps/web/src/theme/presets.ts`     | The default "Ember" preset and "Ember dark": black pill actions, borderless 28px cards, ember gradient hero (`--fds-brand-ember-gradient`). Inter.            |
+
+Notes and deviations from the source apps:
+
+- Status colours (`success`, `warn`, `danger`) are nudged a few percent darker (lighter for Tredjekort's dark danger) than the source apps where needed so Badge text passes 4.5:1 on its own 12% tint over every surface; the apps' exact values are not reproduced.
+- None of the three apps defines chart colours, so `--fds-chart-*` are additions chosen for AA graphical contrast.
+- Tredjekort has one paper surface, so `panel`, `panel-raised` and `panel-soft` are derived neighbours. Its danger red (`#dc2626`), amber (`#a16207`) and green (`#15803d`) are below 4.5:1 on the raised surface, so `--fds-danger`, `--fds-warn` and `--fds-success` are slightly darker; the original amber is kept as the decorative `--fds-brand-amber` (lightened in dark mode). Its map basemap stays light in both modes: keep map overlays on `--fds-brand-paper`.
+- Orbit is user-themable at runtime. This theme is only the shipped Ember default, not Orbit's other presets or household-edited themes. Its panels are borderless (`border-color: transparent`), while form controls keep their hairline. `--fds-brand-ember-bright` is decorative only: use `--fds-brand-ink` on it.
+- BoligData's `--color-border` (`#e6e8e2`) is intentionally soft; control borders use it as in the app.
+- The package loads no fonts. Load Inter, DM Serif Display, IBM Plex and Space Grotesk yourself or the stacks fall back to system fonts.
+- `--fds-brand-*` fields are decorative: use `--fds-brand-foreground` / `--fds-brand-muted` on the solid brand fields and `--fds-brand-ink` on the light ones. Contrast is tested in `src/product-themes.test.ts`. Try `?theme=boligdata&mode=dark` (or `tredjekort`, `orbit`) in the showcase.
 
 ## Choosing a product theme
 

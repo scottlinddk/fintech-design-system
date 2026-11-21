@@ -1,0 +1,107 @@
+@layer fds {
+  /*
+   * Tredjekort: the drafting palette of scottlinddk/tredjekort (src/shared/styles/tokens.css), borrowed from
+   * Vejdirektoratet CAD survey drawings: survey-blue actions and focus on warm paper, graphite text, fjord
+   * cyan and amber markers, and tight 4px corners. Flat hairline panels. Light is the default; add
+   * data-fds-mode="dark" for the dark palette. Import after styles.css.
+   *
+   * Source: Tredjekort's --color-* tokens. Tredjekort has a single paper surface, so panel, panel-raised
+   * and panel-soft are derived neighbours of it. Its danger red (#dc2626), amber (#a16207) and green (#15803d) fall below
+   * 4.5:1 on the raised surface, so --fds-danger, --fds-warn and --fds-success are slightly darker; the original values remain
+   * as the decorative --fds-brand-amber. The map basemap stays light in both modes, so keep map overlays
+   * on their own paper surface (--fds-brand-paper) as Tredjekort does.
+   */
+  :root,
+  [data-fds-theme="tredjekort"] {
+    color-scheme: light;
+    --fds-panel-background-image: none;
+    --fds-panel-grain-content: none;
+    --fds-background: #fafaf8;
+    --fds-foreground: #1c2128;
+    --fds-muted: #59626e;
+    --fds-muted-strong: #3a424d;
+    --fds-line: #d8d5cc;
+    --fds-line-soft: #e8e6df;
+    --fds-panel: #fff;
+    --fds-panel-raised: #f0efea;
+    --fds-panel-soft: #f5f4f0;
+    --fds-accent: #1d4ed8;
+    --fds-accent-strong: #1e40af;
+    --fds-on-accent: #fff;
+    --fds-focus-ring: #1d4ed8;
+    --fds-success: #126e32;
+    --fds-warn: #8a5706;
+    --fds-danger: #bb1f1f;
+    --fds-on-danger: #fff;
+    --fds-on-success: #fff;
+    --fds-chart-1: #1d4ed8;
+    --fds-chart-2: #a16207;
+    --fds-chart-3: #0e7490;
+    --fds-chart-4: #7c2d12;
+    --fds-chart-5: #137535;
+    --fds-chart-6: #6d28d9;
+    --fds-chart-grid: #6f7782;
+    --fds-radius-sm: 0.25rem;
+    --fds-radius-md: 0.25rem;
+    --fds-radius-lg: 0.375rem;
+    --fds-font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --fds-font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    /* Display voice for headings; components do not use it, apps opt in. */
+    --fds-font-display: "Space Grotesk", system-ui, sans-serif;
+    --fds-shadow-card: 0 2px 8px rgb(28 33 40 / 0.12);
+    --fds-shadow-popover: 0 8px 24px rgb(28 33 40 / 0.18);
+    --fds-shadow-dialog: 0 24px 64px rgb(28 33 40 / 0.28);
+    --fds-overlay: rgb(28 33 40 / 0.5);
+    /* Brand fields are decorative; text and actions use their paired foregrounds. */
+    --fds-brand-survey: #1d4ed8;
+    --fds-brand-fjord: #0e7490;
+    --fds-brand-noise: #7c2d12;
+    --fds-brand-amber: #a16207;
+    --fds-brand-paper: #fafaf8;
+    --fds-brand-ink: #1c2128;
+    --fds-brand-foreground: #fff;
+    --fds-brand-muted: #e8eefc;
+    --fds-brand-accent-soft: rgb(29 78 216 / 0.08);
+  }
+
+  :root:where([data-fds-mode="dark"]),
+  [data-fds-theme="tredjekort"][data-fds-mode="dark"] {
+    color-scheme: dark;
+    --fds-background: #15191f;
+    --fds-foreground: #e8eaed;
+    --fds-muted: #a2abb6;
+    --fds-muted-strong: #c9cfd6;
+    --fds-line: #3a414b;
+    --fds-line-soft: #2b323a;
+    --fds-panel: #1b2027;
+    --fds-panel-raised: #232a33;
+    --fds-panel-soft: #181d23;
+    --fds-accent: #8ab0ff;
+    --fds-accent-strong: #a9c5ff;
+    --fds-on-accent: #0b1220;
+    --fds-focus-ring: #8ab0ff;
+    --fds-success: #4ade80;
+    --fds-warn: #d9a441;
+    --fds-danger: #f87676;
+    --fds-on-danger: #15191f;
+    --fds-on-success: #15191f;
+    --fds-chart-1: #8ab0ff;
+    --fds-chart-2: #d9a441;
+    --fds-chart-3: #4cc3de;
+    --fds-chart-4: #d98d63;
+    --fds-chart-5: #4ade80;
+    --fds-chart-6: #c4a6ff;
+    --fds-chart-grid: #7d8794;
+    --fds-shadow-card: 0 2px 8px rgb(0 0 0 / 0.5);
+    --fds-shadow-popover: 0 12px 32px rgb(0 0 0 / 0.55);
+    --fds-shadow-dialog: 0 24px 64px rgb(0 0 0 / 0.65);
+    --fds-overlay: rgb(0 0 0 / 0.65);
+    --fds-brand-amber: #d9a441;
+    --fds-brand-accent-soft: rgb(138 176 255 / 0.14);
+  }
+
+  /* Tredjekort panels are flat paper with a thin drop shadow. */
+  :is(:root, [data-fds-theme="tredjekort"]) .fds-panel {
+    box-shadow: var(--fds-shadow-card);
+  }
+}

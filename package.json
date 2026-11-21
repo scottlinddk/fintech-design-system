@@ -29,7 +29,10 @@
     "./themes/studio.css": "./styles/themes/studio.css",
     "./themes/classic.css": "./styles/themes/classic.css",
     "./themes/nuance.css": "./styles/themes/nuance.css",
-    "./themes/caffeine.css": "./styles/themes/caffeine.css"
+    "./themes/caffeine.css": "./styles/themes/caffeine.css",
+    "./themes/boligdata.css": "./styles/themes/boligdata.css",
+    "./themes/tredjekort.css": "./styles/themes/tredjekort.css",
+    "./themes/orbit.css": "./styles/themes/orbit.css"
   },
   "publishConfig": {
     "access": "public",
