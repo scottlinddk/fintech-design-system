@@ -37,3 +37,10 @@ export {
   TableHeaderCell,
 } from "./components/Table.js";
 export type { TableProps, TableCellProps, TableHeaderCellProps } from "./components/Table.js";
+export { Dialog, Sheet, AlertDialog } from "./components/Dialog.js";
+export type {
+  DialogProps,
+  DialogPlacement,
+  SheetProps,
+  AlertDialogProps,
+} from "./components/Dialog.js";

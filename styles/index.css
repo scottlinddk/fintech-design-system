@@ -6,5 +6,7 @@
 @import "./components/skeleton.css";
 @import "./components/toast.css";
 @import "./components/table.css";
+@import "./components/button-danger.css";
+@import "./components/dialog.css";
 @import "./components/a11y.css";
 @import "./themes/studio.css";

@@ -1,6 +1,6 @@
 # Per-entry build and App Router verification
 
-`vp pack` now builds separate ESM component modules and declarations using multiple entries and tsdown's unbundle mode. The public barrel still exports the same flat named API and the published `.mjs` / `.d.mts` paths remain compatible. A banner marks only Button, Field (including Input/Select/Textarea), Menu and Panel as client modules. Panel and Field need the boundary because they use hooks, even when their content looks static. Badge, Metric, Meter, Notice and the barrel remain unmarked.
+`vp pack` now builds separate ESM component modules and declarations using multiple entries and tsdown's unbundle mode. The public barrel still exports the same flat named API and the published `.mjs` / `.d.mts` paths remain compatible. A banner marks only Button, Dialog (with Sheet and AlertDialog), Field (including Input/Select/Textarea), Menu, Panel and Toast as client modules. Panel and Field need the boundary because they use hooks, even when their content looks static. Badge, Metric, Meter, Notice and the barrel remain unmarked.
 
 Consumers can import static primitives from a server component. Functions still cannot cross a server/client boundary: put Field's render function, Menu callbacks and event handlers in a consumer client component. This is not removed by adding library directives.
 

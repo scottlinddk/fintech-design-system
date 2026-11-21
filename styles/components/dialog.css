@@ -1,0 +1,190 @@
+@layer fds {
+  /*
+   * Dialog / Sheet / AlertDialog on native <dialog>. The top layer makes z-index and a portal
+   * unnecessary. Enter/exit use @starting-style and transition-behavior: allow-discrete (Chrome 117,
+   * Safari 17.4, Firefox 129); older browsers simply skip the animation.
+   */
+  .fds-dialog {
+    --fds-dialog-shift: 0.75rem;
+    box-sizing: border-box;
+    max-width: none;
+    max-height: none;
+    margin: auto;
+    padding: 0;
+    border: 1px solid var(--fds-line);
+    border-radius: var(--fds-radius-lg);
+    background: var(--fds-panel-raised);
+    color: var(--fds-foreground);
+    box-shadow: var(--fds-shadow-dialog);
+    overscroll-behavior: contain;
+    opacity: 0;
+    transform: translateY(var(--fds-dialog-shift)) scale(0.98);
+    transition:
+      opacity var(--fds-duration-exit) var(--fds-ease-accelerate),
+      transform var(--fds-duration-exit) var(--fds-ease-accelerate),
+      overlay var(--fds-duration-exit) allow-discrete,
+      display var(--fds-duration-exit) allow-discrete;
+  }
+  .fds-dialog[open] {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity var(--fds-duration-enter) var(--fds-ease-decelerate),
+      transform var(--fds-duration-enter) var(--fds-ease-decelerate),
+      overlay var(--fds-duration-enter) allow-discrete,
+      display var(--fds-duration-enter) allow-discrete;
+  }
+  @starting-style {
+    .fds-dialog[open] {
+      opacity: 0;
+      transform: translateY(var(--fds-dialog-shift)) scale(0.98);
+    }
+  }
+  .fds-dialog[data-fds-closing] {
+    pointer-events: none;
+  }
+  .fds-dialog--center {
+    inline-size: min(100% - 2rem, 32rem);
+    max-block-size: min(100% - 2rem, 40rem);
+  }
+  .fds-dialog::backdrop {
+    background: var(--fds-overlay);
+    opacity: 0;
+    transition:
+      opacity var(--fds-duration-exit) var(--fds-ease-accelerate),
+      overlay var(--fds-duration-exit) allow-discrete,
+      display var(--fds-duration-exit) allow-discrete;
+  }
+  .fds-dialog[open]::backdrop {
+    opacity: 1;
+    transition:
+      opacity var(--fds-duration-enter) var(--fds-ease-decelerate),
+      overlay var(--fds-duration-enter) allow-discrete,
+      display var(--fds-duration-enter) allow-discrete;
+  }
+  @starting-style {
+    .fds-dialog[open]::backdrop {
+      opacity: 0;
+    }
+  }
+
+  /* Edge sheets */
+  .fds-dialog--bottom,
+  .fds-dialog--start,
+  .fds-dialog--end {
+    --fds-dialog-shift: 0;
+    border-radius: 0;
+    inline-size: 100%;
+  }
+  .fds-dialog--bottom {
+    inset: auto 0 0;
+    margin: 0;
+    max-block-size: 90dvh;
+    border-start-start-radius: var(--fds-radius-lg);
+    border-start-end-radius: var(--fds-radius-lg);
+    border-block-end-width: 0;
+    transform: translateY(100%);
+  }
+  .fds-dialog--start,
+  .fds-dialog--end {
+    inset-block: 0;
+    margin: 0;
+    block-size: 100dvh;
+    max-block-size: none;
+    inline-size: min(100%, 28rem);
+  }
+  .fds-dialog--start {
+    inset-inline: 0 auto;
+    border-inline-start-width: 0;
+    transform: translateX(-100%);
+  }
+  .fds-dialog--end {
+    inset-inline: auto 0;
+    border-inline-end-width: 0;
+    transform: translateX(100%);
+  }
+  .fds-dialog--bottom[open],
+  .fds-dialog--start[open],
+  .fds-dialog--end[open] {
+    transform: none;
+  }
+  @starting-style {
+    .fds-dialog--bottom[open] {
+      transform: translateY(100%);
+    }
+    .fds-dialog--start[open] {
+      transform: translateX(-100%);
+    }
+    .fds-dialog--end[open] {
+      transform: translateX(100%);
+    }
+  }
+
+  .fds-dialog__surface {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fds-space-3);
+    max-block-size: inherit;
+    block-size: 100%;
+    box-sizing: border-box;
+    padding: var(--fds-space-5);
+    padding-block-end: max(var(--fds-space-5), env(safe-area-inset-bottom));
+    padding-inline: max(var(--fds-space-5), env(safe-area-inset-left))
+      max(var(--fds-space-5), env(safe-area-inset-right));
+    overflow: auto;
+  }
+  .fds-dialog__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--fds-space-3);
+  }
+  .fds-dialog__title {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.3;
+    text-wrap: balance;
+  }
+  .fds-dialog__close {
+    flex: none;
+    min-inline-size: var(--fds-control-h);
+    margin-block: calc(var(--fds-space-2) * -1);
+    margin-inline-end: calc(var(--fds-space-2) * -1);
+    padding-inline: 0;
+  }
+  .fds-dialog__description {
+    margin: 0;
+    color: var(--fds-muted);
+    font-size: 0.9375rem;
+  }
+  .fds-dialog__body {
+    min-block-size: 0;
+  }
+  .fds-dialog__footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--fds-space-2);
+    margin-block-start: var(--fds-space-2);
+  }
+
+  /* Scroll lock: stack-aware without a counter. */
+  :root:has(.fds-dialog[open]) {
+    overflow: hidden;
+  }
+
+  @media (max-width: 30rem) {
+    .fds-dialog__footer > .fds-button {
+      flex: 1 1 100%;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fds-dialog,
+    .fds-dialog[open],
+    .fds-dialog::backdrop,
+    .fds-dialog[open]::backdrop {
+      transition: none;
+    }
+  }
+}

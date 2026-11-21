@@ -1,0 +1,8 @@
+@layer fds {
+  /* Destructive variant. Kept apart from button.css, whose bytes are pinned by the CSS-split baseline. */
+  .fds-button--danger {
+    background: var(--fds-danger);
+    color: var(--fds-on-danger);
+    border: 1px solid transparent;
+  }
+}

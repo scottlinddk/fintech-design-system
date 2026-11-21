@@ -1,6 +1,6 @@
 # Component plan
 
-Status: Phase 0 implemented in PRs #12–#17 (2026-11-08), awaiting merge and consumer release verification. Phases 1–5 remain proposed. See [Phase 0 verification](verification/phase-0.md).
+Status (2026-11-21, package 0.8.0): Phase 0 is shipped. Parts of later phases shipped **out of phase order** and without new dependencies: `Skeleton`, `Toast` and `Table` (0.7.0), then `Dialog`, `Sheet` and `AlertDialog` on native `<dialog>` ([ADR 0001](adr/0001-native-dialog-overlays.md)). The release numbers in section 6 are historical: releases now follow the changeset policy and each shipped PR picks its own bump. Everything not marked **Exists** or **Shipped** below is still proposed. See [Phase 0 verification](verification/phase-0.md).
 Scope: a reference set of 66 common UI components (reviewed 2026-11-08), triaged against what this package ships today.
 
 ## 1. Summary
@@ -14,7 +14,7 @@ Scope: a reference set of 66 common UI components (reviewed 2026-11-08), triaged
 
 | # | Decision | Recommendation | Why |
 | - | -------- | -------------- | --- |
-| D1 | Headless library | `@base-ui/react` as a regular `dependency` (`^1.9.0`) | One package, tree-shakeable, maintained. React Aria is stronger on i18n/date handling but larger and its API is less conventional. Hand-rolling (like today's `Menu`) does not scale to Dialog/Combobox/Select. |
+| D1 | Headless library | **Amended 2026-11-21:** native `<dialog>` for modal overlays (ADR 0001, no dependency). `@base-ui/react` stays the candidate for anchored/positioned components (Popover, Tooltip, Combobox, Select), decided when one is requested. Original recommendation: `@base-ui/react` as a regular `dependency` (`^1.9.0`) | One package, tree-shakeable, maintained. React Aria is stronger on i18n/date handling but larger and its API is less conventional. Hand-rolling (like today's `Menu`) does not scale to Dialog/Combobox/Select. |
 | D2 | Tailwind | Do not adopt | Consumers would need a Tailwind build matching ours. Plain CSS + tokens works in Funder (Next.js), Portare and Investor without config. |
 | D3 | Export style | Flat named exports with conventional names (`Dialog`, `DialogTrigger`, `DialogContent`, …) | Familiar to most React developers, and tree-shakes cleanly. |
 | D4 | Composition | Base UI `render` prop (not Radix `asChild`) | It is Base UI's native composition mechanism. |
@@ -31,14 +31,14 @@ Legend: **Exists** = shipped today, extend to parity with the reference set. **P
 | ---------------- | ------ | --------------- |
 | Accordion | P4 | `Accordion*` (Base UI). FAQ, fee breakdowns. |
 | Alert | Exists | `Notice`. Add `title` slot and optional icon. Keep `danger` = `role="alert"`. |
-| Alert Dialog | P3 | `AlertDialog*`. Priority: confirming transfers, deletions, irreversible actions. |
+| Alert Dialog | Shipped | `AlertDialog` (native). Focuses Cancel, danger confirm, no backdrop dismissal. Type-to-confirm goes in `children`. |
 | Aspect Ratio | Out | CSS `aspect-ratio` is enough. |
 | Attachment | Out | Chat/AI building block. |
 | Avatar | P1 | `Avatar` with initials fallback. |
 | Badge | Exists | `Badge`. Already has tones. Add `outline` variant only if a product asks. |
 | Breadcrumb | P1 | `Breadcrumb*`. Semantic `nav` + `aria-current`. |
 | Bubble | Out | Chat. |
-| Button | Exists | `Button`. Add `danger` variant, `size` (`sm`/`md`/`icon`), `loading` (with `aria-busy`, keeps width), `render` prop. |
+| Button | Exists | `Button`. `danger` variant shipped with AlertDialog. Still to add: `size` (`sm`/`md`/`icon`), `loading` (with `aria-busy`, keeps width), `render` prop. |
 | Button Group | P1 | `ButtonGroup`. CSS-only grouping with `role="group"`. |
 | Calendar | P5 | `Calendar` on `react-day-picker` 10. See §5. |
 | Card | Exists | `Panel` covers it. Add `PanelFooter` slot rather than a second `Card` component. |
@@ -52,9 +52,9 @@ Legend: **Exists** = shipped today, extend to parity with the reference set. **P
 | Context Menu | P3 | `ContextMenu*`. Low priority: right-click is invisible on touch. Always pair with a visible menu. |
 | Data Table | P5 (recipe) | See D8. |
 | Date Picker | P5 | `DatePicker` = `Popover` + `Calendar` + typed input fallback. |
-| Dialog | P3 | `Dialog*`. |
+| Dialog | Shipped | `Dialog` (native `<dialog>`, controlled `open`/`onOpenChange`). Flat props rather than the compound `DialogTrigger`/`DialogContent` of D3: the trigger is the app's own button. |
 | Direction | Out | Danish/English are LTR. Use logical CSS properties anyway so RTL stays cheap. |
-| Drawer | P3 | `Drawer*` (Base UI drawer if available at implementation time, else `Sheet` with bottom side). Mobile action sheets. Verify Base UI support before starting. |
+| Drawer | P3 (likely covered by `Sheet`) | `Drawer*` (Base UI drawer if available at implementation time, else `Sheet` with bottom side). Mobile action sheets. Verify Base UI support before starting. |
 | Dropdown Menu | Exists | `Menu` today (hand-rolled, items array). Add `DropdownMenu*` on Base UI; reimplement `Menu` as a thin wrapper so its API does not break. |
 | Empty | Exists | `EmptyState`. Add media/action slots. |
 | Field | Exists | `Field`. Add `FieldSet`/`FieldLegend` for grouped radios/checkboxes. |
@@ -80,16 +80,16 @@ Legend: **Exists** = shipped today, extend to parity with the reference set. **P
 | Scroll Area | P4 | `ScrollArea`. Use only for contained regions (tables); never the page. |
 | Select | P2 | `SelectMenu*` (Base UI custom select). Name differs to avoid clashing with today's native `Select`. Use native by default. |
 | Separator | P1 | `Separator`. |
-| Sheet | P3 | `Sheet*` (Base UI Dialog with side placement). Safe-area padding. |
+| Sheet | Shipped | `Sheet`: `Dialog` with `placement` bottom/start/end, safe-area padding. Distinct from any A4/document "sheet" in consumer apps. |
 | Sidebar | Out | App shell / navigation (AGENTS.md). |
-| Skeleton | P1 | `Skeleton`. Width hints so figures do not shift on load. Respects reduced motion. |
+| Skeleton | Exists (0.7.0) | `Skeleton`. Width hints so figures do not shift on load. Respects reduced motion. |
 | Slider | P2 | `Slider` (Base UI). `aria-valuetext` takes a pre-formatted string from the app. |
 | Spinner | P1 | `Spinner`. `role="status"` with visually hidden label. |
 | Switch | P2 | `Switch` (Base UI). Settings only; not for actions that move money. |
-| Table | P1 | `Table*`. Highest-value P1 item. See §5. |
+| Table | Exists (0.7.0) | `Table*`. See §5. |
 | Tabs | P4 | `Tabs*` (Base UI). |
 | Textarea | Exists | `Textarea`. |
-| Toast | P3 | `Toast*` (Base UI Toast). See §5. |
+| Toast | Exists (0.7.0) | `Toast`, `ToastRegion`, controlled and hand-built (not Base UI). See §5. |
 | Toggle | P2 | `Toggle` (Base UI). |
 | Toggle Group | P2 | `ToggleGroup` (Base UI). Period pickers (1D/1M/1Y). |
 | Tooltip | P3 | `Tooltip*`. Supplementary only; must work on keyboard focus. |
@@ -98,7 +98,7 @@ Legend: **Exists** = shipped today, extend to parity with the reference set. **P
 
 Also out: all 21 "AI Elements" (a separate group of chat/AI pieces, not core components).
 
-Count: 12 Exists + 38 planned (P1–P5) + 16 Out = 66.
+Count at 2026-11-08: 12 Exists + 38 planned (P1–P5) + 16 Out = 66. Since then Skeleton, Toast, Table, Dialog, Alert Dialog and Sheet moved from planned to shipped (Drawer is probably absorbed by Sheet).
 
 ## 4. Phase 0: groundwork (blocks everything else)
 
@@ -180,6 +180,28 @@ Each phase is one or more PRs and one **minor** release (0.x). Every release nee
 
 Order inside phases follows consumer demand. If Portare or Investor need a component sooner, pull it forward; Phase 0 is the only hard prerequisite, and Phase 3 needs Phase 2's dependency.
 
+## 6a. Consumer evidence (2026-11-21)
+
+Source: the maintainer's read of the consumer repos' component folders; **not re-verified by the agent that wrote this section**, so check the cited files before porting. Only components hand-built in at least two apps, or generic and stable, are listed. The order below is the proposed build order; the Dialog/Sheet/AlertDialog row has shipped.
+
+| Tier | Component | Already hand-built in | Notes |
+| ---- | --------- | --------------------- | ----- |
+| 1 | Dialog, Sheet, AlertDialog | Family Meals `BottomSheet`, `InfoPopover`, `SubscribeCalloutModal`; sure `DS/dialog` | **Shipped**, native `<dialog>` (ADR 0001). |
+| 1 | Tabs (with panels, scrollable variant) | Family Meals `Tabs`, sure `DS/tabs` | Support controlled mode without panels (Family Meals swaps content itself). |
+| 1 | SegmentedControl / ToggleGroup | Family Meals `WeekViewToggle`, nuance `ThemeSetting`, sure `segmented_control` | Single-select pill group, not a tab widget. Pick one semantic model (radiogroup for single-select, `aria-pressed` for toggles) and document why. |
+| 1 | Checkbox, Radio, Switch (+ FieldSet) | 12+ raw checkboxes in Family Meals, radios in nuance | Real `<input>` underneath, 44px hit area. Switch for settings only. |
+| 1 | ThemeSwitch (controlled, presentational) | cv `ThemeSwitch`, Sovnguiden `theme-toggle`, Family Meals `ThemePicker`, nuance `ThemeSetting` | Not in the original plan. Persistence and the no-flash script are user state (AGENTS.md rule 7): documented recipe in ADOPTION.md, not exported. Check each consumer's `data-fds-mode` approach first. |
+| 1 | Accordion / Collapsible | Family Meals `Accordion` (`<details>`), sure `DS/disclosure` | Keep the `<details>` base (works without JS, server-compatible). |
+| 2 | Item / list row | sure `action_row`/`detail_row`/`review_row`; Family Meals `RecipeListItem`, `PastDayRow` | P1 in this plan. |
+| 2 | Image with loading state | Family Meals `Photo` | Check overlap with `Avatar` first. |
+| 2 | Progress | Family Meals `RouteProgress` (bar only), sure `progress_ring` | `role="progressbar"`, separate from `Meter`. Router coupling stays out. |
+| 2 | Popover / Tooltip | Family Meals `InfoPopover` (a sheet by choice), sure `DS/popover` | Only on request; needs the anchoring decision (see D1). |
+| 2 | Slider | AI-LEVEL `PredictionSlider` (17 lines) | One consumer: skip until a second asks. |
+| 2 | `render` prop on `Button` | Family Meals `LinkButton`/`IconLink`, cv `LanguageSwitch` | Implements D4 without a router dependency. |
+| 2 | `fds-rise` reveal utility | Family Meals `.animate-rise` | Optional, CSS only. |
+
+Not worth sharing: domain components (product cards, comparison/offer tables, consent banners, WeekGrid, CookMode, NutritionPanel, RadarChart, BarRow, AreaMark), brand compositions (Nuance `Hero`, CV `ProfileHeader`, CV's A4 `Sheet`), app shell and routing (BottomNav, TopNav, Toolbar, BackLink, RouteProgress wiring), and anything already covered by an export (Tag/Badge -> `Badge`; TextField -> `Field`+`Input`; Card -> `Panel`; skeletons -> `Skeleton`). `3lay` (SwiftUI) and the Rails `sure` DS are behavioural references only. Sovnguiden/SmaatogGodt duplication is a template problem. No icon set is added here: components accept icon `ReactNode`s (open question 5).
+
 ## 7. Risks
 
 - **Dependency weight**: Base UI adds to every consumer's bundle. Mitigate with per-entry build and `sideEffects` so unused components drop out. Add a size check (e.g. `size-limit`) in Phase 0.
@@ -190,7 +212,10 @@ Order inside phases follows consumer demand. If Portare or Investor need a compo
 
 ## 8. Open questions
 
-1. Which components do Portare and Investor need first? That should reorder P1–P3.
+1. ~~Which components do Portare and Investor need first?~~ Answered by section 6a: the apps building these by hand today are Family Meals, nuance, cv, Sovnguiden and sure, not only Portare and Investor. The order in 6a replaces the P1–P3 order for the components it lists. Separator, Spinner, Avatar, Breadcrumb, Pagination, ButtonGroup, InputGroup, Kbd, Label and Combobox/SelectMenu show no consumer evidence either way: do not pull them forward without a real request.
 2. Is `@layer fds` (D6) acceptable now, while there are no published consumers? It gets more expensive after 1.0.
 3. Drop React 18 from peers before Phase 3? Simplifies refs; depends on Funder/Portare/Investor versions.
 4. Should the showcase move to a proper docs site (Storybook or Ladle) once there are 40+ components, or stay a single static page?
+5. Icons: Family Meals, nuance, Sovnguiden and cv each ship their own icon set. Add one here (weight, brand choice) or keep accepting `ReactNode` icons? Default: keep accepting `ReactNode`s.
+6. Which two apps want Popover, Tooltip or Slider badly enough to justify them (and settle the anchoring approach)?
+7. Pin `@scttlnd/ui` to one version across consumers first? As of 2026-11-21 AI-LEVEL is pinned to 0.7.0, cv uses `^0.8.0`; Family Meals, nuance and the Next.js apps do not depend on it yet (unverified by the agent).

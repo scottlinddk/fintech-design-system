@@ -20,6 +20,7 @@ it("showcases the real primitives rather than duplicate component markup", () =>
     "menu",
     "skeleton",
     "table",
+    "button--danger",
   ]) {
     expect(html).toContain(`fds-${name}`);
   }
