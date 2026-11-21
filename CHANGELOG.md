@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.9.0
+
+### Minor Changes
+
+- [#38](https://github.com/scottlinddk/ui/pull/38) [`81f884c`](https://github.com/scottlinddk/ui/commit/81f884c5e3447cb14994e8f10407b2bef2ed2bf8) Thanks [@scottlinddk](https://github.com/scottlinddk)! - Add three opt-in themes in light and dark (`data-fds-mode="dark"`): `@scttlnd/ui/themes/boligdata.css` (copper and ink on sage-neutral surfaces), `@scttlnd/ui/themes/tredjekort.css` (survey-blue drafting palette on paper) and `@scttlnd/ui/themes/orbit.css` (the Ember preset with pill buttons and large radii). Each exposes `--fds-brand-*` fields and font stacks. Existing themes are unchanged.
+
+- [#40](https://github.com/scottlinddk/ui/pull/40) [`7249132`](https://github.com/scottlinddk/ui/commit/7249132882460427e0a57c07547272ebc1059718) Thanks [@scottlinddk](https://github.com/scottlinddk)! - VISIBLE CHANGE: add `Dialog`, `Sheet` and `AlertDialog`, built on the native `<dialog>` element with no new dependency. They are controlled (`open` / `onOpenChange`), return focus to the trigger, close on Escape and backdrop press, lock page scroll without JavaScript, support nested sheets, and animate in and out (removed under reduced motion). `AlertDialog` focuses Cancel, not the confirm button, and ignores backdrop presses. `Button` gains a `danger` variant using `--fds-danger` / `--fds-on-danger`. Existing exports and tokens are unchanged; no migration is needed. The new `Dialog` module is a client module (`"use client"`).
+
 ## 0.8.0
 
 ### Minor Changes
