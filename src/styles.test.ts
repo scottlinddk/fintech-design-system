@@ -11,7 +11,9 @@ const expand = (file: string): string =>
     // Grain, motion tokens, newer components, forced-colors rules and the Studio default are deliberate
     // additions to the pre-split baseline, verified by their own tests.
     .replace(/@import "(.+?)";/g, (_, child: string) =>
-      /(?:grain|motion|skeleton|toast|table|a11y)\.css$|themes\/studio\.css$/.test(child)
+      /(?:grain|motion|skeleton|toast|table|button-danger|dialog|a11y)\.css$|themes\/studio\.css$/.test(
+        child,
+      )
         ? ""
         : expand(resolve(dirname(file), child)),
     );

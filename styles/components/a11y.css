@@ -7,7 +7,8 @@
     .fds-badge,
     .fds-notice,
     .fds-metric,
-    .fds-panel {
+    .fds-panel,
+    .fds-dialog {
       border-color: CanvasText;
     }
     .fds-notice {
@@ -47,6 +48,16 @@
       border-color: GrayText;
       color: GrayText;
       opacity: 1;
+    }
+    .fds-button--danger {
+      background: ButtonFace;
+      color: ButtonText;
+      border-style: double;
+      border-width: 3px;
+    }
+    .fds-dialog::backdrop {
+      background: Canvas;
+      opacity: 0.6;
     }
     .fds-button:focus-visible,
     .fds-control:focus-visible,

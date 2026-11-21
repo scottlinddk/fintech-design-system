@@ -1,7 +1,9 @@
 import { useState, type ReactNode } from "react";
 import {
+  AlertDialog,
   Badge,
   Button,
+  Dialog,
   DistributionList,
   EmptyState,
   Field,
@@ -14,6 +16,7 @@ import {
   Panel,
   SegmentedMeter,
   Select,
+  Sheet,
   Skeleton,
   SkeletonGroup,
   SkeletonText,
@@ -105,6 +108,7 @@ export function Showcase({
   const [undoToast, setUndoToast] = useState(false);
   const [sortDescending, setSortDescending] = useState(true);
   const [preferencesSaved, setPreferencesSaved] = useState(false);
+  const [overlay, setOverlay] = useState<"dialog" | "sheet" | "filters" | "alert" | null>(null);
 
   async function copyCommand() {
     try {
@@ -606,6 +610,23 @@ export function Showcase({
               </div>
             </Panel>
             <Panel
+              title="Dialogs & sheets"
+              eyebrow="07 / OVERLAYS"
+              help="Native dialogs: focus returns, background is inert, Escape closes."
+            >
+              <div className="showcase__stack">
+                <Button variant="secondary" onClick={() => setOverlay("dialog")}>
+                  Open dialog
+                </Button>
+                <Button variant="secondary" onClick={() => setOverlay("sheet")}>
+                  Open bottom sheet
+                </Button>
+                <Button variant="danger" onClick={() => setOverlay("alert")}>
+                  Delete account
+                </Button>
+              </div>
+            </Panel>
+            <Panel
               className="empty-example"
               title="Room for what's next"
               eyebrow="05 / EMPTY STATES"
@@ -736,6 +757,53 @@ export function Showcase({
           </div>
         </section>
       </main>
+      <Dialog
+        description="Changes apply to this account only."
+        footer={
+          <>
+            <Button variant="secondary" onClick={() => setOverlay(null)}>
+              Cancel
+            </Button>
+            <Button onClick={() => setOverlay(null)}>Save</Button>
+          </>
+        }
+        onOpenChange={(next) => setOverlay(next ? "dialog" : null)}
+        open={overlay === "dialog"}
+        title="Edit account"
+      >
+        <Field label="Account name">
+          {(control) => <Input {...control} defaultValue="Savings" />}
+        </Field>
+      </Dialog>
+      <Sheet
+        footer={
+          <Button variant="secondary" onClick={() => setOverlay("filters")}>
+            More filters
+          </Button>
+        }
+        onOpenChange={(next) => setOverlay(next ? "sheet" : null)}
+        open={overlay === "sheet" || overlay === "filters"}
+        title="Filters"
+      >
+        <p>Pick what to show. This sheet is safe-area aware on phones.</p>
+      </Sheet>
+      <Sheet
+        onOpenChange={(next) => setOverlay(next ? "filters" : "sheet")}
+        open={overlay === "filters"}
+        placement="end"
+        title="More filters"
+      >
+        <p>A nested side panel. Escape closes only this one.</p>
+      </Sheet>
+      <AlertDialog
+        confirmLabel="Delete account"
+        description="This removes the account and cannot be undone."
+        onConfirm={() => setOverlay(null)}
+        onOpenChange={(next) => setOverlay(next ? "alert" : null)}
+        open={overlay === "alert"}
+        title="Delete account Savings?"
+        tone="danger"
+      />
       <ToastRegion>
         {undoToast ? (
           <Toast
