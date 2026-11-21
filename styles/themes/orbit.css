@@ -1,0 +1,119 @@
+@layer fds {
+  /*
+   * Orbit: the default "Ember" preset of scottlinddk/orbit (apps/web/src/theme/presets.ts): warm paper, black
+   * pill actions, borderless 28px-radius cards and an ember gradient hero. Light ("Ember") is the default;
+   * add data-fds-mode="dark" for "Ember dark" (warm near-black, light pills). Import after styles.css.
+   *
+   * Orbit lets each household edit its theme at runtime (colours, fonts, radius, density), so this is the
+   * shipped default, not every Orbit theme. Orbit's other presets and user themes stay in Orbit. It defines
+   * no chart colours, so chart-* are additions chosen to meet WCAG AA graphical contrast on these surfaces.
+   */
+  :root,
+  [data-fds-theme="orbit"] {
+    color-scheme: light;
+    --fds-panel-background-image: none;
+    --fds-panel-grain-content: none;
+    --fds-background: #f4f0ee;
+    --fds-foreground: #0e0e0e;
+    --fds-muted: #625d59;
+    --fds-muted-strong: #3a3633;
+    --fds-line: #e4ddd9;
+    --fds-line-soft: #eee8e5;
+    --fds-panel: #fafafa;
+    --fds-panel-raised: #fff;
+    --fds-panel-soft: #f9f6f4;
+    --fds-accent: #0e0e0e;
+    --fds-accent-strong: #2a2a2a;
+    --fds-on-accent: #fff;
+    --fds-focus-ring: #0e0e0e;
+    --fds-success: #0b7130;
+    --fds-warn: #a54200;
+    --fds-danger: #be1e0d;
+    --fds-on-danger: #fff;
+    --fds-on-success: #fff;
+    --fds-chart-1: #c2410c;
+    --fds-chart-2: #0b3a6e;
+    --fds-chart-3: #0b7632;
+    --fds-chart-4: #7a3f6b;
+    --fds-chart-5: #8a6a00;
+    --fds-chart-6: #0e7490;
+    --fds-chart-grid: #7d7570;
+    /* Orbit's card radius is 28px; small and medium steps keep inputs and chips proportionate. */
+    --fds-radius-sm: 0.75rem;
+    --fds-radius-md: 1.25rem;
+    --fds-radius-lg: 1.75rem;
+    --fds-font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --fds-shadow-card: none;
+    --fds-shadow-popover: 0 2px 4px rgb(0 0 0 / 0.08), 0 14px 36px rgb(0 0 0 / 0.14);
+    --fds-shadow-dialog: 0 24px 64px rgb(0 0 0 / 0.24);
+    --fds-overlay: rgb(14 14 14 / 0.5);
+    /* The ember hero gradient. Brand fields are decorative; use their paired foregrounds for text. */
+    --fds-brand-ember-deep: #5a0600;
+    --fds-brand-ember: #c2410c;
+    --fds-brand-ember-bright: #e0662b;
+    --fds-brand-ember-gradient: linear-gradient(
+      180deg,
+      var(--fds-brand-ember-deep) 0%,
+      var(--fds-brand-ember) 58%,
+      var(--fds-brand-ember-bright) 100%
+    );
+    --fds-brand-ink: #0e0e0e;
+    --fds-brand-foreground: #fff;
+    --fds-brand-muted: #fff4ee;
+  }
+
+  :root:where([data-fds-mode="dark"]),
+  [data-fds-theme="orbit"][data-fds-mode="dark"] {
+    color-scheme: dark;
+    --fds-background: #130e0c;
+    --fds-foreground: #f6efec;
+    --fds-muted: #b9aca6;
+    --fds-muted-strong: #d8ceca;
+    --fds-line: #3b2f2a;
+    --fds-line-soft: #2b221e;
+    --fds-panel: #1c1512;
+    --fds-panel-raised: #281f1b;
+    --fds-panel-soft: #171110;
+    --fds-accent: #f6efec;
+    --fds-accent-strong: #fff;
+    --fds-on-accent: #130e0c;
+    --fds-focus-ring: #f6efec;
+    --fds-success: #62d58c;
+    --fds-warn: #f4a259;
+    --fds-danger: #ff8f80;
+    --fds-on-danger: #130e0c;
+    --fds-on-success: #130e0c;
+    --fds-chart-1: #f08a4b;
+    --fds-chart-2: #8fb0ee;
+    --fds-chart-3: #62d58c;
+    --fds-chart-4: #d9a0c8;
+    --fds-chart-5: #e8c15a;
+    --fds-chart-6: #5ccbe0;
+    --fds-chart-grid: #8c807a;
+    --fds-shadow-popover: 0 12px 32px rgb(0 0 0 / 0.55);
+    --fds-shadow-dialog: 0 24px 64px rgb(0 0 0 / 0.65);
+    --fds-overlay: rgb(0 0 0 / 0.65);
+    --fds-brand-ember-deep: #4a0500;
+    --fds-brand-ember: #b23a09;
+    --fds-brand-ember-bright: #cf5a1c;
+  }
+
+  /*
+   * Component shapes. Orbit uses pill buttons and chips and borderless, very round cards separated from the
+   * page by surface colour alone. Controls keep their hairline border so inputs stay identifiable. These
+   * rules apply wherever this theme is imported, or inside [data-fds-theme="orbit"].
+   */
+  :is(:root, [data-fds-theme="orbit"]) .fds-button,
+  :is(:root, [data-fds-theme="orbit"]) .fds-badge {
+    border-radius: 999px;
+  }
+  :is(:root, [data-fds-theme="orbit"]) .fds-panel {
+    border-radius: var(--fds-radius-lg);
+    border-color: transparent;
+    box-shadow: var(--fds-shadow-card);
+  }
+  :is(:root, [data-fds-theme="orbit"]) .fds-metric,
+  :is(:root, [data-fds-theme="orbit"]) .fds-notice {
+    border-radius: var(--fds-radius-md);
+  }
+}

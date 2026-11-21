@@ -87,6 +87,9 @@ function SectionHeading({
   );
 }
 
+/** Themes with a light and a dark palette, switched by data-fds-mode. */
+const modeThemes = ["studio", "classic", "nuance", "caffeine", "boligdata", "tredjekort", "orbit"];
+
 export function Showcase({
   theme = "studio",
   initialMode = "light",
@@ -124,11 +127,7 @@ export function Showcase({
   return (
     <div
       className={`site-shell${theme === "studio" ? " site-shell--studio" : ""}${theme === "classic" ? " site-shell--classic" : ""}${theme === "nuance" ? " site-shell--nuance" : ""}${theme === "caffeine" ? " site-shell--caffeine" : ""}`}
-      data-fds-grain={
-        theme === "studio" || theme === "classic" || theme === "nuance" || theme === "caffeine"
-          ? "off"
-          : undefined
-      }
+      data-fds-grain={modeThemes.includes(theme) ? "off" : undefined}
     >
       <a className="skip-link" href="#main">
         Skip to content
@@ -165,14 +164,14 @@ export function Showcase({
             <option value="classic">Classic</option>
             <option value="nuance">Nuance</option>
             <option value="caffeine">Caffeine</option>
+            <option value="boligdata">BoligData</option>
+            <option value="tredjekort">Tredjekort</option>
+            <option value="orbit">Orbit</option>
             <option value="funder">Funder</option>
             <option value="investor">Investor</option>
             <option value="portare">Portare (proposed light)</option>
           </Select>
-          {theme === "studio" ||
-          theme === "classic" ||
-          theme === "nuance" ||
-          theme === "caffeine" ? (
+          {modeThemes.includes(theme) ? (
             <Button
               variant="ghost"
               className="icon-button"
