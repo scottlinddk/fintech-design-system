@@ -1881,3 +1881,63 @@ button:focus-visible,
   background: #2a1f1a;
   color: #f8eee4;
 }
+
+/* Caffeine (CV): a flat espresso hero with a serif name, cream actions and a mocha install band. */
+.site-shell--caffeine .hero {
+  padding-block: 72px 88px;
+  color: var(--fds-brand-foreground);
+  background: var(--fds-brand-espresso);
+}
+.site-shell--caffeine .hero h1,
+.site-shell--caffeine .hero h1 > span {
+  font-family: var(--fds-font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.site-shell--caffeine .hero h1 > span {
+  font-style: italic;
+  color: var(--fds-brand-cream);
+}
+.site-shell--caffeine .release-label,
+.site-shell--caffeine .hero__description,
+.site-shell--caffeine .hero__meta,
+.site-shell--caffeine .hero__meta > [aria-hidden] {
+  color: var(--fds-brand-muted);
+}
+.site-shell--caffeine .hero .status-dot {
+  background: var(--fds-brand-cream);
+}
+.site-shell--caffeine .hero .action-link {
+  --fds-focus-ring: var(--fds-brand-cream);
+  color: var(--fds-brand-foreground);
+  border-color: var(--fds-brand-muted);
+  background: transparent;
+}
+.site-shell--caffeine .hero .action-link--primary {
+  color: var(--fds-brand-ink);
+  border-color: transparent;
+  background: var(--fds-brand-cream);
+}
+.site-shell--caffeine .hero .action-link--primary:hover {
+  background: var(--fds-brand-peach);
+}
+.site-shell--caffeine .getting-started {
+  --fds-foreground: var(--fds-brand-foreground);
+  --fds-muted: var(--fds-brand-muted);
+  --fds-line: var(--fds-brand-line);
+  --fds-panel-soft: var(--fds-brand-mocha);
+  --fds-focus-ring: var(--fds-brand-cream);
+  color: var(--fds-brand-foreground);
+  background: var(--fds-brand-mocha-card);
+}
+.site-shell--caffeine .getting-started .text-link {
+  color: var(--fds-brand-cream);
+}
+@media (forced-colors: active) {
+  .site-shell--caffeine .hero,
+  .site-shell--caffeine .getting-started {
+    background: Canvas;
+    color: CanvasText;
+  }
+}

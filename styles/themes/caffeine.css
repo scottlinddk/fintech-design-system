@@ -1,0 +1,107 @@
+@layer fds {
+  /*
+   * Caffeine: the editorial CV palette of scottlinddk/cv (tweakcn "Caffeine"). Neutral greys with an
+   * espresso-brown primary and a cream secondary, flat hairline cards, Geist body text, Geist Mono labels
+   * and an Instrument Serif display voice. Light is the default; add data-fds-mode="dark" for the dark
+   * palette (cream actions on near-black). Import after styles.css.
+   *
+   * Source: cv's design-system/tokens/colors.css. cv defines no success, warning, danger or chart colours,
+   * so those are additions chosen to meet WCAG AA against the Caffeine surfaces.
+   */
+  :root,
+  [data-fds-theme="caffeine"] {
+    color-scheme: light;
+    --fds-panel-background-image: none;
+    --fds-panel-grain-content: none;
+    --fds-background: #f9f9f9;
+    --fds-foreground: #202020;
+    --fds-muted: #646464;
+    --fds-muted-strong: #3b3b3b;
+    --fds-line: #d8d8d8;
+    --fds-line-soft: #efefef;
+    --fds-panel: #fff;
+    --fds-panel-raised: #efefef;
+    --fds-panel-soft: #fcfcfc;
+    --fds-accent: #644a40;
+    --fds-accent-strong: #582d1d;
+    --fds-on-accent: #fff;
+    --fds-focus-ring: #644a40;
+    --fds-success: #2f6a3b;
+    --fds-warn: #8a5300;
+    --fds-danger: #a62b2b;
+    --fds-on-danger: #fff;
+    --fds-on-success: #fff;
+    --fds-chart-1: #644a40;
+    --fds-chart-2: #b84a1f;
+    --fds-chart-3: #8a6a00;
+    --fds-chart-4: #7a3f6b;
+    --fds-chart-5: #3d7a2e;
+    --fds-chart-6: #3a5fa0;
+    --fds-chart-grid: #767676;
+    /* cv radii: 6px small, 16px medium, 24px large. */
+    --fds-radius-sm: 0.375rem;
+    --fds-radius-md: 1rem;
+    --fds-radius-lg: 1.5rem;
+    --fds-font-sans: "Geist", "Helvetica Neue", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --fds-font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    /* Display voice for names and headings; components do not use it, apps opt in. */
+    --fds-font-display: "Instrument Serif", "Times New Roman", serif;
+    --fds-shadow-card: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px rgb(0 0 0 / 0.07);
+    --fds-shadow-popover: 0 8px 24px rgb(0 0 0 / 0.12);
+    --fds-shadow-dialog: 0 24px 64px rgb(0 0 0 / 0.22);
+    --fds-overlay: rgb(32 32 32 / 0.5);
+    /* Brand fields are decorative; text and actions use their paired foregrounds. */
+    --fds-brand-espresso: #644a40;
+    --fds-brand-roast: #582d1d;
+    --fds-brand-mocha: #393028;
+    --fds-brand-mocha-card: #4a3d33;
+    --fds-brand-cream: #ffe0c2;
+    --fds-brand-peach: #ffdfb5;
+    --fds-brand-ink: #081a1b;
+    --fds-brand-foreground: #fff;
+    --fds-brand-muted: #f0e4d6;
+    --fds-brand-line: #a8927c;
+  }
+
+  :root:where([data-fds-mode="dark"]),
+  [data-fds-theme="caffeine"][data-fds-mode="dark"] {
+    color-scheme: dark;
+    --fds-background: #111;
+    --fds-foreground: #eee;
+    --fds-muted: #b4b4b4;
+    --fds-muted-strong: #d2d2d2;
+    --fds-line: #393028;
+    --fds-line-soft: #2a241f;
+    --fds-panel: #191919;
+    --fds-panel-raised: #222;
+    --fds-panel-soft: #151515;
+    --fds-accent: #ffe0c2;
+    --fds-accent-strong: #ffdfb5;
+    --fds-on-accent: #081a1b;
+    --fds-focus-ring: #ffe0c2;
+    --fds-success: #8fd19e;
+    --fds-warn: #f2b652;
+    --fds-danger: #ff9c8f;
+    --fds-on-danger: #111;
+    --fds-on-success: #111;
+    --fds-chart-1: #ffe0c2;
+    --fds-chart-2: #f2a878;
+    --fds-chart-3: #ffd966;
+    --fds-chart-4: #d9a0c8;
+    --fds-chart-5: #a5d68a;
+    --fds-chart-6: #8fb0ee;
+    --fds-chart-grid: #8c8c8c;
+    --fds-shadow-card: none;
+    --fds-shadow-popover: 0 12px 32px rgb(0 0 0 / 0.5);
+    --fds-shadow-dialog: 0 24px 64px rgb(0 0 0 / 0.6);
+    --fds-overlay: rgb(0 0 0 / 0.6);
+  }
+
+  /*
+   * Component shapes. cv cards are flat hairline surfaces with a faint lift in light mode and none in dark.
+   * These rules apply wherever this theme is imported, or inside [data-fds-theme="caffeine"].
+   */
+  :is(:root, [data-fds-theme="caffeine"]) .fds-panel {
+    box-shadow: var(--fds-shadow-card);
+  }
+}

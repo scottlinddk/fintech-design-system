@@ -1,6 +1,6 @@
 # Scttlnd UI
 
-Shared design tokens and primitive components for multiple products and themes (Funder, Portare, Investor, Studio, Classic, Nuance). Each brand and product remains independent.
+Shared design tokens and primitive components for multiple products and themes (Funder, Portare, Investor, Studio, Classic, Nuance, Caffeine). Each brand and product remains independent.
 
 ## Develop with Vite+
 
@@ -37,19 +37,19 @@ The component showcase (`npm run showcase:dev` locally, `npm run showcase:build`
 
 ## Components
 
-| Component                                     | Purpose                                                                 | Origin                                                           |
-| --------------------------------------------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `Button`                                      | Primary / secondary / ghost actions                                     | Shared                                                           |
-| `Panel`                                       | Titled surface with eyebrow, help text and action; labelled `<section>` | Funder `Panel`, Investor `.panel`                                |
-| `Metric`, `KeyValue`                          | Label/value tiles for **pre-formatted** figures                         | Funder `Metric` / `KeyValue`, Investor `.metrics`                |
-| `Badge`                                       | Status chip (`neutral`, `accent`, `success`, `warn`, `danger`)          | Funder `Pill`, Investor `.status-badge`                          |
-| `Notice`, `EmptyState`                        | Inline messages (`danger` = `role="alert"`) and empty placeholders      | Investor `.notice`, `.empty-state`                               |
-| `Field`, `Input`, `Select`, `Textarea`        | Label/hint/error wiring with 44px touch targets and 16px mobile font    | Investor `.form-grid`/`.field-hint`, Funder form sizing standard |
-| `Meter`, `SegmentedMeter`, `DistributionList` | Bounded bars, discrete scale, ranked share bars (`role="meter"`)        | Funder `EvidenceBar`, `RiskBars`, `ExposureList`                 |
-| `Menu`                                        | Action menu with Escape/arrow-key support and focus return              | Funder `Menu`                                                    |
-| `Skeleton`, `SkeletonText`, `SkeletonGroup`   | Decorative loading placeholders; the group announces "Loading" (`role="status"`, `aria-busy`) | Shared |
-| `Toast`, `ToastRegion`                        | Controlled transient message with optional Undo; pauses on hover/focus; danger stays until dismissed | Shared |
-| `Table`, `TableHead`, `TableBody`, `TableRow`, `TableCell`, `TableHeaderCell` | Semantic table: keyboard-scrollable region, sticky header, 48px/32px rows, numeric columns, `aria-sort` | Shared |
+| Component                                                                     | Purpose                                                                                                 | Origin                                                           |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `Button`                                                                      | Primary / secondary / ghost actions                                                                     | Shared                                                           |
+| `Panel`                                                                       | Titled surface with eyebrow, help text and action; labelled `<section>`                                 | Funder `Panel`, Investor `.panel`                                |
+| `Metric`, `KeyValue`                                                          | Label/value tiles for **pre-formatted** figures                                                         | Funder `Metric` / `KeyValue`, Investor `.metrics`                |
+| `Badge`                                                                       | Status chip (`neutral`, `accent`, `success`, `warn`, `danger`)                                          | Funder `Pill`, Investor `.status-badge`                          |
+| `Notice`, `EmptyState`                                                        | Inline messages (`danger` = `role="alert"`) and empty placeholders                                      | Investor `.notice`, `.empty-state`                               |
+| `Field`, `Input`, `Select`, `Textarea`                                        | Label/hint/error wiring with 44px touch targets and 16px mobile font                                    | Investor `.form-grid`/`.field-hint`, Funder form sizing standard |
+| `Meter`, `SegmentedMeter`, `DistributionList`                                 | Bounded bars, discrete scale, ranked share bars (`role="meter"`)                                        | Funder `EvidenceBar`, `RiskBars`, `ExposureList`                 |
+| `Menu`                                                                        | Action menu with Escape/arrow-key support and focus return                                              | Funder `Menu`                                                    |
+| `Skeleton`, `SkeletonText`, `SkeletonGroup`                                   | Decorative loading placeholders; the group announces "Loading" (`role="status"`, `aria-busy`)           | Shared                                                           |
+| `Toast`, `ToastRegion`                                                        | Controlled transient message with optional Undo; pauses on hover/focus; danger stays until dismissed    | Shared                                                           |
+| `Table`, `TableHead`, `TableBody`, `TableRow`, `TableCell`, `TableHeaderCell` | Semantic table: keyboard-scrollable region, sticky header, 48px/32px rows, numeric columns, `aria-sort` | Shared                                                           |
 
 Components render only `--fds-*` styled markup. Formatting, locale, currency and calculations stay in the consuming app (pass pre-formatted strings, or `formatValue`). The published modules for `Button`, `Menu`, `Field` (including its native controls), and `Panel` carry `"use client"`. The root barrel and static primitives such as `Badge` remain server-compatible. Event handlers, `Menu.items` callbacks and `Field.children` render functions still belong in a consumer client component because functions cannot cross the server/client boundary. See [Next.js verification](docs/verification/next-app-router.md).
 
@@ -98,6 +98,17 @@ import "@scttlnd/ui/themes/nuance.css";
 ```
 
 Light is the default; add `data-fds-mode="dark"` to the root for Aften. Values come from nuance's `src/styles/index.css`, and its dark focus ring is the sun yellow. Like nuance, the accent is its ink "action": the primary button is a dark pill in Solskin and a cream pill in Aften, while teal stays the brand and focus colour (and chart 1). Besides tokens, the theme ships a few component rules, active wherever it is imported or inside `[data-fds-theme="nuance"]`: pill buttons and badges, and frosted, 32px-radius panels with a soft warm glow (`--fds-glass-shadow`). `--fds-brand-wash` is the rose and peach background glow and `--fds-brand-coral-gradient` the highlight card gradient; apply them to a page, hero or card yourself. The theme exposes `--fds-font-sans` (Figtree) and `--fds-font-display` (Fraunces); the package loads no fonts, so load them or the stacks fall back to system fonts (the showcase bundles both variable fonts under SIL OFL, as nuance does). `--fds-brand-*` teal, coral, sun and glow fields are decorative: use `--fds-brand-foreground` / `--fds-brand-muted` on teal, and `--fds-brand-ink` on coral, sun and cream. Contrast is tested in `src/nuance-theme.test.ts`. Try `?theme=nuance&mode=dark` in the showcase.
+
+## Caffeine theme
+
+Caffeine brings the editorial CV design system of [scottlinddk/cv](https://github.com/scottlinddk/cv) into the package: neutral greys with an espresso-brown primary (`#644a40`) and a cream secondary (`#ffe0c2`), flat hairline cards with a faint lift in light mode, and 6px / 16px / 24px radii. Import it after the base stylesheet:
+
+```tsx
+import "@scttlnd/ui/styles.css";
+import "@scttlnd/ui/themes/caffeine.css";
+```
+
+Light is the default; add `data-fds-mode="dark"` to the root for the dark palette (cream actions on near-black). cv follows the OS and `data-theme`; here the package convention `data-fds-mode` applies. Values come from cv's `design-system/tokens/colors.css`. cv defines no success, warning, danger or chart colours, so those are additions chosen for AA contrast and are not verified against cv itself. Print/A4 rules, the `--ds-*` token names and cv's components stay in cv; only the palette, radii, shadows and font stacks are themed. The theme exposes `--fds-font-sans` (Geist), `--fds-font-mono` (Geist Mono) and `--fds-font-display` (Instrument Serif); the package loads no fonts, so load them or the stacks fall back to system fonts (cv ships static weights because variable fonts break PDF text extraction). `--fds-brand-*` espresso, roast, mocha, cream and peach fields are decorative: use `--fds-brand-foreground` / `--fds-brand-muted` on espresso, roast and mocha, and `--fds-brand-ink` on cream and peach. Contrast is tested in `src/caffeine-theme.test.ts`. Try `?theme=caffeine&mode=dark` in the showcase.
 
 ## Choosing a product theme
 

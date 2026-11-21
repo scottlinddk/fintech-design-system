@@ -123,9 +123,11 @@ export function Showcase({
 
   return (
     <div
-      className={`site-shell${theme === "studio" ? " site-shell--studio" : ""}${theme === "classic" ? " site-shell--classic" : ""}${theme === "nuance" ? " site-shell--nuance" : ""}`}
+      className={`site-shell${theme === "studio" ? " site-shell--studio" : ""}${theme === "classic" ? " site-shell--classic" : ""}${theme === "nuance" ? " site-shell--nuance" : ""}${theme === "caffeine" ? " site-shell--caffeine" : ""}`}
       data-fds-grain={
-        theme === "studio" || theme === "classic" || theme === "nuance" ? "off" : undefined
+        theme === "studio" || theme === "classic" || theme === "nuance" || theme === "caffeine"
+          ? "off"
+          : undefined
       }
     >
       <a className="skip-link" href="#main">
@@ -162,11 +164,15 @@ export function Showcase({
             <option value="studio">Studio</option>
             <option value="classic">Classic</option>
             <option value="nuance">Nuance</option>
+            <option value="caffeine">Caffeine</option>
             <option value="funder">Funder</option>
             <option value="investor">Investor</option>
             <option value="portare">Portare (proposed light)</option>
           </Select>
-          {theme === "studio" || theme === "classic" || theme === "nuance" ? (
+          {theme === "studio" ||
+          theme === "classic" ||
+          theme === "nuance" ||
+          theme === "caffeine" ? (
             <Button
               variant="ghost"
               className="icon-button"
@@ -445,8 +451,15 @@ export function Showcase({
                 <Menu
                   ariaLabel="Example actions"
                   items={[
-                    { label: "View details", onSelect: () => setMessage("View details selected.") },
-                    { label: "Unavailable", disabled: true, onSelect: () => {} },
+                    {
+                      label: "View details",
+                      onSelect: () => setMessage("View details selected."),
+                    },
+                    {
+                      label: "Unavailable",
+                      disabled: true,
+                      onSelect: () => {},
+                    },
                     {
                       label: "Remove example",
                       tone: "danger",
@@ -729,7 +742,10 @@ export function Showcase({
           <Toast
             tone="success"
             title="View archived"
-            action={{ label: "Undo", onSelect: () => setMessage("Archive undone.") }}
+            action={{
+              label: "Undo",
+              onSelect: () => setMessage("Archive undone."),
+            }}
             onDismiss={() => setUndoToast(false)}
           />
         ) : null}

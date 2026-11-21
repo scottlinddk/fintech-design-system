@@ -6,7 +6,7 @@ const legacy: Record<string, Record<string, string>> = JSON.parse(
 );
 const require = createRequire(import.meta.url);
 
-for (const theme of ["studio", "classic", "nuance", "funder", "investor", "portare"]) {
+for (const theme of ["studio", "classic", "nuance", "caffeine", "funder", "investor", "portare"]) {
   test(`${theme}: theme, keyboard, axe, motion and screenshots`, async ({ page }, info) => {
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
@@ -23,9 +23,11 @@ for (const theme of ["studio", "classic", "nuance", "funder", "investor", "porta
           ? "rgb(242, 235, 219)"
           : theme === "nuance"
             ? "rgb(251, 245, 236)"
-            : theme === "portare"
-              ? "rgb(250, 251, 252)"
-              : "rgb(8, 9, 11)",
+            : theme === "caffeine"
+              ? "rgb(249, 249, 249)"
+              : theme === "portare"
+                ? "rgb(250, 251, 252)"
+                : "rgb(8, 9, 11)",
     );
     expect(await page.locator("link[rel=stylesheet][id=fds-theme]").count()).toBe(1);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
@@ -77,9 +79,9 @@ for (const theme of ["studio", "classic", "nuance", "funder", "investor", "porta
       const axe = (
         window as unknown as {
           axe: {
-            run: (
-              node: Document,
-            ) => Promise<{ violations: { id: string; nodes: { target: string[] }[] }[] }>;
+            run: (node: Document) => Promise<{
+              violations: { id: string; nodes: { target: string[] }[] }[];
+            }>;
           };
         }
       ).axe;
@@ -136,7 +138,9 @@ for (const theme of ["funder", "investor", "portare"]) {
     await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
     const violations = await page.evaluate(async () => {
       const axe = (
-        window as unknown as { axe: { run: (n: Document) => Promise<{ violations: unknown[] }> } }
+        window as unknown as {
+          axe: { run: (n: Document) => Promise<{ violations: unknown[] }> };
+        }
       ).axe;
       return (await axe.run(document)).violations;
     });
@@ -153,7 +157,9 @@ test("grain is on by default for panels and data-fds-grain=off opts out (self an
   );
   const state = (title: string) =>
     page
-      .locator(".fds-panel", { has: page.getByRole("heading", { name: title }) })
+      .locator(".fds-panel", {
+        has: page.getByRole("heading", { name: title }),
+      })
       .evaluate((el) => ({
         bg: getComputedStyle(el).backgroundImage,
         grain: getComputedStyle(el, "::before").content,
@@ -231,7 +237,9 @@ test("Studio preview, theme mode and empty state work together", async ({ page }
   await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
   const violations = await page.evaluate(async () => {
     const axe = (
-      window as unknown as { axe: { run: (n: Document) => Promise<{ violations: unknown[] }> } }
+      window as unknown as {
+        axe: { run: (n: Document) => Promise<{ violations: unknown[] }> };
+      }
     ).axe;
     return (await axe.run(document)).violations;
   });
@@ -250,7 +258,10 @@ test("styles.css alone defaults to Studio, including flat panels and dark mode",
   });
   await expect(page.locator("body")).toHaveCSS("background-color", "rgb(255, 255, 255)");
   await expect(page.locator("body")).toHaveCSS("font-family", /DM Sans/);
-  const panel = page.getByRole("region", { name: "Actions & feedback", exact: true });
+  const panel = page.getByRole("region", {
+    name: "Actions & feedback",
+    exact: true,
+  });
   // Exercise the primitive outside showcase composition rules, as in a consumer app.
   await panel.evaluate((el) => document.body.append(el));
   await expect(panel).toHaveCSS("background-image", "none");
@@ -258,7 +269,10 @@ test("styles.css alone defaults to Studio, including flat panels and dark mode",
   await panel.evaluate((el) => el.style.setProperty("--fds-panel", "#eff6f0"));
   await expect(panel).toHaveCSS("background-color", "rgb(239, 246, 240)");
   await panel.evaluate((el) => el.style.removeProperty("--fds-panel"));
-  const button = page.getByRole("button", { name: "Primary action", exact: true });
+  const button = page.getByRole("button", {
+    name: "Primary action",
+    exact: true,
+  });
   await expect(button).toHaveCSS("background-color", "rgb(33, 72, 62)");
   await expect(button).toHaveCSS("color", "rgb(255, 255, 255)");
   await page.evaluate(() => {
@@ -271,7 +285,9 @@ test("styles.css alone defaults to Studio, including flat panels and dark mode",
   await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
   const violations = await page.evaluate(async () => {
     const axe = (
-      window as unknown as { axe: { run: (n: Document) => Promise<{ violations: unknown[] }> } }
+      window as unknown as {
+        axe: { run: (n: Document) => Promise<{ violations: unknown[] }> };
+      }
     ).axe;
     return (await axe.run(document)).violations;
   });
