@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.0
+
+### Minor Changes
+
+- [#36](https://github.com/scottlinddk/ui/pull/36) [`48d19bf`](https://github.com/scottlinddk/ui/commit/48d19bf684dfcb5a40d8faf798fdf9240d6a6d3c) Thanks [@scottlinddk](https://github.com/scottlinddk)! - Add the opt-in Caffeine theme (`@scttlnd/ui/themes/caffeine.css`): the espresso and cream CV palette from scottlinddk/cv in light and dark (`data-fds-mode="dark"`), with Geist and Instrument Serif font stacks and `--fds-brand-*` espresso, roast, mocha, cream and peach fields. Existing themes are unchanged.
+
 ## 0.7.0
 
 ### Minor Changes
